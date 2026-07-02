@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-gray-700 font-body antialiased;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-lavender-200 text-lavender-600;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-lg;
+    border-radius: 24px;
+  }
+
+  .glass-card-sm {
+    @apply bg-white/60 backdrop-blur-sm border border-white/40 shadow-md;
+    border-radius: 16px;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-lavender-400 text-white font-medium rounded-full
+           hover:bg-lavender-500 active:scale-95
+           transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-soft {
+    @apply inline-flex items-center justify-center px-5 py-2.5
+           bg-white/60 text-lavender-500 font-medium rounded-full
+           hover:bg-lavender-50 active:scale-95
+           transition-all duration-300 border border-lavender-200/50;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl text-gray-800 mb-3;
+  }
+
+  .section-subtitle {
+    @apply text-gray-500 text-lg max-w-2xl;
+  }
+}
+
+/* Staggered animation delay utility */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-lavender-200 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-lavender-300;
+}
