@@ -6,7 +6,7 @@ const AVATARS = ['🧑', '👩', '👨', '🧒', '👩‍🎓', '🧑‍🎓', '
 type Tab = 'login' | 'register' | 'profile'
 
 export default function Profile() {
-  const { user, isLogin, register, login, logout, updateProfile } = useUser()
+  const { user, isLogin, isAdmin, register, login, logout, updateProfile } = useUser()
   const [tab, setTab] = useState<Tab>(isLogin ? 'profile' : 'login')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -404,6 +404,34 @@ export default function Profile() {
             <p style={{ textAlign: 'center', fontSize: 13, color: '#9CA3AF', marginTop: 4 }}>
               {user.email}
             </p>
+
+            {/* Admin Badge */}
+            {isAdmin && (
+              <div style={{ textAlign: 'center', marginTop: 8 }}>
+                <span style={{
+                  display: 'inline-block',
+                  padding: '4px 14px',
+                  borderRadius: 10,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  background: 'rgba(245,158,11,0.1)',
+                  color: '#F59E0B',
+                  marginBottom: 8,
+                }}>👑 管理员</span>
+                <br />
+                <a href="/mind-ease/admin" style={{
+                  display: 'inline-block',
+                  padding: '10px 28px',
+                  borderRadius: 14,
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: '#fff',
+                  background: 'linear-gradient(135deg, #F59E0B, #D97706)',
+                  textDecoration: 'none',
+                  marginTop: 4,
+                }}>进入管理后台 →</a>
+              </div>
+            )}
 
             {/* Stats */}
             <div style={s.statsRow}>

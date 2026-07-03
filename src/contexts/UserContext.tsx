@@ -8,16 +8,19 @@ export interface UserProfile {
   bio: string
   createdAt: string
   lastLogin: string
-  moodStreak: number  // 连续记录天数
+  moodStreak: number
+  role: 'admin' | 'user'
 }
 
 interface UserContextType {
   user: UserProfile | null
   isLogin: boolean
+  isAdmin: boolean
   register: (nickname: string, email: string, password: string) => boolean
   login: (email: string, password: string) => boolean
   logout: () => void
   updateProfile: (updates: Partial<Pick<UserProfile, 'nickname' | 'avatar' | 'bio'>>) => void
+  getAllUsers: () => Array<{ password: string; profile: UserProfile }>
 }
 
 const UserContext = createContext<UserContextType | null>(null)
@@ -31,13 +34,16 @@ export function useUser() {
 const STORAGE_KEY = 'mindease-users'
 const SESSION_KEY = 'mindease-session'
 
+// 预设管理员邮箱列表，注册时自动设为 admin
+const ADMIN_EMAILS = ['caiaiji@qq.com', 'caiaiji@gmail.com']
+
 const AVATARS = ['🧑', '👩', '👨', '🧒', '👩‍🎓', '🧑‍🎓', '👨‍🎓', '🌸', '🍀', '⭐']
 
 function generateId(): string {
   return 'u_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7)
 }
 
-function getUsers(): Record<string, { password: string; profile: UserProfile }> {
+export function getUsers(): Record<string, { password: string; profile: UserProfile }> {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
   } catch {
@@ -64,7 +70,6 @@ function clearSession() {
 export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null)
 
-  // Restore session on mount
   useEffect(() => {
     const userId = getSession()
     if (userId) {
@@ -82,20 +87,21 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
   const register = (nickname: string, email: string, password: string): boolean => {
     const users = getUsers()
-    // Check duplicate email
     if (Object.values(users).some(u => u.profile.email === email)) {
       return false
     }
     const id = generateId()
+    const role: 'admin' | 'user' = ADMIN_EMAILS.includes(email) ? 'admin' : 'user'
     const profile: UserProfile = {
       id,
       nickname,
       email,
-      avatar: AVATARS[Math.floor(Math.random() * AVATARS.length)],
+      avatar: role === 'admin' ? '👑' : AVATARS[Math.floor(Math.random() * AVATARS.length)],
       bio: '',
       createdAt: new Date().toISOString(),
       lastLogin: new Date().toISOString(),
       moodStreak: 0,
+      role,
     }
     users[id] = { password, profile }
     saveUsers(users)
@@ -130,8 +136,14 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setUser(updated)
   }
 
+  const getAllUsers = () => {
+    return Object.values(getUsers())
+  }
+
+  const isAdmin = user?.role === 'admin'
+
   return (
-    <UserContext.Provider value={{ user, isLogin: !!user, register, login, logout, updateProfile }}>
+    <UserContext.Provider value={{ user, isLogin: !!user, isAdmin, register, login, logout, updateProfile, getAllUsers }}>
       {children}
     </UserContext.Provider>
   )

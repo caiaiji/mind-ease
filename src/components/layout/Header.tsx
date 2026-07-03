@@ -16,7 +16,7 @@ const navLinks = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-  const { user, isLogin } = useUser()
+  const { user, isLogin, isAdmin } = useUser()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-lg border-b border-lavender-100/50">
@@ -48,11 +48,21 @@ export default function Header() {
               </Link>
             ))}
 
+            {/* Admin Button */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className="ml-1 px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 text-amber-600 border border-amber-100 hover:bg-amber-100 transition-all"
+              >
+                👑 管理后台
+              </Link>
+            )}
+
             {/* User Avatar / Login Button */}
             {isLogin && user ? (
               <Link
                 to="/profile"
-                className="ml-2 flex items-center gap-2 px-3 py-1.5 rounded-full bg-lavender-50 border border-lavender-100 hover:bg-lavender-100 transition-all"
+                className="ml-1 flex items-center gap-2 px-3 py-1.5 rounded-full bg-lavender-50 border border-lavender-100 hover:bg-lavender-100 transition-all"
               >
                 <span className="text-lg">{user.avatar}</span>
                 <span className="text-sm font-medium text-lavender-600">{user.nickname}</span>
@@ -108,6 +118,15 @@ export default function Header() {
 
             {/* Mobile User Section */}
             <div className="border-t border-lavender-100/50 mt-2 pt-3">
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2 px-4 py-3 rounded-2xl bg-amber-50 text-amber-600 font-medium mb-2"
+                >
+                  👑 管理后台
+                </Link>
+              )}
               {isLogin && user ? (
                 <Link
                   to="/profile"

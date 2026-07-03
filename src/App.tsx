@@ -11,6 +11,7 @@ import Games from './pages/Games'
 import MoodDiary from './pages/MoodDiary'
 import TreeHole from './pages/TreeHole'
 import Profile from './pages/Profile'
+import Admin from './pages/Admin'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/mood-diary" element={<MoodDiary />} />
           <Route path="/treehole" element={<TreeHole />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
         </Route>
       </Routes>
     </UserProvider>
