@@ -188,14 +188,14 @@ export default function MoodDiary() {
     cardTitle: { fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 16 },
     moodGrid: { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 20 },
     moodBtn: (selected: boolean, color: string) => ({
-      display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+      display: 'flex', flexDirection: 'column' as const, alignItems: 'center', gap: 6,
       padding: '12px 8px', borderRadius: 16,
       border: selected ? `2px solid ${color}` : '2px solid transparent',
       background: selected ? `${color}22` : 'rgba(0,0,0,0.02)',
       cursor: 'pointer', transition: 'all 0.2s',
       fontSize: 11, color: '#6B7280',
     }),
-    tagsWrap: { display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 },
+    tagsWrap: { display: 'flex', flexWrap: 'wrap' as const, gap: 8, marginBottom: 20 },
     tag: (active: boolean) => ({
       padding: '4px 14px', borderRadius: 999, fontSize: 12,
       border: `1px solid ${active ? '#A78BFA' : '#E5E7EB'}`,
