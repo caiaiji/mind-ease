@@ -7,6 +7,8 @@ import Assessment from './pages/Assessment'
 import Relax from './pages/Relax'
 import About from './pages/About'
 import Games from './pages/Games'
+import MoodDiary from './pages/MoodDiary'
+import TreeHole from './pages/TreeHole'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/relax" element={<Relax />} />
         <Route path="/about" element={<About />} />
         <Route path="/games" element={<Games />} />
+        <Route path="/mood-diary" element={<MoodDiary />} />
+        <Route path="/treehole" element={<TreeHole />} />
       </Route>
     </Routes>
   )

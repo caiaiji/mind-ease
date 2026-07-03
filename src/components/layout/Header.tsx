@@ -6,8 +6,10 @@ const navLinks = [
   { path: '/articles', label: '心理文章' },
   { path: '/assessment', label: '情绪测评' },
   { path: '/relax', label: '放松工具' },
-  { path: '/about', label: '关于' },
   { path: '/games', label: '放松游戏' },
+  { path: '/mood-diary', label: '情绪日记' },
+  { path: '/treehole', label: '树洞倾诉' },
+  { path: '/about', label: '关于' },
 ]
 
 export default function Header() {
@@ -34,7 +36,7 @@ export default function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   location.pathname === link.path
                     ? 'bg-lavender-100 text-lavender-600'
                     : 'text-gray-500 hover:text-lavender-500 hover:bg-lavender-50'
