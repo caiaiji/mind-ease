@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { UserProvider } from './contexts/UserContext'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Articles from './pages/Articles'
@@ -9,22 +10,26 @@ import About from './pages/About'
 import Games from './pages/Games'
 import MoodDiary from './pages/MoodDiary'
 import TreeHole from './pages/TreeHole'
+import Profile from './pages/Profile'
 
 function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/articles" element={<Articles />} />
-        <Route path="/articles/:id" element={<ArticleDetail />} />
-        <Route path="/assessment" element={<Assessment />} />
-        <Route path="/relax" element={<Relax />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/mood-diary" element={<MoodDiary />} />
-        <Route path="/treehole" element={<TreeHole />} />
-      </Route>
-    </Routes>
+    <UserProvider>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:id" element={<ArticleDetail />} />
+          <Route path="/assessment" element={<Assessment />} />
+          <Route path="/relax" element={<Relax />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/mood-diary" element={<MoodDiary />} />
+          <Route path="/treehole" element={<TreeHole />} />
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+      </Routes>
+    </UserProvider>
   )
 }
 
