@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>心晴驿站 - 给心灵放个假</title>
+    <script>
+      // 将路径重定向到正确的 SPA 路由
+      var seg = location.pathname.replace(/^\/mind-ease\/?/, '');
+      if (seg) {
+        sessionStorage.redirect = seg;
+      }
+      if (sessionStorage.redirect) {
+        var target = '/mind-ease/' + sessionStorage.redirect;
+        sessionStorage.redirect = null;
+        window.location.replace(target);
+      }
+    </script>
+  </head>
+  <body>
+    Redirecting...
+  </body>
+</html>
