@@ -12,6 +12,7 @@ import MoodDiary from './pages/MoodDiary'
 import TreeHole from './pages/TreeHole'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/treehole" element={<TreeHole />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Route>
       </Routes>
     </UserProvider>

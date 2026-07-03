@@ -46,6 +46,7 @@ export default function Footer() {
               <Link to="/treehole" className="text-sm text-gray-400 hover:text-lavender-500 transition-colors">树洞倾诉</Link>
               <Link to="/games" className="text-sm text-gray-400 hover:text-lavender-500 transition-colors">放松游戏</Link>
               <Link to="/about" className="text-sm text-gray-400 hover:text-lavender-500 transition-colors">关于我们</Link>
+              <Link to="/privacy" className="text-sm text-gray-400 hover:text-lavender-500 transition-colors">隐私政策</Link>
             </div>
           </div>
 
@@ -79,7 +80,13 @@ export default function Footer() {
 
         <div className="mt-6 pt-6 border-t border-lavender-100/50">
           <p className="text-center text-xs text-gray-300">
-            心晴驿站 MindEase · 用温暖守护每一颗年轻的心
+            <span className="flex items-center justify-center gap-2">
+              心晴驿站 MindEase · 用温暖守护每一颗年轻的心
+              <span className="text-gray-200">|</span>
+              <Link to="/privacy" className="hover:text-lavender-500 transition-colors">隐私政策</Link>
+              <span className="text-gray-200">|</span>
+              <a href="https://github.com/caiaiji/mind-ease" target="_blank" rel="noopener noreferrer" className="hover:text-lavender-500 transition-colors">GitHub</a>
+            </span>
           </p>
         </div>
       </div>

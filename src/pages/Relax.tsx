@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { relaxTips } from '../data/relax'
+import WhiteNoise from '../components/WhiteNoise'
 
 type BreathingPhase = 'inhale' | 'hold' | 'exhale' | 'rest'
 
 export default function Relax() {
   const [showBreathing, setShowBreathing] = useState(false)
+  const [showWhiteNoise, setShowWhiteNoise] = useState(false)
   const breathActiveRef = useRef(false)
   const [phase, setPhase] = useState<BreathingPhase>('inhale')
   const [count, setCount] = useState(4)
@@ -91,6 +93,25 @@ export default function Relax() {
   }
 
   if (showBreathing) {
+    if (showWhiteNoise) {
+    return (
+      <div className="px-6 md:px-12 lg:px-20 pt-12 pb-20">
+        <div className="max-w-5xl mx-auto">
+          <div className="mb-6">
+            <button onClick={() => setShowWhiteNoise(false)} className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
+              ← 返回放松工具
+            </button>
+          </div>
+          <h1 className="font-display text-3xl md:text-4xl text-gray-800 mb-3">白噪音</h1>
+          <p className="text-gray-500 text-lg mb-8 max-w-2xl">
+            用自然的声音包裹自己，隔绝外界喧嚣，帮助放松和入睡。
+          </p>
+          <WhiteNoise />
+        </div>
+      </div>
+    )
+  }
+
     return (
       <div className="px-6 md:px-12 lg:px-20 pt-12 pb-20 min-h-[80vh] flex items-center justify-center">
         <div className="max-w-lg mx-auto text-center">
@@ -149,6 +170,22 @@ export default function Relax() {
           <p className="text-gray-500 text-lg max-w-2xl">
             给自己几分钟时间，试试这些简单有效的放松方法，让身心回到平衡状态。
           </p>
+        </div>
+      </section>
+
+      {/* White Noise Section */}
+      <section className="px-6 md:px-12 lg:px-20 py-10">
+        <div className="max-w-5xl mx-auto">
+          <div className="glass-card p-8 md:p-12 text-center bg-gradient-to-br from-blue-50/80 to-indigo-50/80">
+            <span className="text-4xl block mb-4">🎧</span>
+            <h2 className="font-display text-2xl text-gray-800 mb-3">白噪音播放</h2>
+            <p className="text-gray-500 max-w-md mx-auto mb-6">
+              雨声、海浪、篝火……用自然的声音帮助放松、专注或入睡。纯浏览器生成，无需联网。
+            </p>
+            <button onClick={() => setShowWhiteNoise(true)} className="btn-primary">
+              打开白噪音
+            </button>
+          </div>
         </div>
       </section>
 

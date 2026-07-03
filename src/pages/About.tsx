@@ -121,6 +121,39 @@ export default function About() {
           </div>
         </div>
 
+        {/* Site Info */}
+        <div className="glass-card p-8 md:p-10 mb-8">
+          <h2 className="font-display text-xl text-gray-800 mb-4">关于本项目</h2>
+          <div className="space-y-3 text-sm text-gray-600">
+            <p>
+              心晴驿站 MindEase 是一个<strong>开源公益项目</strong>，使用现代前端技术构建，
+              面向学生和年轻群体提供免费的心理健康科普工具。
+            </p>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 bg-lavender-50/50 rounded-xl">
+                <span className="text-xs text-gray-400">技术栈</span>
+                <p className="text-gray-700 font-medium">React + TypeScript + Vite</p>
+              </div>
+              <div className="p-3 bg-mint-50/50 rounded-xl">
+                <span className="text-xs text-gray-400">UI 框架</span>
+                <p className="text-gray-700 font-medium">Tailwind CSS</p>
+              </div>
+              <div className="p-3 bg-peach-50/50 rounded-xl">
+                <span className="text-xs text-gray-400">托管平台</span>
+                <p className="text-gray-700 font-medium">GitHub Pages</p>
+              </div>
+              <div className="p-3 bg-blue-50/50 rounded-xl">
+                <span className="text-xs text-gray-400">开源协议</span>
+                <p className="text-gray-700 font-medium">MIT License</p>
+              </div>
+            </div>
+            <p className="text-gray-400 text-xs">
+              本站所有用户数据存储在浏览器本地（localStorage），不会上传至任何服务器。
+              所有功能均可离线使用（首次加载后）。
+            </p>
+          </div>
+        </div>
+
         {/* CTA */}
         <div className="text-center">
           <p className="text-gray-400 text-sm mb-6">你不是一个人在面对这些。</p>
