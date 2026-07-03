@@ -13,6 +13,7 @@ import TreeHole from './pages/TreeHole'
 import Profile from './pages/Profile'
 import Admin from './pages/Admin'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import AssessmentGuide from './pages/AssessmentGuide'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/assessment-guide" element={<AssessmentGuide />} />
         </Route>
       </Routes>
     </UserProvider>

@@ -5,7 +5,13 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/mind-ease/favicon.svg" />
+    <link rel="apple-touch-icon" href="/mind-ease/icons/icon-192.png" />
+    <link rel="manifest" href="/mind-ease/manifest.json" />
+    <meta name="theme-color" content="#8B5CF6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="description" content="心晴驿站 MindEase - 面向年轻人的心理健康科普小站，提供情绪测评、放松工具、心理文章等" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>心晴驿站 - 给心灵放个假</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,5 +21,12 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/mind-ease/sw.js')
+        })
+      }
+    </script>
   </body>
 </html>

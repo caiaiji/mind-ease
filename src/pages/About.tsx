@@ -34,8 +34,8 @@ export default function About() {
           <h2 className="font-display text-xl text-gray-800 mb-4">我们提供什么</h2>
           <div className="space-y-6">
             {[
-              { emoji: '📖', title: '心理科普文章', desc: '涵盖焦虑管理、人际关系、自我成长、睡眠改善、亲子边界、恋爱内耗等 10+ 篇科普内容，基于循证心理学研究。', to: '/articles' },
-              { emoji: '📊', title: '情绪自评工具', desc: '3 种轻量化心理自测量表，测评结果自动保存，支持历史记录和趋势追踪。', to: '/assessment' },
+              { emoji: '📖', title: '心理科普文章', desc: '涵盖焦虑管理、人际关系、自我成长、睡眠改善、惊恐发作、躯体化等 18 篇科普内容，基于循证心理学研究。', to: '/articles' },
+              { emoji: '📊', title: '情绪自评工具', desc: '3 种轻量化心理自测量表，测评结果自动保存，支持历史记录和趋势追踪。附带量表科普页，帮你了解自测与医院量表的差异。', to: '/assessment' },
               { emoji: '🧘', title: '放松练习引导', desc: '4-7-8 呼吸法、渐进式肌肉放松、正念冥想、五行放松法等 6 种科学验证的放松方法。', to: '/relax' },
               { emoji: '📝', title: '情绪日记', desc: '每日心情记录，5 级情绪评估 + 标签 + 笔记，自动生成情绪趋势图，追踪长期情绪变化。', to: '/mood-diary' },
               { emoji: '🌳', title: '树洞倾诉', desc: '匿名留言板，安全倾诉内心想法，支持点赞和回复，给情绪一个温暖的出口。', to: '/treehole' },
@@ -160,6 +160,7 @@ export default function About() {
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/articles" className="btn-primary">浏览文章</Link>
             <Link to="/assessment" className="btn-soft">情绪测评</Link>
+            <Link to="/assessment-guide" className="btn-soft">了解量表</Link>
             <Link to="/mood-diary" className="btn-soft">记录心情</Link>
           </div>
         </div>

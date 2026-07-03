@@ -30,8 +30,7 @@ export default function Footer() {
               <span className="font-display text-xl text-gray-800">心晴驿站</span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              给心灵放个假。这里是属于年轻人的心理健康小站，
-              愿你在忙碌的生活中找到一片宁静。
+              年轻人的心理健康小站，用温暖守护每一颗年轻的心。
             </p>
           </div>
 
@@ -57,7 +56,6 @@ export default function Footer() {
               <p>全国心理援助热线：<strong className="text-gray-600">400-161-9995</strong>（24h）</p>
               <p>北京心理危机干预中心：<strong className="text-gray-600">010-82951332</strong>（24h）</p>
               <p>生命热线：<strong className="text-gray-600">400-821-1215</strong></p>
-              <p>希望24热线：<strong className="text-gray-600">400-161-9995</strong></p>
               <p>共青团心理咨询热线：<strong className="text-gray-600">12355</strong></p>
             </div>
           </div>
@@ -69,11 +67,8 @@ export default function Footer() {
             <span className="text-lg flex-shrink-0">⚠️</span>
             <div className="text-sm text-amber-700 leading-relaxed">
               <strong>重要声明：</strong>
-              本站所有内容（包括文章、测评、放松工具等）仅供心理健康科普和日常自我觉察参考，
-              <strong>不能替代专业心理咨询、诊断或治疗</strong>。
-              本站测评基于简化版量表，结果不具备临床诊断效力。
-              如果你正经历持续的情绪低落、焦虑、失眠、自我伤害念头等严重心理困扰超过两周，
-              请务必前往<strong>正规医院心理科/精神科</strong>就诊，或拨打上方心理援助热线寻求专业帮助。
+              本站内容仅供心理健康科普参考，<strong>不能替代专业心理咨询、诊断或治疗</strong>。
+              如你正经历严重心理困扰（持续超过两周），请前往医院心理科就诊或拨打上方热线。
             </div>
           </div>
         </div>

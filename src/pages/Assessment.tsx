@@ -122,9 +122,12 @@ export default function Assessment() {
       <div className="px-6 md:px-12 lg:px-20 pt-12 pb-20">
         <div className="max-w-4xl mx-auto">
           <h1 className="font-display text-3xl md:text-4xl text-gray-800 mb-3">情绪测评</h1>
-          <p className="text-gray-500 text-lg mb-4 max-w-2xl">
+          <p className="text-gray-500 text-lg mb-2 max-w-2xl">
             通过简短的测评了解自己的心理状态，获取个性化建议。
           </p>
+          <Link to="/assessment-guide" className="text-sm text-lavender-500 hover:text-lavender-600 transition-colors mb-4 inline-block">
+            测评结果准吗？了解本站量表与医院量表的区别 →
+          </Link>
 
           {/* Disclaimer Banner */}
           <div className="mb-10 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
@@ -133,6 +136,9 @@ export default function Assessment() {
               <strong>重要提示：</strong>本测评仅用于日常自我觉察，基于简化版量表，结果<strong>不能作为心理诊断依据</strong>。
               如果你正在经历持续的情绪低落、焦虑或自我伤害倾向，请立即联系专业心理咨询师或拨打
               <strong>全国心理援助热线：400-161-9995</strong>（24 小时）。
+              <Link to="/assessment-guide" className="block mt-2 text-lavender-600 hover:text-lavender-700 transition-colors underline">
+                不确定测评结果是否靠谱？了解自测量表与医院量表的区别
+              </Link>
             </div>
           </div>
 

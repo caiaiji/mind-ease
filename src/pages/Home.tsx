@@ -42,8 +42,7 @@ export default function Home() {
             给心灵放个假
           </h1>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 animate-fade-up stagger-1" style={{ opacity: 0 }}>
-            这里是属于年轻人的心理健康小站。无论你是在备考、在社交、还是在成长中，
-            都可以在这里找到让内心安宁的方法。
+            年轻人的心理健康小站，陪你找到让内心安宁的方法。
           </p>
           <div className="flex flex-wrap justify-center gap-4 animate-fade-up stagger-2" style={{ opacity: 0 }}>
             <Link to="/games" className="btn-primary">
@@ -64,7 +63,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="section-title">探索心晴驿站</h2>
-            <p className="section-subtitle mx-auto">丰富的互动工具，陪你度过每一个需要陪伴的时刻</p>
+
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {interactiveTools.map((item) => (
@@ -90,7 +89,6 @@ export default function Home() {
       <section className="px-6 md:px-12 lg:px-20 py-16">
         <div className="max-w-4xl mx-auto text-center mb-10">
           <h2 className="section-title">今天感觉怎么样？</h2>
-          <p className="section-subtitle mx-auto">选择一个最接近你当前状态的选项，或者去情绪日记详细记录</p>
         </div>
         <div className="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
           {moodOptions.map((mood) => (
@@ -116,7 +114,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="section-title">精选文章</h2>
-            <p className="section-subtitle mx-auto">关于心理健康，你关心的那些话题</p>
+
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featured.map((article) => (
@@ -159,7 +157,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="section-title">快速测评</h2>
-            <p className="section-subtitle mx-auto">了解自己的心理状态，是关爱自己的第一步</p>
+
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {assessments.map((a) => (
@@ -184,7 +182,7 @@ export default function Home() {
             <span className="text-2xl block mb-3">🆘</span>
             <h3 className="font-medium text-gray-800 mb-2">需要专业帮助？</h3>
             <p className="text-sm text-gray-500 mb-4">
-              如果你或身边的人正在经历心理危机，请及时寻求专业帮助。
+              
             </p>
             <div className="flex flex-wrap justify-center gap-3 text-sm">
               <span className="px-4 py-2 bg-red-50 text-red-600 rounded-full font-medium">
@@ -198,7 +196,7 @@ export default function Home() {
               </span>
             </div>
             <p className="text-xs text-gray-300 mt-4">
-              本站内容仅供心理健康科普参考，不构成专业心理咨询或诊断建议。
+              
             </p>
           </div>
         </div>
