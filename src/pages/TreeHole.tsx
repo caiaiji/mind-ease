@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { dark } from '../contexts/ThemeContext'
 
 const STORAGE_KEY = 'mindease-treehole'
 
@@ -80,12 +81,12 @@ export default function TreeHole() {
   const clearAll = () => { setMessages([]) }
 
   const s = {
-    page: { background: '#FFFBF5', minHeight: '100vh', fontFamily: '"Noto Sans SC", sans-serif', color: '#374151', padding: '100px 16px 60px' },
+    page: { background: '#FFFBF5', minHeight: '100vh', fontFamily: '"Noto Sans SC", sans-serif', color: dark('#374151', '#d1d5db'), padding: '100px 16px 60px' },
     container: { maxWidth: 640, margin: '0 auto' },
-    title: { fontSize: 28, fontWeight: 700, color: '#374151', marginBottom: 4, fontFamily: '"ZCOOL XiaoWei", serif' },
+    title: { fontSize: 28, fontWeight: 700, color: dark('#374151', '#d1d5db'), marginBottom: 4, fontFamily: '"ZCOOL XiaoWei", serif' },
     subtitle: { fontSize: 14, color: '#9CA3AF', marginBottom: 32 },
     card: { background: 'rgba(255,255,255,0.7)', borderRadius: 20, padding: 24, marginBottom: 20, border: '1px solid rgba(167,139,250,0.1)', backdropFilter: 'blur(10px)' },
-    cardTitle: { fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 16 },
+    cardTitle: { fontSize: 16, fontWeight: 600, color: dark('#374151', '#d1d5db'), marginBottom: 16 },
     moodRow: { display: 'flex', gap: 8, marginBottom: 16, alignItems: 'center' },
     moodBtn: (selected: boolean) => ({
       width: 40, height: 40, borderRadius: 12, fontSize: 22,
@@ -96,13 +97,13 @@ export default function TreeHole() {
     nickInput: (isSmall: boolean) => ({
       width: isSmall ? 120 : '100%', padding: '8px 14px', borderRadius: 999, fontSize: 13,
       border: '1px solid rgba(167,139,250,0.25)', background: 'rgba(255,255,255,0.6)',
-      color: '#374151', outline: 'none', marginBottom: isSmall ? 0 : 12,
+      color: dark('#374151', '#d1d5db'), outline: 'none', marginBottom: isSmall ? 0 : 12,
       boxSizing: 'border-box' as const,
     }),
     textarea: {
       width: '100%', minHeight: 100, padding: '12px 16px', borderRadius: 14,
       border: '1px solid rgba(167,139,250,0.2)', background: 'rgba(255,255,255,0.6)',
-      color: '#374151', fontSize: 14, resize: 'vertical' as const, outline: 'none',
+      color: dark('#374151', '#d1d5db'), fontSize: 14, resize: 'vertical' as const, outline: 'none',
       fontFamily: '"Noto Sans SC", sans-serif', marginBottom: 12,
       boxSizing: 'border-box' as const,
     },
@@ -118,7 +119,7 @@ export default function TreeHole() {
     msgNick: { fontWeight: 600, fontSize: 13, color: '#7C3AED' },
     msgMood: { fontSize: 11, color: '#D1D5DB' },
     msgDate: { fontSize: 11, color: '#D1D5DB', marginLeft: 'auto' },
-    msgContent: { fontSize: 14, color: '#374151', lineHeight: 1.7, marginBottom: 8, paddingLeft: 30 },
+    msgContent: { fontSize: 14, color: dark('#374151', '#d1d5db'), lineHeight: 1.7, marginBottom: 8, paddingLeft: 30 },
     msgActions: { display: 'flex', gap: 12, paddingLeft: 30 },
     actionBtn: (active: boolean) => ({
       padding: '3px 10px', borderRadius: 8, fontSize: 12,
@@ -129,13 +130,13 @@ export default function TreeHole() {
     replyArea: { paddingLeft: 30, marginTop: 12 },
     replyItem: { padding: '8px 12px', background: '#F0EEFF', borderRadius: 12, marginBottom: 8, fontSize: 13 },
     replyNick: { fontWeight: 600, color: '#7C3AED', fontSize: 12 },
-    replyContent: { color: '#374151', marginTop: 2 },
+    replyContent: { color: dark('#374151', '#d1d5db'), marginTop: 2 },
     replyDate: { fontSize: 10, color: '#D1D5DB', marginTop: 2 },
     replyInputRow: { display: 'flex', gap: 8, marginTop: 8 },
     replyTextarea: {
       flex: 1, minHeight: 40, padding: '8px 12px', borderRadius: 12,
       border: '1px solid rgba(167,139,250,0.2)', background: 'rgba(255,255,255,0.6)',
-      color: '#374151', fontSize: 13, outline: 'none', resize: 'none' as const,
+      color: dark('#374151', '#d1d5db'), fontSize: 13, outline: 'none', resize: 'none' as const,
       fontFamily: '"Noto Sans SC", sans-serif',
     },
     replySubmitBtn: {

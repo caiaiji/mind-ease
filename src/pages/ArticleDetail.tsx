@@ -9,8 +9,8 @@ export default function ArticleDetail() {
     return (
       <div className="px-6 md:px-12 lg:px-20 py-32 text-center">
         <span className="text-6xl block mb-6">📭</span>
-        <h2 className="font-display text-2xl text-gray-800 mb-3">文章未找到</h2>
-        <p className="text-gray-400 mb-8">你访问的文章不存在或已被移除</p>
+        <h2 className="font-display text-2xl text-gray-800 dark:text-gray-100 mb-3">文章未找到</h2>
+        <p className="text-gray-400 dark:text-gray-500 mb-8">你访问的文章不存在或已被移除</p>
         <Link to="/articles" className="btn-primary">返回文章列表</Link>
       </div>
     )
@@ -27,7 +27,7 @@ export default function ArticleDetail() {
     return content.split('\n\n').map((block, i) => {
       if (block.startsWith('**') && block.endsWith('**')) {
         return (
-          <h2 key={i} className="font-display text-xl md:text-2xl text-gray-800 mt-8 mb-4">
+          <h2 key={i} className="font-display text-xl md:text-2xl text-gray-800 dark:text-gray-100 mt-8 mb-4">
             {block.replace(/\*\*/g, '')}
           </h2>
         )
@@ -38,17 +38,17 @@ export default function ArticleDetail() {
         return (
           <div key={i} className="mb-6">
             {heading && (
-              <h3 className="font-medium text-gray-800 mb-2">{heading}</h3>
+              <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">{heading}</h3>
             )}
             {rest.map((line, j) => (
-              <p key={j} className="text-gray-600 leading-relaxed mb-2">{line}</p>
+              <p key={j} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-2">{line}</p>
             ))}
           </div>
         )
       }
       if (block.startsWith('- ')) {
         return (
-          <ul key={i} className="list-disc list-inside space-y-2 text-gray-600 mb-6 ml-4">
+          <ul key={i} className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-6 ml-4">
             {block.split('\n').map((line, j) => (
               <li key={j}>{line.replace('- ', '')}</li>
             ))}
@@ -56,7 +56,7 @@ export default function ArticleDetail() {
         )
       }
       return (
-        <p key={i} className="text-gray-600 leading-relaxed mb-6">{block}</p>
+        <p key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{block}</p>
       )
     })
   }
@@ -66,22 +66,22 @@ export default function ArticleDetail() {
       {/* Article Header */}
       <section className="px-6 md:px-12 lg:px-20 pt-12 pb-8">
         <div className="max-w-3xl mx-auto">
-          <Link to="/articles" className="text-sm text-lavender-400 hover:text-lavender-500 transition-colors mb-6 inline-block">
+          <Link to="/articles" className="text-sm text-lavender-400 dark:text-lavender-300 hover:text-lavender-500 transition-colors mb-6 inline-block">
             ← 返回文章列表
           </Link>
           <div className="flex items-center gap-3 mb-4">
             {categoryLabel && (
-              <span className="px-3 py-1 rounded-full bg-lavender-100 text-lavender-500 text-xs font-medium">
+              <span className="px-3 py-1 rounded-full bg-lavender-100 dark:bg-lavender-900/40 text-lavender-500 dark:text-lavender-400 text-xs font-medium">
                 {categoryLabel}
               </span>
             )}
-            <span className="text-xs text-gray-300">{article.readTime} 分钟阅读</span>
+            <span className="text-xs text-gray-300 dark:text-gray-600">{article.readTime} 分钟阅读</span>
             <span className="text-xs text-gray-300">{article.date}</span>
           </div>
-          <h1 className="font-display text-3xl md:text-4xl text-gray-800 mb-4">
+          <h1 className="font-display text-3xl md:text-4xl text-gray-800 dark:text-gray-100 mb-4">
             {article.title}
           </h1>
-          <p className="text-gray-400 text-lg">{article.summary}</p>
+          <p className="text-gray-400 dark:text-gray-500 text-lg">{article.summary}</p>
         </div>
       </section>
 
@@ -100,7 +100,7 @@ export default function ArticleDetail() {
       {related.length > 0 && (
         <section className="px-6 md:px-12 lg:px-20 pb-20 bg-white/40 py-16">
           <div className="max-w-3xl mx-auto">
-            <h2 className="section-title mb-8">推荐阅读</h2>
+            <h2 className="section-title mb-8 dark:!text-gray-100">推荐阅读</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {related.map((a) => (
                 <Link
@@ -109,10 +109,10 @@ export default function ArticleDetail() {
                   className="glass-card-sm p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group"
                 >
                   <span className="text-2xl block mb-3">{a.coverEmoji}</span>
-                  <h3 className="font-medium text-gray-800 text-sm mb-1 group-hover:text-lavender-500 transition-colors line-clamp-2">
+                  <h3 className="font-medium text-gray-800 dark:text-gray-100 text-sm mb-1 group-hover:text-lavender-500 transition-colors line-clamp-2">
                     {a.title}
                   </h3>
-                  <span className="text-xs text-gray-300">{a.readTime} 分钟阅读</span>
+                  <span className="text-xs text-gray-300 dark:text-gray-600">{a.readTime} 分钟阅读</span>
                 </Link>
               ))}
             </div>

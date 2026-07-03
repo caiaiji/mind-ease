@@ -14,46 +14,105 @@
   }
 
   body {
-    @apply bg-cream text-gray-700 font-body antialiased;
+    @apply font-body antialiased;
     min-height: 100vh;
+    background-color: #FFFBF5;
+    color: #374151;
+  }
+
+  .dark body {
+    background-color: #1a1a2e;
+    color: #d1d5db;
   }
 
   ::selection {
     @apply bg-lavender-200 text-lavender-600;
   }
+
+  .dark ::selection {
+    background-color: #4c1d95;
+    color: #e9d5ff;
+  }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-lg;
+    @apply backdrop-blur-md shadow-lg;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 24px;
   }
 
+  .dark .glass-card {
+    background: rgba(30, 30, 60, 0.7);
+    border-color: rgba(60, 60, 100, 0.5);
+  }
+
   .glass-card-sm {
-    @apply bg-white/60 backdrop-blur-sm border border-white/40 shadow-md;
+    @apply backdrop-blur-sm shadow-md;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 16px;
+  }
+
+  .dark .glass-card-sm {
+    background: rgba(30, 30, 60, 0.6);
+    border-color: rgba(60, 60, 100, 0.4);
   }
 
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3
-           bg-lavender-400 text-white font-medium rounded-full
-           hover:bg-lavender-500 active:scale-95
-           transition-all duration-300 shadow-md hover:shadow-lg;
+           font-medium rounded-full
+           active:scale-95 transition-all duration-300 shadow-md hover:shadow-lg;
+    background-color: #A78BFA;
+    color: white;
+  }
+  .btn-primary:hover {
+    background-color: #8B5CF6;
+  }
+
+  .dark .btn-primary {
+    background-color: #7C3AED;
+  }
+  .dark .btn-primary:hover {
+    background-color: #6D28D9;
   }
 
   .btn-soft {
     @apply inline-flex items-center justify-center px-5 py-2.5
-           bg-white/60 text-lavender-500 font-medium rounded-full
-           hover:bg-lavender-50 active:scale-95
-           transition-all duration-300 border border-lavender-200/50;
+           font-medium rounded-full
+           active:scale-95 transition-all duration-300;
+    background: rgba(255, 255, 255, 0.6);
+    color: #8B5CF6;
+    border: 1px solid rgba(139, 92, 246, 0.15);
+  }
+  .btn-soft:hover {
+    background-color: #F5F3FF;
+  }
+
+  .dark .btn-soft {
+    background: rgba(139, 92, 246, 0.15);
+    color: #C4B5FD;
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+  .dark .btn-soft:hover {
+    background-color: rgba(139, 92, 246, 0.25);
   }
 
   .section-title {
-    @apply font-display text-3xl md:text-4xl text-gray-800 mb-3;
+    @apply font-display text-3xl md:text-4xl mb-3;
+    color: #1f2937;
+  }
+  .dark .section-title {
+    color: #f3f4f6;
   }
 
   .section-subtitle {
-    @apply text-gray-500 text-lg max-w-2xl;
+    @apply text-lg max-w-2xl;
+    color: #6b7280;
+  }
+  .dark .section-subtitle {
+    color: #9ca3af;
   }
 }
 
@@ -76,4 +135,72 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-lavender-300;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #4c1d95;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: #6d28d9;
+}
+
+/* Dark mode utility: text colors */
+.dark .text-gray-800 { color: #f3f4f6 !important; }
+.dark .text-gray-700 { color: #e5e7eb !important; }
+.dark .text-gray-600 { color: #d1d5db !important; }
+.dark .text-gray-500 { color: #9ca3af !important; }
+.dark .text-gray-400 { color: #6b7280 !important; }
+.dark .text-gray-300 { color: #4b5563 !important; }
+
+/* Dark mode utility: backgrounds */
+.dark .bg-white\/60 { background: rgba(30, 30, 60, 0.6) !important; }
+.dark .bg-white\/40 { background: rgba(30, 30, 60, 0.4) !important; }
+.dark .bg-white\/70 { background: rgba(30, 30, 60, 0.7) !important; }
+.dark .bg-white\/80 { background: rgba(30, 30, 60, 0.8) !important; }
+
+/* Dark mode: link hover colors */
+.dark .hover\:text-lavender-500:hover { color: #C4B5FD !important; }
+.dark .hover\:text-lavender-600:hover { color: #DDD6FE !important; }
+.dark .hover\:bg-lavender-50:hover { background-color: rgba(139, 92, 246, 0.15) !important; }
+.dark .hover\:bg-lavender-100:hover { background-color: rgba(139, 92, 246, 0.25) !important; }
+.dark .hover\:bg-mint-100:hover { background-color: rgba(16, 185, 129, 0.15) !important; }
+.dark .hover\:bg-peach-100:hover { background-color: rgba(244, 63, 94, 0.15) !important; }
+.dark .hover\:bg-gray-100:hover { background-color: rgba(107, 114, 128, 0.15) !important; }
+
+/* Dark mode: header/footer */
+.dark .bg-white\/60.backdrop-blur-lg {
+  background: rgba(26, 26, 46, 0.85) !important;
+  border-color: rgba(60, 60, 100, 0.5) !important;
+}
+
+/* Dark mode: subtle background sections */
+.dark .bg-amber-50 { background-color: rgba(120, 80, 0, 0.15) !important; }
+.dark .bg-red-50 { background-color: rgba(220, 38, 38, 0.1) !important; }
+.dark .border-amber-200 { border-color: rgba(120, 80, 0, 0.3) !important; }
+.dark .border-red-200 { border-color: rgba(220, 38, 38, 0.3) !important; }
+.dark .text-amber-700 { color: #fbbf24 !important; }
+.dark .text-red-700 { color: #fca5a5 !important; }
+.dark .text-red-600 { color: #f87171 !important; }
+.dark .text-amber-600 { color: #fcd34d !important; }
+
+/* Dark mode: tag colors need brightening */
+.dark .bg-lavender-50 { background-color: rgba(139, 92, 246, 0.15) !important; }
+.dark .bg-mint-50 { background-color: rgba(16, 185, 129, 0.15) !important; }
+.dark .bg-peach-50 { background-color: rgba(244, 63, 94, 0.15) !important; }
+.dark .text-lavender-500 { color: #C4B5FD !important; }
+.dark .text-mint-500 { color: #6EE7B7 !important; }
+.dark .text-peach-500 { color: #FDA4AF !important; }
+
+/* Dark mode: article content */
+.dark .prose { color: #d1d5db; }
+
+/* Dark mode: active tab bg */
+.dark .bg-lavender-100 { background-color: rgba(139, 92, 246, 0.25) !important; }
+
+/* Transition for theme switch */
+html.transitioning,
+html.transitioning *,
+html.transitioning *::before,
+html.transitioning *::after {
+  transition: background-color 0.3s ease, color 0.2s ease, border-color 0.3s ease !important;
 }

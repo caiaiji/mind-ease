@@ -8,13 +8,13 @@ export default function About() {
         <div className="text-center mb-16">
           <span className="text-5xl block mb-6">🌤</span>
           <h1 className="font-display text-3xl md:text-4xl text-gray-800 mb-4">关于心晴驿站</h1>
-          <p className="text-gray-500 text-lg">一个为年轻人打造的心理健康小站</p>
+          <p className="text-gray-500 dark:text-gray-400 text-lg">一个为年轻人打造的心理健康小站</p>
         </div>
 
         {/* Mission */}
         <div className="glass-card p-8 md:p-10 mb-8">
-          <h2 className="font-display text-xl text-gray-800 mb-4">我们的使命</h2>
-          <div className="space-y-4 text-gray-600 leading-relaxed">
+          <h2 className="font-display text-xl text-gray-800 dark:text-gray-100 mb-4">我们的使命</h2>
+          <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
             <p>
               心晴驿站诞生于一个简单的想法：每个年轻人都应该有一个可以安心倾诉和自我关怀的地方。
             </p>
@@ -31,7 +31,7 @@ export default function About() {
 
         {/* What we offer */}
         <div className="glass-card p-8 md:p-10 mb-8">
-          <h2 className="font-display text-xl text-gray-800 mb-4">我们提供什么</h2>
+          <h2 className="font-display text-xl text-gray-800 dark:text-gray-100 mb-4">我们提供什么</h2>
           <div className="space-y-6">
             {[
               { emoji: '📖', title: '心理科普文章', desc: '涵盖焦虑管理、人际关系、自我成长、睡眠改善、惊恐发作、躯体化等 18 篇科普内容，基于循证心理学研究。', to: '/articles' },
@@ -44,8 +44,8 @@ export default function About() {
               <Link key={item.title} to={item.to} className="flex gap-4 group">
                 <span className="text-2xl flex-shrink-0 mt-0.5">{item.emoji}</span>
                 <div>
-                  <h3 className="font-medium text-gray-800 mb-1 group-hover:text-lavender-500 transition-colors">{item.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                  <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-1 group-hover:text-lavender-500 transition-colors">{item.title}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{item.desc}</p>
                 </div>
               </Link>
             ))}
@@ -53,11 +53,11 @@ export default function About() {
         </div>
 
         {/* Disclaimer - Prominent */}
-        <div className="glass-card p-8 md:p-10 mb-8 border-2 border-amber-200 bg-amber-50/50">
-          <h2 className="font-display text-xl text-gray-800 mb-4 flex items-center gap-2">
+        <div className="glass-card p-8 md:p-10 mb-8 border-2 border-amber-200 dark:border-amber-800/50 bg-amber-50/50 dark:bg-amber-950/20">
+          <h2 className="font-display text-xl text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
             <span>⚠️</span> 重要声明
           </h2>
-          <div className="space-y-3 text-gray-600 text-sm leading-relaxed">
+          <div className="space-y-3 text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
             <p>
               <strong>本站内容仅供心理健康科普和日常自我觉察参考，不构成专业心理咨询或诊断建议。</strong>
             </p>
@@ -69,9 +69,9 @@ export default function About() {
               本站文章参考了心理学研究文献和公开资料，但我们<strong>不保证内容的绝对准确性和完整性</strong>。
               建议读者结合自身情况理性参考，如有疑问请咨询专业心理咨询师。
             </p>
-            <div className="mt-4 p-4 bg-white rounded-2xl border border-amber-200">
-              <p className="font-medium text-amber-700 mb-2">以下情况请立即寻求专业帮助，而非依赖本站：</p>
-              <ul className="space-y-1 text-amber-600 list-disc list-inside">
+            <div className="mt-4 p-4 bg-white dark:bg-gray-800 rounded-2xl border border-amber-200 dark:border-amber-800/50">
+              <p className="font-medium text-amber-700 dark:text-amber-400 mb-2">以下情况请立即寻求专业帮助，而非依赖本站：</p>
+              <ul className="space-y-1 text-amber-600 dark:text-amber-400 list-disc list-inside">
                 <li>持续两周以上的情绪低落或兴趣丧失</li>
                 <li>频繁的焦虑发作、恐慌或过度担忧</li>
                 <li>睡眠严重障碍（失眠或嗜睡超过两周）</li>
@@ -84,11 +84,11 @@ export default function About() {
         </div>
 
         {/* Crisis Resources - Expanded */}
-        <div className="glass-card p-8 md:p-10 mb-8 bg-red-50/50 border border-red-100">
+        <div className="glass-card p-8 md:p-10 mb-8 bg-red-50/50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/50">
           <h2 className="font-display text-xl text-gray-800 mb-2 flex items-center gap-2">
             <span>🆘</span> 心理危机求助资源
           </h2>
-          <p className="text-gray-500 text-sm mb-6">
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
             如果你或身边的人正在经历心理危机，请立即拨打以下热线。这些热线由专业机构运营，提供免费、保密的心理支持。
           </p>
           <div className="space-y-3">
@@ -99,20 +99,20 @@ export default function About() {
               { name: '生命热线', phone: '400-821-1215', hours: '每天 8:00-22:00', desc: '提供心理支持与危机干预服务' },
               { name: '共青团中央心理咨询热线', phone: '12355', hours: '每天 9:00-21:00', desc: '面向青少年的心理咨询和法律援助' },
             ].map((resource) => (
-              <div key={resource.name} className="flex items-center justify-between p-4 bg-white rounded-2xl border border-red-50">
+              <div key={resource.name} className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-2xl border border-red-50 dark:border-red-900/50">
                 <div>
-                  <p className="font-medium text-gray-800 text-sm">{resource.name}</p>
-                  <p className="text-xs text-gray-400">{resource.hours} · {resource.desc}</p>
+                  <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">{resource.name}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">{resource.hours} · {resource.desc}</p>
                 </div>
-                <span className="font-mono text-red-500 font-bold text-lg">{resource.phone}</span>
+                <span className="font-mono text-red-500 dark:text-red-400 font-bold text-lg">{resource.phone}</span>
               </div>
             ))}
           </div>
 
           {/* In-person help */}
-          <div className="mt-6 p-4 bg-white rounded-2xl border border-red-50">
-            <p className="font-medium text-gray-700 text-sm mb-2">🏥 线下就医指引</p>
-            <ul className="space-y-1.5 text-sm text-gray-500">
+          <div className="mt-6 p-4 bg-white dark:bg-gray-800 rounded-2xl border border-red-50 dark:border-red-900/50">
+            <p className="font-medium text-gray-700 dark:text-gray-300 text-sm mb-2">🏥 线下就医指引</p>
+            <ul className="space-y-1.5 text-sm text-gray-500 dark:text-gray-400">
               <li>• <strong>三甲医院</strong>心理科/精神科：挂心理科或精神科门诊号，由专业医师评估诊断</li>
               <li>• <strong>高校心理咨询中心</strong>：在校学生可免费预约校内心理咨询师</li>
               <li>• <strong>社区卫生服务中心</strong>：部分社区提供免费或低价心理咨询服务</li>
@@ -123,31 +123,31 @@ export default function About() {
 
         {/* Site Info */}
         <div className="glass-card p-8 md:p-10 mb-8">
-          <h2 className="font-display text-xl text-gray-800 mb-4">关于本项目</h2>
-          <div className="space-y-3 text-sm text-gray-600">
+          <h2 className="font-display text-xl text-gray-800 dark:text-gray-100 mb-4">关于本项目</h2>
+          <div className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
             <p>
               心晴驿站 MindEase 是一个<strong>开源公益项目</strong>，使用现代前端技术构建，
               面向学生和年轻群体提供免费的心理健康科普工具。
             </p>
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 bg-lavender-50/50 rounded-xl">
-                <span className="text-xs text-gray-400">技术栈</span>
-                <p className="text-gray-700 font-medium">React + TypeScript + Vite</p>
+              <div className="p-3 bg-lavender-50/50 dark:bg-lavender-950/30 rounded-xl">
+                <span className="text-xs text-gray-400 dark:text-gray-500">技术栈</span>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">React + TypeScript + Vite</p>
               </div>
-              <div className="p-3 bg-mint-50/50 rounded-xl">
-                <span className="text-xs text-gray-400">UI 框架</span>
-                <p className="text-gray-700 font-medium">Tailwind CSS</p>
+              <div className="p-3 bg-mint-50/50 dark:bg-mint-950/30 rounded-xl">
+                <span className="text-xs text-gray-400 dark:text-gray-500">UI 框架</span>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">Tailwind CSS</p>
               </div>
-              <div className="p-3 bg-peach-50/50 rounded-xl">
-                <span className="text-xs text-gray-400">托管平台</span>
-                <p className="text-gray-700 font-medium">GitHub Pages</p>
+              <div className="p-3 bg-peach-50/50 dark:bg-peach-950/30 rounded-xl">
+                <span className="text-xs text-gray-400 dark:text-gray-500">托管平台</span>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">GitHub Pages</p>
               </div>
-              <div className="p-3 bg-blue-50/50 rounded-xl">
-                <span className="text-xs text-gray-400">开源协议</span>
-                <p className="text-gray-700 font-medium">MIT License</p>
+              <div className="p-3 bg-blue-50/50 dark:bg-blue-950/30 rounded-xl">
+                <span className="text-xs text-gray-400 dark:text-gray-500">开源协议</span>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">MIT License</p>
               </div>
             </div>
-            <p className="text-gray-400 text-xs">
+            <p className="text-gray-400 dark:text-gray-500 text-xs">
               本站所有用户数据存储在浏览器本地（localStorage），不会上传至任何服务器。
               所有功能均可离线使用（首次加载后）。
             </p>
@@ -156,7 +156,7 @@ export default function About() {
 
         {/* CTA */}
         <div className="text-center">
-          <p className="text-gray-400 text-sm mb-6">你不是一个人在面对这些。</p>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mb-6">你不是一个人在面对这些。</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to="/articles" className="btn-primary">浏览文章</Link>
             <Link to="/assessment" className="btn-soft">情绪测评</Link>

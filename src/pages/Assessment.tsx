@@ -121,8 +121,8 @@ export default function Assessment() {
     return (
       <div className="px-6 md:px-12 lg:px-20 pt-12 pb-20">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-display text-3xl md:text-4xl text-gray-800 mb-3">情绪测评</h1>
-          <p className="text-gray-500 text-lg mb-2 max-w-2xl">
+          <h1 className="font-display text-3xl md:text-4xl text-gray-800 dark:text-gray-100 mb-3">情绪测评</h1>
+          <p className="text-gray-500 dark:text-gray-400 text-lg mb-2 max-w-2xl">
             通过简短的测评了解自己的心理状态，获取个性化建议。
           </p>
           <Link to="/assessment-guide" className="text-sm text-lavender-500 hover:text-lavender-600 transition-colors mb-4 inline-block">
@@ -130,9 +130,9 @@ export default function Assessment() {
           </Link>
 
           {/* Disclaimer Banner */}
-          <div className="mb-10 p-4 bg-amber-50 border border-amber-200 rounded-2xl flex items-start gap-3">
+          <div className="mb-10 p-4 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-2xl flex items-start gap-3">
             <span className="text-xl flex-shrink-0 mt-0.5">⚠️</span>
-            <div className="text-sm text-amber-700 leading-relaxed">
+            <div className="text-sm text-amber-700 dark:text-amber-400 leading-relaxed">
               <strong>重要提示：</strong>本测评仅用于日常自我觉察，基于简化版量表，结果<strong>不能作为心理诊断依据</strong>。
               如果你正在经历持续的情绪低落、焦虑或自我伤害倾向，请立即联系专业心理咨询师或拨打
               <strong>全国心理援助热线：400-161-9995</strong>（24 小时）。
@@ -146,7 +146,7 @@ export default function Assessment() {
           {history.length > 0 && (
             <div className="mb-10">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-medium text-gray-700">历史测评记录</h2>
+                <h2 className="font-medium text-gray-700 dark:text-gray-300">历史测评记录</h2>
                 <button
                   onClick={() => setPhase('history')}
                   className="text-sm text-lavender-500 hover:text-lavender-600 transition-colors"
@@ -156,14 +156,14 @@ export default function Assessment() {
               </div>
               <div className="flex gap-3 overflow-x-auto pb-2">
                 {history.slice(0, 4).map(r => (
-                  <div key={r.id} className="flex-shrink-0 p-4 bg-white/80 border border-lavender-100/50 rounded-2xl min-w-[180px]">
+                  <div key={r.id} className="flex-shrink-0 p-4 bg-white/80 dark:bg-gray-800/80 border border-lavender-100/50 dark:border-gray-700/50 rounded-2xl min-w-[180px]">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-lg">{r.assessmentEmoji}</span>
-                      <span className="text-xs text-gray-400">{r.assessmentTitle}</span>
+                      <span className="text-xs text-gray-400 dark:text-gray-500">{r.assessmentTitle}</span>
                     </div>
-                    <div className="text-lg font-bold text-gray-800">{r.score}<span className="text-xs text-gray-400 font-normal">/{r.maxScore}</span></div>
-                    <div className="text-xs text-lavender-500 mt-1">{r.level}</div>
-                    <div className="text-xs text-gray-300 mt-2">{fmtDate(r.date)}</div>
+                    <div className="text-lg font-bold text-gray-800 dark:text-gray-100">{r.score}<span className="text-xs text-gray-400 font-normal">/{r.maxScore}</span></div>
+                    <div className="text-xs text-lavender-500 dark:text-lavender-400 mt-1">{r.level}</div>
+                    <div className="text-xs text-gray-300 dark:text-gray-600 mt-2">{fmtDate(r.date)}</div>
                   </div>
                 ))}
               </div>
@@ -179,7 +179,7 @@ export default function Assessment() {
                 className="glass-card p-8 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl text-left"
               >
                 <span className="text-4xl block mb-4">{a.emoji}</span>
-                <h3 className="font-medium text-gray-800 text-lg mb-2">{a.title}</h3>
+                <h3 className="font-medium text-gray-800 dark:text-gray-100 text-lg mb-2">{a.title}</h3>
                 <p className="text-sm text-gray-400 mb-4">{a.description}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-300">{a.questions.length} 道题</span>
@@ -235,7 +235,7 @@ export default function Assessment() {
                     className={`p-4 rounded-2xl text-sm font-medium transition-all duration-300 border-2 ${
                       isSelected
                         ? 'bg-lavender-400 text-white border-lavender-400 shadow-lg scale-95'
-                        : 'bg-white/60 text-gray-600 border-lavender-100 hover:border-lavender-300 hover:bg-lavender-50'
+                        : 'bg-white/60 dark:bg-gray-800/60 text-gray-600 dark:text-gray-300 border-lavender-100 dark:border-gray-700 hover:border-lavender-300 dark:hover:border-lavender-600 hover:bg-lavender-50 dark:hover:bg-lavender-950/50'
                     }`}
                   >
                     {option.label}
@@ -258,11 +258,11 @@ export default function Assessment() {
             <button onClick={() => setPhase('select')} className="text-sm text-gray-400 hover:text-gray-600 transition-colors">
               ← 返回测评
             </button>
-            <h1 className="font-display text-2xl md:text-3xl text-gray-800">测评历史记录</h1>
+            <h1 className="font-display text-2xl md:text-3xl text-gray-800 dark:text-gray-100">测评历史记录</h1>
           </div>
 
           {history.length === 0 ? (
-            <div className="text-center py-20 text-gray-300">
+            <div className="text-center py-20 text-gray-300 dark:text-gray-600">
               <span className="text-5xl block mb-4">📋</span>
               <p>暂无测评记录</p>
             </div>
@@ -283,8 +283,8 @@ export default function Assessment() {
                         </span>
                       </div>
                       <div className="flex items-center gap-4 text-sm">
-                        <span className="text-gray-500">得分：{r.score}/{r.maxScore}（{pct}%）</span>
-                        <span className="text-gray-300">{fmtDate(r.date)}</span>
+                        <span className="text-gray-500 dark:text-gray-400">得分：{r.score}/{r.maxScore}（{pct}%）</span>
+                        <span className="text-gray-300 dark:text-gray-600">{fmtDate(r.date)}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0">
@@ -316,7 +316,7 @@ export default function Assessment() {
                     setHistory([])
                   }
                 }}
-                className="text-sm text-red-400 hover:text-red-500 transition-colors"
+                className="text-sm text-red-400 dark:text-red-300 hover:text-red-500 dark:hover:text-red-400 transition-colors"
               >
                 清空所有记录
               </button>
@@ -347,12 +347,12 @@ export default function Assessment() {
         <div className="max-w-2xl mx-auto">
           {/* High Risk Warning */}
           {isHighRisk && (
-            <div className="mb-6 p-5 bg-red-50 border-2 border-red-200 rounded-2xl">
+            <div className="mb-6 p-5 bg-red-50 dark:bg-red-950/30 border-2 border-red-200 dark:border-red-800/50 rounded-2xl">
               <div className="flex items-start gap-3">
                 <span className="text-2xl flex-shrink-0">🆘</span>
                 <div>
-                  <h3 className="font-bold text-red-700 mb-1">需要关注</h3>
-                  <p className="text-sm text-red-600 leading-relaxed mb-3">
+                  <h3 className="font-bold text-red-700 dark:text-red-400 mb-1">需要关注</h3>
+                  <p className="text-sm text-red-600 dark:text-red-400 leading-relaxed mb-3">
                     你的测评结果显示可能存在较高的心理压力。请注意，这不是诊断结果，
                     但建议你关注自己的情绪状态。
                   </p>
@@ -379,7 +379,7 @@ export default function Assessment() {
             {/* Score Visualization */}
             <div className="relative w-40 h-40 mx-auto mb-8">
               <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#EDE9FE" strokeWidth="10" />
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#EDE9FE" strokeWidth="10" className="dark:stroke-gray-700" />
                 <circle
                   cx="60" cy="60" r="50"
                   fill="none"
@@ -391,8 +391,8 @@ export default function Assessment() {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="text-2xl font-bold text-gray-800">{totalScore}</span>
-                <span className="text-xs text-gray-400">/ {maxScore}</span>
+                <span className="text-2xl font-bold text-gray-800 dark:text-gray-100">{totalScore}</span>
+                <span className="text-xs text-gray-400 dark:text-gray-500">/ {maxScore}</span>
               </div>
             </div>
 
@@ -406,7 +406,7 @@ export default function Assessment() {
 
             {/* Suggestions */}
             <div className="text-left max-w-lg mx-auto">
-              <h3 className="font-medium text-gray-800 mb-4">个性化建议</h3>
+              <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-4">个性化建议</h3>
               <div className="space-y-3">
                 {result.suggestions.map((s, i) => (
                   <div key={i} className={`p-4 rounded-2xl ${colors.light}`}>
@@ -431,7 +431,7 @@ export default function Assessment() {
           </div>
 
           {/* Enhanced Disclaimer */}
-          <div className="mt-8 p-5 bg-amber-50 border border-amber-200 rounded-2xl">
+          <div className="mt-8 p-5 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 rounded-2xl">
             <div className="flex items-start gap-3">
               <span className="text-lg flex-shrink-0">⚠️</span>
               <div className="text-sm text-amber-700 leading-relaxed">

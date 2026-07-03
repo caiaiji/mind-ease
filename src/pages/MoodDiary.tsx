@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { dark } from '../contexts/ThemeContext'
 
 const STORAGE_KEY = 'mindease-mood-journal'
 
@@ -180,12 +181,12 @@ export default function MoodDiary() {
     : '--'
 
   const s = {
-    page: { background: '#FFFBF5', minHeight: '100vh', fontFamily: '"Noto Sans SC", sans-serif', color: '#374151', padding: '100px 16px 60px' },
+    page: { background: '#FFFBF5', minHeight: '100vh', fontFamily: '"Noto Sans SC", sans-serif', color: dark('#374151', '#d1d5db'), padding: '100px 16px 60px' },
     container: { maxWidth: 640, margin: '0 auto' },
-    title: { fontSize: 28, fontWeight: 700, color: '#374151', marginBottom: 4, fontFamily: '"ZCOOL XiaoWei", serif' },
+    title: { fontSize: 28, fontWeight: 700, color: dark('#374151', '#d1d5db'), marginBottom: 4, fontFamily: '"ZCOOL XiaoWei", serif' },
     subtitle: { fontSize: 14, color: '#9CA3AF', marginBottom: 32 },
     card: { background: 'rgba(255,255,255,0.7)', borderRadius: 20, padding: 24, marginBottom: 20, border: '1px solid rgba(167,139,250,0.1)', backdropFilter: 'blur(10px)' },
-    cardTitle: { fontSize: 16, fontWeight: 600, color: '#374151', marginBottom: 16 },
+    cardTitle: { fontSize: 16, fontWeight: 600, color: dark('#374151', '#d1d5db'), marginBottom: 16 },
     moodGrid: { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 20 },
     moodBtn: (selected: boolean, color: string) => ({
       display: 'flex', flexDirection: 'column' as const, alignItems: 'center', gap: 6,
@@ -205,7 +206,7 @@ export default function MoodDiary() {
     textarea: {
       width: '100%', minHeight: 80, padding: '12px 16px', borderRadius: 14,
       border: '1px solid rgba(167,139,250,0.2)', background: 'rgba(255,255,255,0.6)',
-      color: '#374151', fontSize: 14, resize: 'vertical' as const, outline: 'none',
+      color: dark('#374151', '#d1d5db'), fontSize: 14, resize: 'vertical' as const, outline: 'none',
       fontFamily: '"Noto Sans SC", sans-serif', marginBottom: 16,
       boxSizing: 'border-box' as const,
     },
@@ -222,7 +223,7 @@ export default function MoodDiary() {
     entryItem: { display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.04)' },
     entryEmoji: { fontSize: 24 },
     entryInfo: { flex: 1 },
-    entryNote: { fontSize: 13, color: '#374151', marginBottom: 2 },
+    entryNote: { fontSize: 13, color: dark('#374151', '#d1d5db'), marginBottom: 2 },
     entryMeta: { fontSize: 11, color: '#D1D5DB' },
     entryTags: { display: 'flex', gap: 4, marginBottom: 2 },
     entryTag: { fontSize: 10, padding: '1px 8px', borderRadius: 999, background: '#F0EEFF', color: '#7C3AED' },

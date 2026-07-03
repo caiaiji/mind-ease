@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser, getUsers } from '../contexts/UserContext'
+import { dark } from '../contexts/ThemeContext'
 
 type AdminTab = 'overview' | 'users' | 'mood' | 'treehole' | 'schulte'
 
@@ -347,7 +348,7 @@ export default function Admin() {
                       <span style={{ fontWeight: 600, color: '#1F2937', fontSize: 14 }}>{t.nickname || '匿名'}</span>
                       <span style={{ marginLeft: 'auto', fontSize: 11, color: '#D1D5DB' }}>{formatDate(t.date)}</span>
                     </div>
-                    <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.6, margin: '0 0 8px' }}>{t.content}</p>
+                    <p style={{ fontSize: 14, color: dark('#374151', '#d1d5db'), lineHeight: 1.6, margin: '0 0 8px' }}>{t.content}</p>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 12, color: '#9CA3AF' }}>
                       <span>❤️ {t.likes || 0}</span>
                       <span>💬 {t.replies?.length || 0} 条回复</span>
@@ -358,7 +359,7 @@ export default function Admin() {
                         {t.replies.map((r: any, ri: number) => (
                           <div key={ri} style={{ marginBottom: 4, fontSize: 13 }}>
                             <span style={{ fontWeight: 500, color: '#8B5CF6' }}>{r.nickname || '匿名'}</span>
-                            <span style={{ color: '#374151', marginLeft: 6 }}>{r.content}</span>
+                            <span style={{ color: dark('#374151', '#d1d5db'), marginLeft: 6 }}>{r.content}</span>
                             <span style={{ color: '#D1D5DB', marginLeft: 8, fontSize: 11 }}>{formatDate(r.date)}</span>
                           </div>
                         ))}

@@ -14,7 +14,7 @@ export default function Articles() {
       {/* Page Header */}
       <section className="px-6 md:px-12 lg:px-20 pt-12 pb-8">
         <div className="max-w-5xl mx-auto">
-          <h1 className="font-display text-3xl md:text-4xl text-gray-800 mb-3">心理文章</h1>
+          <h1 className="font-display text-3xl md:text-4xl text-gray-800 dark:text-gray-100 mb-3">心理文章</h1>
           <p className="text-gray-500 text-lg max-w-2xl">
             关于焦虑、人际关系、自我成长、睡眠和压力，找到你需要的信息和建议。
           </p>
@@ -31,8 +31,8 @@ export default function Articles() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                   activeCategory === cat.id
-                    ? 'bg-lavender-400 text-white shadow-md'
-                    : 'bg-white/60 text-gray-500 hover:bg-lavender-50 hover:text-lavender-500 border border-lavender-100'
+                    ? 'bg-lavender-400 dark:bg-lavender-500 text-white shadow-md'
+                    : 'bg-white/60 dark:bg-gray-800/60 text-gray-500 dark:text-gray-400 hover:bg-lavender-50 dark:hover:bg-lavender-950/50 hover:text-lavender-500 border border-lavender-100 dark:border-gray-700'
                 }`}
               >
                 {cat.label}
@@ -56,14 +56,14 @@ export default function Articles() {
                   {article.coverEmoji}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-medium text-gray-800 mb-1 group-hover:text-lavender-500 transition-colors truncate">
+                  <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-1 group-hover:text-lavender-500 transition-colors truncate">
                     {article.title}
                   </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed line-clamp-2 mb-3">
+                  <p className="text-sm text-gray-400 dark:text-gray-500 leading-relaxed line-clamp-2 mb-3">
                     {article.summary}
                   </p>
-                  <div className="flex items-center gap-3 text-xs text-gray-300">
-                    <span className={`px-2 py-0.5 rounded-full bg-lavender-50 text-lavender-500`}>
+                  <div className="flex items-center gap-3 text-xs text-gray-300 dark:text-gray-600">
+                    <span className={`px-2 py-0.5 rounded-full bg-lavender-50 dark:bg-lavender-900/40 text-lavender-500 dark:text-lavender-400`}>
                       {categories.find((c) => c.id === article.category)?.label}
                     </span>
                     <span>{article.readTime} 分钟</span>
@@ -77,7 +77,7 @@ export default function Articles() {
           {filtered.length === 0 && (
             <div className="text-center py-16">
               <span className="text-5xl block mb-4">📭</span>
-              <p className="text-gray-400">该分类下暂无文章</p>
+              <p className="text-gray-400 dark:text-gray-500">该分类下暂无文章</p>
             </div>
           )}
         </div>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useUser } from '../contexts/UserContext'
 
+
 const AVATARS = ['🧑', '👩', '👨', '🧒', '👩‍🎓', '🧑‍🎓', '👨‍🎓', '🌸', '🍀', '⭐', '🌙', '🌈']
 
 type Tab = 'login' | 'register' | 'profile'

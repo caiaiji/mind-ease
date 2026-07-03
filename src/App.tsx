@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
+import { ThemeProvider } from './contexts/ThemeContext'
 import Layout from './components/layout/Layout'
 import Home from './pages/Home'
 import Articles from './pages/Articles'
@@ -17,7 +18,8 @@ import AssessmentGuide from './pages/AssessmentGuide'
 
 function App() {
   return (
-    <UserProvider>
+    <ThemeProvider>
+      <UserProvider>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -36,6 +38,7 @@ function App() {
         </Route>
       </Routes>
     </UserProvider>
+    </ThemeProvider>
   )
 }
 

@@ -5,6 +5,7 @@ import MemoryMatch from '../components/features/games/MemoryMatch'
 import FloatingBubbles from '../components/features/games/FloatingBubbles'
 import SchulteGrid from '../components/features/games/SchulteGrid'
 
+
 type GameId = 'none' | 'bubble-pop' | 'flower-garden' | 'memory-match' | 'floating-bubbles' | 'schulte-grid'
 
 const GAMES: { id: GameId; title: string; description: string; emoji: string; gradient: string; tag: string }[] = [

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { relaxTips } from '../data/relax'
 import WhiteNoise from '../components/WhiteNoise'
 
+
 type BreathingPhase = 'inhale' | 'hold' | 'exhale' | 'rest'
 
 export default function Relax() {
