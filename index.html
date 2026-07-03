@@ -11,6 +11,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // SPA route recovery: restore the correct URL after 404.html redirect
+      (function() {
+        var redirect = sessionStorage.getItem('spa-redirect');
+        if (redirect) {
+          sessionStorage.removeItem('spa-redirect');
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

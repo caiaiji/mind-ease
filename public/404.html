@@ -4,19 +4,29 @@
     <meta charset="utf-8">
     <title>心晴驿站 - 给心灵放个假</title>
     <script>
-      // 将路径重定向到正确的 SPA 路由
-      var seg = location.pathname.replace(/^\/mind-ease\/?/, '');
-      if (seg) {
-        sessionStorage.redirect = seg;
-      }
-      if (sessionStorage.redirect) {
-        var target = '/mind-ease/' + sessionStorage.redirect;
-        sessionStorage.redirect = null;
-        window.location.replace(target);
+      // GitHub Pages SPA redirect: 404.html -> index.html with correct path
+      // This script runs on 404 pages and redirects to index.html
+      // while preserving the full path (including query string and hash)
+      var pathSegments = location.pathname.replace(/\/index\.html$/, '');
+      var basePath = '/mind-ease';
+      
+      // Store the original path in sessionStorage for recovery after redirect
+      var redirectPath = location.pathname + location.search + location.hash;
+      sessionStorage.setItem('spa-redirect', redirectPath);
+      
+      // Redirect to index.html at base path
+      var indexPath = basePath + '/';
+      if (location.protocol + '//' + location.host + pathSegments !== location.protocol + '//' + location.host + indexPath) {
+        window.location.replace(
+          location.protocol + '//' + location.host + indexPath + location.search
+        );
       }
     </script>
   </head>
   <body>
-    Redirecting...
+    <p>Redirecting to <a id="link">home</a>...</p>
+    <script>
+      document.getElementById('link').href = '/mind-ease/';
+    </script>
   </body>
 </html>
