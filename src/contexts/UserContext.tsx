@@ -21,6 +21,8 @@ interface UserContextType {
   logout: () => void
   updateProfile: (updates: Partial<Pick<UserProfile, 'nickname' | 'avatar' | 'bio'>>) => void
   getAllUsers: () => Array<{ password: string; profile: UserProfile }>
+  setUserRole: (userId: string, role: 'admin' | 'user') => boolean
+  deleteUser: (userId: string) => boolean
 }
 
 const UserContext = createContext<UserContextType | null>(null)
@@ -140,10 +142,33 @@ export function UserProvider({ children }: { children: ReactNode }) {
     return Object.values(getUsers())
   }
 
+  const setUserRole = (userId: string, role: 'admin' | 'user'): boolean => {
+    const users = getUsers()
+    if (!users[userId]) return false
+    users[userId].profile.role = role
+    if (role === 'admin') users[userId].profile.avatar = '👑'
+    saveUsers(users)
+    // Refresh current user state if modified self
+    if (user?.id === userId) {
+      setUser({ ...user, role, ...(role === 'admin' ? { avatar: '👑' } : {}) })
+    }
+    return true
+  }
+
+  const deleteUser = (userId: string): boolean => {
+    const users = getUsers()
+    if (!users[userId]) return false
+    // Cannot delete self
+    if (userId === user?.id) return false
+    delete users[userId]
+    saveUsers(users)
+    return true
+  }
+
   const isAdmin = user?.role === 'admin'
 
   return (
-    <UserContext.Provider value={{ user, isLogin: !!user, isAdmin, register, login, logout, updateProfile, getAllUsers }}>
+    <UserContext.Provider value={{ user, isLogin: !!user, isAdmin, register, login, logout, updateProfile, getAllUsers, setUserRole, deleteUser }}>
       {children}
     </UserContext.Provider>
   )

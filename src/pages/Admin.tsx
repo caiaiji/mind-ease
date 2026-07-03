@@ -12,7 +12,7 @@ interface StatCard {
 }
 
 export default function Admin() {
-  const { user, isAdmin, isLogin } = useUser()
+  const { user, isAdmin, isLogin, setUserRole, deleteUser } = useUser()
   const navigate = useNavigate()
   const [tab, setTab] = useState<AdminTab>('overview')
   const [users, setUsers] = useState<Array<{ password: string; profile: any }>>([])
@@ -33,6 +33,8 @@ export default function Admin() {
   }, [isLogin, isAdmin, navigate])
 
   // Load data
+  const [confirmAction, setConfirmAction] = useState<{ type: string; userId: string; nickname: string } | null>(null)
+
   const refreshData = () => {
     setUsers(getUsers ? Object.values(getUsers()) : [])
     try {
@@ -255,6 +257,41 @@ export default function Admin() {
                         {u.profile.bio}
                       </p>
                     )}
+                    {/* Action Buttons */}
+                    <div style={{ ...s.userActions }}>
+                      {u.profile.role !== 'admin' ? (
+                        <button
+                          style={{ ...s.actionBtnPromote }}
+                          onClick={() => {
+                            setUserRole(u.profile.id, 'admin')
+                            refreshData()
+                          }}
+                          title="设为管理员"
+                        >
+                          👑 提升管理员
+                        </button>
+                      ) : (
+                        <button
+                          style={{ ...s.actionBtnDemote }}
+                          onClick={() => {
+                            setUserRole(u.profile.id, 'user')
+                            refreshData()
+                          }}
+                          title="设为普通用户"
+                        >
+                          👤 降为用户
+                        </button>
+                      )}
+                      {u.profile.id !== user?.id && (
+                        <button
+                          style={{ ...s.actionBtnDelete }}
+                          onClick={() => setConfirmAction({ type: 'delete', userId: u.profile.id, nickname: u.profile.nickname })}
+                          title="删除用户"
+                        >
+                          🗑️ 删除
+                        </button>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -365,6 +402,37 @@ export default function Admin() {
                   ))}
               </div>
             )}
+          </div>
+        )}
+
+        {/* ===== CONFIRM DIALOG ===== */}
+        {confirmAction && (
+          <div style={s.overlay} onClick={() => setConfirmAction(null)}>
+            <div style={s.dialog} onClick={e => e.stopPropagation()}>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: '#1F2937', margin: '0 0 12px' }}>
+                {confirmAction.type === 'delete' ? '⚠️ 确认删除用户' : '⚠️ 确认操作'}
+              </h3>
+              <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.6, margin: '0 0 24px' }}>
+                确定要删除用户「{confirmAction.nickname}」吗？<br/>
+                <span style={{ color: '#EF4444', fontSize: 12 }}>此操作不可撤销，该用户的所有数据将被清除。</span>
+              </p>
+              <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+                <button
+                  style={{ ...s.dialogBtn, ...s.dialogCancel }}
+                  onClick={() => setConfirmAction(null)}
+                >取消</button>
+                <button
+                  style={{ ...s.dialogBtn, ...s.dialogConfirm }}
+                  onClick={() => {
+                    if (confirmAction.type === 'delete') {
+                      deleteUser(confirmAction.userId)
+                      refreshData()
+                    }
+                    setConfirmAction(null)
+                  }}
+                >确认删除</button>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -568,5 +636,82 @@ const s: Record<string, any> = {
     color: '#D1D5DB',
     padding: '40px 0',
     fontSize: 14,
+  } as React.CSSProperties,
+  userActions: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    gap: 6,
+    marginTop: 10,
+  } as React.CSSProperties,
+  actionBtnPromote: {
+    width: '100%',
+    padding: '7px 0',
+    borderRadius: 10,
+    border: '1.5px solid rgba(245,158,11,0.3)',
+    background: 'rgba(245,158,11,0.05)',
+    color: '#F59E0B',
+    fontSize: 12,
+    fontWeight: 500,
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+  } as React.CSSProperties,
+  actionBtnDemote: {
+    width: '100%',
+    padding: '7px 0',
+    borderRadius: 10,
+    border: '1.5px solid rgba(139,92,246,0.3)',
+    background: 'rgba(139,92,246,0.05)',
+    color: '#8B5CF6',
+    fontSize: 12,
+    fontWeight: 500,
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+  } as React.CSSProperties,
+  actionBtnDelete: {
+    width: '100%',
+    padding: '7px 0',
+    borderRadius: 10,
+    border: '1.5px solid rgba(239,68,68,0.3)',
+    background: 'rgba(239,68,68,0.05)',
+    color: '#EF4444',
+    fontSize: 12,
+    fontWeight: 500,
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+  } as React.CSSProperties,
+  overlay: {
+    position: 'fixed' as const,
+    top: 0, left: 0, right: 0, bottom: 0,
+    background: 'rgba(0,0,0,0.4)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 9999,
+    padding: 20,
+  } as React.CSSProperties,
+  dialog: {
+    background: '#fff',
+    borderRadius: 20,
+    padding: 28,
+    maxWidth: 380,
+    width: '100%',
+    boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
+  } as React.CSSProperties,
+  dialogBtn: {
+    padding: '10px 24px',
+    borderRadius: 12,
+    fontSize: 14,
+    fontWeight: 500,
+    cursor: 'pointer',
+    border: 'none',
+    transition: 'all 0.2s',
+  } as React.CSSProperties,
+  dialogCancel: {
+    background: '#F3F4F6',
+    color: '#6B7280',
+  } as React.CSSProperties,
+  dialogConfirm: {
+    background: '#EF4444',
+    color: '#fff',
   } as React.CSSProperties,
 }
