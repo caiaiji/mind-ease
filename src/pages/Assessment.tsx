@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { useUser } from '../contexts/UserContext'
 import { assessments } from '../data/assessments'
+import AssessmentReportCard from '../components/AssessmentReportCard'
 
 type Phase = 'select' | 'quiz' | 'result' | 'history'
 
@@ -41,6 +42,7 @@ export default function Assessment() {
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [totalScore, setTotalScore] = useState(0)
   const [history, setHistory] = useState<HistoryRecord[]>(loadHistory)
+  const [showReport, setShowReport] = useState(false)
 
   const assessment = useMemo(
     () => assessments.find((a) => a.id === activeType),
@@ -427,6 +429,17 @@ export default function Assessment() {
               <Link to="/relax" className="btn-primary">
                 试试放松工具
               </Link>
+              <button
+                onClick={() => setShowReport(true)}
+                className="px-5 py-2.5 rounded-full text-sm font-bold text-white transition-all duration-300"
+                style={{
+                  background: 'linear-gradient(135deg, #F472B6, #8B5CF6)',
+                  boxShadow: '0 4px 16px rgba(139,92,246,0.3)',
+                  border: 'none', cursor: 'pointer',
+                }}
+              >
+                📋 生成报告卡片
+              </button>
             </div>
           </div>
 
@@ -445,10 +458,28 @@ export default function Assessment() {
 
           {/* Result saved notice */}
           <div className="mt-4 text-center">
-            <p className="text-xs text-gray-300">
+            <p className="text-xs text-gray-300 dark:text-gray-600">
               {isLogin ? `测评结果已自动保存（${user?.nickname}）` : '登录后测评结果将自动保存，方便追踪情绪变化'}
             </p>
           </div>
+
+          {/* Report Card Modal */}
+          <AssessmentReportCard
+            visible={showReport}
+            onClose={() => setShowReport(false)}
+            data={{
+              title: assessment.title,
+              emoji: assessment.emoji,
+              score: totalScore,
+              maxScore,
+              level: result.level,
+              color: result.color,
+              description: result.description,
+              suggestions: result.suggestions,
+              date: new Date().toISOString(),
+              nickname: user?.nickname,
+            }}
+          />
         </div>
       </div>
     )
