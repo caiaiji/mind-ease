@@ -18,11 +18,13 @@ import AssessmentGuide from './pages/AssessmentGuide'
 import CheckIn from './pages/CheckIn'
 import Dashboard from './pages/Dashboard'
 import ExamPrep from './pages/ExamPrep'
+import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
   return (
     <ThemeProvider>
       <UserProvider>
+      <ErrorBoundary>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -43,6 +45,7 @@ function App() {
           <Route path="/exam-prep" element={<ExamPrep />} />
         </Route>
       </Routes>
+      </ErrorBoundary>
     </UserProvider>
     </ThemeProvider>
   )
