@@ -23,6 +23,7 @@ const interactiveTools = [
   { to: '/assessment', emoji: '📊', title: '情绪测评', desc: '焦虑自评、压力指数、情绪温度计，了解自己', bg: 'from-mint-50 to-peach-50 dark:from-mint-950/50 dark:to-peach-950/50', border: 'border-mint-100 dark:border-mint-800/50' },
   { to: '/articles', emoji: '📖', title: '心理文章', desc: '焦虑管理、人际关系、自我成长等科普文章', bg: 'from-peach-50 to-mint-50 dark:from-peach-950/50 dark:to-mint-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
   { to: '/exam-prep', emoji: '📚', title: '考前专题', desc: '考前焦虑急救、科学备考策略、考场心态调整', bg: 'from-amber-50 to-lavender-50 dark:from-amber-950/50 dark:to-lavender-950/50', border: 'border-amber-100 dark:border-amber-800/50' },
+  { to: '/weekly-insight', emoji: '📈', title: '情绪周报', desc: '聚合本周心情、打卡、测评数据，生成个性化洞察', bg: 'from-amber-50 to-lavender-50 dark:from-amber-950/50 dark:to-lavender-950/50', border: 'border-amber-100 dark:border-amber-800/50' },
   { to: '/dashboard', emoji: '📊', title: '情绪仪表盘', desc: '全面了解你的心理健康状态，查看趋势和分布', bg: 'from-mint-50 to-lavender-50 dark:from-mint-950/50 dark:to-lavender-950/50', border: 'border-mint-100 dark:border-mint-800/50' },
   { to: '/checkin', emoji: '📅', title: '每日打卡', desc: '坚持每日打卡，养成关注心灵的好习惯，解锁成就徽章', bg: 'from-lavender-50 to-peach-50 dark:from-lavender-950/50 dark:to-peach-950/50', border: 'border-lavender-100 dark:border-lavender-800/50' },
 ]

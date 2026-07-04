@@ -13,6 +13,7 @@ const navLinks = [
   { path: '/treehole', label: '树洞倾诉' },
   { path: '/checkin', label: '每日打卡' },
   { path: '/exam-prep', label: '📚 考前专题' },
+  { path: '/weekly-insight', label: '📊 情绪周报' },
   { path: '/dashboard', label: '情绪仪表盘' },
   { path: '/about', label: '关于' },
 ]

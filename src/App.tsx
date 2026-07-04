@@ -18,6 +18,7 @@ import AssessmentGuide from './pages/AssessmentGuide'
 import CheckIn from './pages/CheckIn'
 import Dashboard from './pages/Dashboard'
 import ExamPrep from './pages/ExamPrep'
+import WeeklyInsight from './pages/WeeklyInsight'
 import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="/checkin" element={<CheckIn />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/exam-prep" element={<ExamPrep />} />
+          <Route path="/weekly-insight" element={<WeeklyInsight />} />
         </Route>
       </Routes>
       </ErrorBoundary>
