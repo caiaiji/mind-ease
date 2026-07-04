@@ -469,7 +469,35 @@ export default function Profile() {
                 </div>
                 <div style={s.statLabel}>树洞留言</div>
               </div>
+              <div style={s.statItem}>
+                <div style={s.statNum}>
+                  {(() => {
+                    try {
+                      const ci = JSON.parse(localStorage.getItem('mindease-checkin') || '{}')
+                      return ci.dates ? [...new Set(ci.dates)].length : 0
+                    } catch { return 0 }
+                  })()}
+                </div>
+                <div style={s.statLabel}>打卡天数</div>
+              </div>
             </div>
+
+            {/* Check-in Shortcut */}
+            <a href="#/checkin" style={{
+              display: 'block',
+              textAlign: 'center',
+              padding: '14px 0',
+              borderRadius: 16,
+              fontSize: 14,
+              fontWeight: 600,
+              color: '#fff',
+              background: 'linear-gradient(135deg, #A78BFA, #6EE7B7)',
+              textDecoration: 'none',
+              marginBottom: 20,
+              boxShadow: '0 4px 16px rgba(139,92,246,0.2)',
+            }}>
+              📅 去打卡
+            </a>
 
             {/* Edit Form */}
             <form onSubmit={handleSaveProfile}>

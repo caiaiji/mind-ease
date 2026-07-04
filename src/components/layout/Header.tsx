@@ -11,6 +11,7 @@ const navLinks = [
   { path: '/games', label: '放松游戏' },
   { path: '/mood-diary', label: '情绪日记' },
   { path: '/treehole', label: '树洞倾诉' },
+  { path: '/checkin', label: '每日打卡' },
   { path: '/about', label: '关于' },
 ]
 
