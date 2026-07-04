@@ -12,6 +12,7 @@ const navLinks = [
   { path: '/mood-diary', label: '情绪日记' },
   { path: '/treehole', label: '树洞倾诉' },
   { path: '/checkin', label: '每日打卡' },
+  { path: '/exam-prep', label: '📚 考前专题' },
   { path: '/dashboard', label: '情绪仪表盘' },
   { path: '/about', label: '关于' },
 ]

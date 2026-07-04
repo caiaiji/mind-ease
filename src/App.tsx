@@ -17,6 +17,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import AssessmentGuide from './pages/AssessmentGuide'
 import CheckIn from './pages/CheckIn'
 import Dashboard from './pages/Dashboard'
+import ExamPrep from './pages/ExamPrep'
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/assessment-guide" element={<AssessmentGuide />} />
           <Route path="/checkin" element={<CheckIn />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/exam-prep" element={<ExamPrep />} />
         </Route>
       </Routes>
     </UserProvider>
