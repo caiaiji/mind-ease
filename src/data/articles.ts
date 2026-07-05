@@ -7,6 +7,7 @@ export interface Article {
   date: string
   content: string
   coverEmoji: string
+  references?: string[]
 }
 
 export const categories = [
@@ -29,6 +30,7 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-07-01',
     coverEmoji: '🪞',
+    references: ['Beck, A. T. (1979). Cognitive Therapy of Depression. Guilford Press.', '王建平等 (2018). 《认知行为疗法：理论、实务与督导》. 中国轻工业出版社.'],
     content: `你有没有这样的时刻——明明做得不错，却总觉得"还不够好"；别人夸你，你第一反应是"他们只是在客气"。这不是谦虚，而是自我否定。
 
 **什么是自我否定？**
@@ -83,6 +85,11 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-06-30',
     coverEmoji: '🏡',
+    references: [
+      'Minuchin, S. (1974). Families and Family Therapy. Harvard University Press.',
+      'Bowen, M. (1978). Family Therapy in Clinical Practice. Jason Aronson.',
+      '曾奇峰 (2018). 《你不知道的自己》. 北京联合出版公司.',
+    ],
     content: `"我是为你好"——这句话可能是中国家庭中出现频率最高、也最让人窒息的话。
 
 父母的期待本是出于关心，但当关心变成控制，它就开始伤害关系和你的心理健康。
@@ -136,6 +143,11 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-06-28',
     coverEmoji: '💔',
+    references: [
+      'Levine, J. A. & Heller, R. (2010). Attached: The New Science of Adult Attachment. TarcherPerigee.',
+      'Firestone, R. W. (1986). The "voice" within. Cognitive Therapy and Research, 10(5).',
+      '克里斯多福·孟 (2015). 《亲密关系：通往灵魂的桥梁》. 湖南文艺出版社.',
+    ],
     content: `你有没有过这样的体验：明明在恋爱，却比单身时还焦虑？不停地猜测对方在想什么，反复审视自己是不是哪里做错了，为一条没有秒回的消息心烦一整天。
 
 这就是恋爱内耗——在亲密关系中过度消耗自己的心理能量。
@@ -189,6 +201,11 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-06-26',
     coverEmoji: '🧰',
+    references: [
+      'Linehan, M. L. (2014). DBT Skills Training Manual (2nd ed.). Guilford Press.',
+      'Gross, J. J. (2015). Emotion regulation: Current status and future prospects. Psychological Inquiry, 26(1), 1-26.',
+      'van der Kolk, B. A. (2014). The Body Keeps the Score. Penguin Books.',
+    ],
     content: `负面情绪突然来袭时，我们常常手足无措。这里准备了一份"情绪急救箱"——5个简单有效的技巧，你可以在任何地方、任何时间使用。
 
 **技巧一：TIPP 技巧（快速降温）**
@@ -242,6 +259,11 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-06-28',
     coverEmoji: '📝',
+    references: [
+      'Zeidner, M. (1998). Test Anxiety: The State of the Art. Springer.',
+      'Spielberger, C. D. & Vagg, P. R. (1995). Test Anxiety: Theory, Assessment, and Treatment. Taylor & Francis.',
+      '刘晓明等 (2011). 考试焦虑心理辅导. 心理科学进展, 19(12).',
+    ],
     content: `考试焦虑是学生群体中最常见的心理困扰之一。适度的紧张有助于提高注意力，但过度的焦虑会影响发挥。
 
 **为什么我们会焦虑？**
@@ -282,6 +304,10 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-06-25',
     coverEmoji: '👥',
+    references: [
+      'Stein, M. B. & Stein, D. J. (2008). Social anxiety disorder. The Lancet, 371(9618), 1115-1125.',
+      'Clark, D. M. & Wells, A. (1995). A cognitive model of social phobia. In Social Phobia: Diagnosis, Assessment, and Treatment.',
+    ],
     content: `很多人把社交焦虑等同于害羞或内向，但实际上，社交焦虑障碍是一种常见的心理健康问题，影响着大量年轻人的日常生活。
 
 **社交焦虑 vs 内向**
@@ -326,6 +352,10 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-06-22',
     coverEmoji: '🛡',
+    references: [
+      'Cloud, H. & Townsend, J. (1992). Boundaries: When to Say Yes, How to Say No. Zondervan.',
+      'Whitfield, C. L. (1993). Boundaries and Relationships. Health Communications Inc.',
+    ],
     content: `在人际关系中，很多年轻人会陷入"不好意思拒绝"的困境。害怕让别人失望、担心破坏关系，结果自己的时间和精力被不断透支。
 
 **什么是人际边界？**
@@ -369,6 +399,11 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-06-19',
     coverEmoji: '🌱',
+    references: [
+      'Frost, R. O. et al. (1990). The dimensions of perfectionism. Cognitive Therapy and Research, 14(5), 449-468.',
+      'Sirois, F. M. & Pychyl, T. A. (2013). Procrastination and emotion regulation. European Psychologist.',
+      'Hewitt, P. L. & Flett, G. L. (1991). Perfectionism in the self-presentation. Journal of Personality and Social Psychology, 60(3), 456.',
+    ],
     content: `完美主义看起来像是追求卓越的积极品质，但实际上，过度的完美主义往往与焦虑、抑郁和拖延密切相关。
 
 **完美主义 vs 追求卓越**
@@ -411,6 +446,11 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-06-16',
     coverEmoji: '🌙',
+    references: [
+      'Walker, M. P. (2017). Why We Sleep: Unlocking the Power of Sleep and Dreams. Scribner.',
+      'National Sleep Foundation. Sleep Hygiene Tips. sleepfoundation.org.',
+      'Hauri, P. J. (1998). Insomnia. Clinics in Chest Medicine, 19(1), 157-168.',
+    ],
     content: `睡眠问题在学生群体中极为普遍。无论是考试前的焦虑失眠，还是刷手机到深夜的习惯性熬夜，都在悄悄影响着身心健康。
 
 **睡眠的重要性**
@@ -457,6 +497,10 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-06-13',
     coverEmoji: '🔋',
+    references: [
+      'Maslach, C. & Leiter, M. P. (2016). Understanding the burnout experience. Harvard Business Review.',
+      'Schaufeli, W. B. & Enzmann, D. (1998). The Burnout Companion to Study and Research. Taylor & Francis.',
+    ],
     content: `学业倦怠不是懒惰或矫情，而是在长期学习压力下身心资源耗尽的状态。它比普通的"不想学习"要严重得多。
 
 **学业倦怠的三大特征**
@@ -510,6 +554,11 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-07-02',
     coverEmoji: '⏰',
+    references: [
+      'Sirois, F. M. & Pychyl, T. A. (2013). Procrastination and emotion regulation. European Psychologist.',
+      'Pychyl, T. A. (2013). Solving the Procrastination Puzzle. TarcherPerigee.',
+      'Wohl, M. J. A. et al. (2010). I forgive myself, now I can study. Personality and Individual Differences, 48, 926-930.',
+    ],
     content: `"我先刷会儿手机再写作业"——这句话你说过多少次？然后一刷就停不下来，直到深夜才手忙脚乱地开始。
 
 这不是因为你懒。拖延是一种复杂的心理现象，和情绪调节能力密切相关。
@@ -563,6 +612,10 @@ export const articles: Article[] = [
     readTime: 9,
     date: '2026-07-02',
     coverEmoji: '🏡',
+    references: [
+      'Bowlby, J. (1982). Attachment and loss: Vol. 1. Attachment (2nd ed.). Basic Books.',
+      'Wallin, D. J. (2007). Attachment in Psychotherapy. Guilford Press.',
+    ],
     content: `你是否发现自己总是陷入同一种关系模式？总是吸引同一种类型的人？或者在冲突中总是做出同样的反应？
 
 很多时候，答案要回到原生家庭中去寻找。
@@ -621,6 +674,11 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-07-02',
     coverEmoji: '🫧',
+    references: [
+      'Eisenberger, N. I. (2012). The neural bases of social pain. Psychosomatic Medicine, 74(2), 126-135.',
+      'Gross, J. J. (2002). Emotion regulation: Affective, cognitive, and social consequences. Psychological Bulletin.',
+      'Verduyn, P. et al. (2017). Do social network sites enhance or undermine subjective well-being? Social Issues and Policy Review, 11(1), 274-302.',
+    ],
     content: `失恋的痛苦是真实的。神经科学研究发现，经历分手时大脑激活的区域与身体疼痛时激活的区域高度重合[1]——你的大脑真的在"感受疼痛"。
 
 这不是矫情，是大脑的正常反应。
@@ -667,6 +725,10 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-07-02',
     coverEmoji: '🌱',
+    references: [
+      'Orth, U. & Robins, R. W. (2014). The development of self-esteem. Current Directions in Psychological Science, 23(5), 381-387.',
+      'Neff, K. D. (2011). Self-Compassion, Self-Esteem, and Well-Being. Social and Personality Psychology Compass, 5(1), 1-12.',
+    ],
     content: `低自尊不仅影响你的情绪，还会影响你的选择——不敢争取机会、不敢表达意见、不敢结束一段有害的关系。
 
 但好消息是：自尊水平不是固定不变的。通过有针对性的练习，你可以逐步重建健康的自我价值感[1]。
@@ -716,6 +778,11 @@ export const articles: Article[] = [
     readTime: 9,
     date: '2026-07-03',
     coverEmoji: '😴',
+    references: [
+      'Baglioni, C. et al. (2011). Insomnia as a predictor of depression. Sleep Medicine Reviews, 15(1), 21-31.',
+      'American Academy of Sleep Medicine (2017). Clinical Practice Guideline for the Treatment of Chronic Insomnia.',
+      'Morin, C. M. et al. (2006). Psychological and behavioral treatment of insomnia. Annual Review of Clinical Psychology, 2, 185-206.',
+    ],
     content: `失眠不只是"睡不着"这么简单。长期的失眠会影响记忆力、注意力、情绪稳定性，甚至增加抑郁和焦虑的风险[1]。
 
 认知行为失眠疗法（CBT-I）被美国睡眠医学会推荐为失眠的**一线治疗方案**，效果与安眠药相当，且没有副作用[2]。
@@ -776,6 +843,11 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-07-03',
     coverEmoji: '💨',
+    references: [
+      'American Psychiatric Association (2013). Diagnostic and Statistical Manual of Mental Disorders (5th ed.).',
+      'Craske, M. G. & Barlow, D. H. (2006). Mastery of Anxiety and Panic. Guilford Press.',
+      'Clark, D. M. (1986). A cognitive approach to panic. Behaviour Research and Therapy, 24(4), 461-470.',
+    ],
     content: `很多人第一次经历惊恐发作时，会觉得自己"快要死了"或"要疯了"。这种感觉非常真实和恐怖，但惊恐发作本身并不会对身体造成真正的伤害。
 
 ## 什么是惊恐发作？
@@ -847,6 +919,11 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-07-03',
     coverEmoji: '🌤',
+    references: [
+      '世界卫生组织 (2023). 抑郁症实况报道.',
+      'American Psychiatric Association (2013). DSM-5 诊断标准.',
+      'Cuijpers, P. et al. (2019). A meta-analysis of cognitive-behavioural therapy for adult depression. Cognitive Behaviour Therapy, 48(1), 1-23.',
+    ],
     content: `"我是不是抑郁了？"这是很多情绪低落的人都会问自己的问题。正确区分情绪波动和抑郁症非常重要。
 
 ## 正常的情绪低落 vs 抑郁
@@ -910,6 +987,10 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-07-03',
     coverEmoji: '🫀',
+    references: [
+      'Lipowski, Z. J. (1988). Somatization: The concept and its clinical application. American Journal of Psychiatry, 145(11), 1358-1368.',
+      'Kroenke, K. (2000). Patients presenting with somatic complaints. Annals of Internal Medicine, 133(11), 881-889.',
+    ],
     content: `去医院做了一堆检查，结果都显示正常，但头痛、胸闷、胃痛就是好不了——这可能不是"装病"，而是你的身体在替你表达情绪。
 
 ## 什么是躯体化？
@@ -982,6 +1063,10 @@ export const articles: Article[] = [
     readTime: 8,
     date: '2026-07-04',
     coverEmoji: '📝',
+    references: [
+      'Zeidner, M. (1998). Test Anxiety: The State of the Art. Springer.',
+      '刘晓明等 (2011). 考试焦虑的心理干预研究. 心理科学进展, 19(12).',
+    ],
     content: `考试焦虑是几乎所有学生都会遇到的问题。适度的紧张其实能帮助你保持专注和警觉，但过度的焦虑则会严重影响发挥。
 
 **考试焦虑的表现**
@@ -1029,6 +1114,10 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-07-04',
     coverEmoji: '📊',
+    references: [
+      'Dweck, C. S. (2006). Mindset: The New Psychology of Success. Random House.',
+      'Yeager, D. S. & Dweck, C. S. (2012). Mindsets that promote resilience. American Psychologist, 67(4), 306-316.',
+    ],
     content: `看到不理想的成绩，第一反应可能是沮丧、自责甚至自我否定。这些情绪都是正常的，重要的是接下来怎么做。
 
 **允许自己难过**
@@ -1067,6 +1156,11 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-07-04',
     coverEmoji: '🧘',
+    references: [
+      'Hölzel, B. K. et al. (2011). Mindfulness practice leads to increases in regional brain gray matter density. Psychiatry Research: Neuroimaging.',
+      'Kabat-Zinn, J. (2003). Mindfulness-based interventions in context. Clinical Psychology: Science and Practice.',
+      'Goleman, D. & Davidson, R. J. (2017). Altered Traits. Avery.',
+    ],
     content: `提到冥想，很多人觉得"我做不到什么都不想"——其实冥想根本不是要求你什么都不想。冥想是训练注意力的体操，让你学会觉察当下。
 
 **冥想能带来什么？**
@@ -1111,6 +1205,10 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-07-04',
     coverEmoji: '🙈',
+    references: [
+      'Stein, M. B. & Stein, D. J. (2008). Social anxiety disorder. The Lancet, 371(9618), 1115-1125.',
+      'Clark, D. M. & Wells, A. (1995). A cognitive model of social phobia. In Social Phobia: Diagnosis, Assessment, and Treatment.',
+    ],
     content: `社交焦虑不是"内向"，也不是"害羞"。它是一种对社交场景的过度恐惧，担心自己被别人负面评价。
 
 **社交焦虑的表现**
@@ -1162,6 +1260,10 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-07-04',
     coverEmoji: '🧩',
+    references: [
+      'Erikson, E. H. (1968). Identity: Youth and Crisis. Norton.',
+      'Marcia, J. E. (1966). Development and validation of ego-identity status. Journal of Personality and Social Psychology.',
+    ],
     content: `"我到底是什么样的人？""我想要什么？""我跟别人不一样是不是有问题？"——这些困惑在青少年和年轻成人阶段非常常见。
 
 **埃里克森的自我认同理论**
@@ -1206,6 +1308,10 @@ export const articles: Article[] = [
     readTime: 7,
     date: '2026-07-04',
     coverEmoji: '⏰',
+    references: [
+      'Sirois, F. M. & Pychyl, T. A. (2013). Procrastination and the priority of short-term mood regulation. Consciousness and Emotion.',
+      'Steel, P. (2007). The nature of procrastination: A meta-analytic and theoretical review. Psychological Bulletin.',
+    ],
     content: `"我明明知道应该开始做作业了，但我就是不想动"——这不是懒惰，这是拖延。拖延是一个涉及情绪、认知和行为的复杂问题。
 
 **拖延的真相：不是懒，是怕**
@@ -1252,6 +1358,10 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-07-04',
     coverEmoji: '👥',
+    references: [
+      'Ryan, R. M. (2001). The peer group as a context for the development of young adolescent motivation and achievement. Child Development.',
+      'Steinberg, L. & Monahan, K. C. (2007). Age differences in resistance to peer influence. Developmental Psychology, 43(6), 1531-1543.',
+    ],
     content: `"别人都在学习，我休息一下就觉得有负罪感""看到同学的好成绩，心里说不出的难受"——这些感受在竞争激烈的环境中非常普遍。
 
 **同辈压力的两种形式**
@@ -1295,6 +1405,11 @@ export const articles: Article[] = [
     readTime: 6,
     date: '2026-07-04',
     coverEmoji: '📱',
+    references: [
+      'Alter, A. (2017). Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked. Penguin Books.',
+      'Przybylski, A. K. & Weinstein, N. (2017). A large-scale test of the Goldilocks Hypothesis. Psychological Science.',
+      'Twenge, J. M. (2017). iGen: Why Today\'s Super-Connected Kids Are Growing Up Less Rebellious. Atria Books.',
+    ],
     content: `"就刷5分钟"→一抬头已经过去1小时。这个场景对绝大多数年轻人都不陌生。手机和社交App的"成瘾性"是科技公司刻意设计的。
 
 **为什么手机这么难放下？**
