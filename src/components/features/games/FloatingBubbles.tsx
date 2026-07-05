@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 
+const isDarkMode = () => document.documentElement.classList.contains('dark')
+
 interface Bubble {
   id: number
   x: number
@@ -20,6 +22,12 @@ export default function FloatingBubbles() {
   const prevTime = useRef(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const [showHint, setShowHint] = useState(true)
+  const dark = isDarkMode()
+
+  const cardBg = dark ? 'rgba(30,27,60,0.6)' : 'rgba(255,255,255,0.6)'
+  const cardBorder = dark ? 'rgba(139,92,246,0.15)' : 'rgba(255,255,255,0.4)'
+  const textMuted = dark ? '#9ca3af' : '#9CA3AF'
+  const textPrimary = dark ? '#e5e7eb' : '#374151'
 
   const addBubble = useCallback((clientX?: number, clientY?: number) => {
     if (showHint) setShowHint(false)
@@ -73,15 +81,15 @@ export default function FloatingBubbles() {
     <div style={{ textAlign: 'center' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 16, marginBottom: 24 }}>
         <div style={{
-          background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)',
-          borderRadius: 16, padding: '12px 20px', border: '1px solid rgba(255,255,255,0.4)',
+          background: cardBg, backdropFilter: 'blur(8px)',
+          borderRadius: 16, padding: '12px 20px', border: `1px solid ${cardBorder}`,
         }}>
-          <div style={{ fontSize: 12, color: '#9CA3AF' }}>泡泡数</div>
-          <div style={{ fontSize: 18, fontWeight: 500, color: '#374151' }}>{bubbles.length}</div>
+          <div style={{ fontSize: 12, color: textMuted }}>泡泡数</div>
+          <div style={{ fontSize: 18, fontWeight: 500, color: textPrimary }}>{bubbles.length}</div>
         </div>
         <button onClick={clearAll} style={{
           padding: '10px 20px', borderRadius: 999, fontSize: 14,
-          background: 'rgba(255,255,255,0.6)', color: '#8B5CF6',
+          background: cardBg, color: '#8B5CF6',
           border: '1px solid rgba(167,139,250,0.3)', fontWeight: 500, cursor: 'pointer',
         }}>🌊 清空</button>
       </div>
@@ -94,7 +102,9 @@ export default function FloatingBubbles() {
         style={{
           width: '100%', height: 450, borderRadius: 24, overflow: 'hidden',
           cursor: 'crosshair', userSelect: 'none', position: 'relative',
-          background: 'linear-gradient(180deg, #EDE9FE 0%, #D1FAE5 40%, #FDE68A 70%, #FBCFE8 100%)',
+          background: dark
+            ? 'linear-gradient(180deg, #1e1b4b 0%, #064e3b 40%, #78350f 70%, #831843 100%)'
+            : 'linear-gradient(180deg, #EDE9FE 0%, #D1FAE5 40%, #FDE68A 70%, #FBCFE8 100%)',
         }}
       >
         {showHint && (
@@ -104,11 +114,11 @@ export default function FloatingBubbles() {
           }}>
             <div style={{
               padding: '16px 24px', borderRadius: 16,
-              background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(255,255,255,0.4)',
+              background: cardBg, backdropFilter: 'blur(8px)',
+              border: `1px solid ${cardBorder}`,
               animation: 'float 6s ease-in-out infinite',
             }}>
-              <p style={{ color: '#6B7280', fontSize: 14 }}>点击或拖动屏幕，创造泡泡 🫧</p>
+              <p style={{ color: textMuted, fontSize: 14 }}>点击或拖动屏幕，创造泡泡 🫧</p>
             </div>
           </div>
         )}
@@ -120,11 +130,11 @@ export default function FloatingBubbles() {
               width: b.size, height: b.size,
               left: b.x - b.size / 2, top: b.y - b.size / 2,
               opacity: b.opacity, pointerEvents: 'none',
-              background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,0.5) 0%, ${b.color}33 50%, ${b.color}66 100%)`,
+              background: `radial-gradient(circle at 30% 30%, rgba(255,255,255,${dark ? '0.3' : '0.5'}) 0%, ${b.color}33 50%, ${b.color}66 100%)`,
               boxShadow: `0 0 ${b.size * 0.3}px ${b.color}22`,
             }}>
               <div style={{
-                position: 'absolute', borderRadius: '50%', background: 'rgba(255,255,255,0.35)',
+                position: 'absolute', borderRadius: '50%', background: `rgba(255,255,255,${dark ? '0.2' : '0.35'})`,
                 width: b.size * 0.22, height: b.size * 0.18,
                 top: b.size * 0.18, left: b.size * 0.22,
               }} />

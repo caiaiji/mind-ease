@@ -1,5 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
 
+const isDarkMode = () => document.documentElement.classList.contains('dark')
+
 type Size = 3 | 4 | 5
 const SIZE_CONFIG: Record<Size, { label: string; total: number; cellPx: number }> = {
   3: { label: '3x3 入门', total: 9, cellPx: 80 },
@@ -38,6 +40,7 @@ function saveNickname(name: string) {
 }
 
 export default function SchulteGrid() {
+  const dark = isDarkMode()
   const [size, setSize] = useState<Size>(5)
   const [numbers, setNumbers] = useState<number[]>([])
   const [nextTarget, setNextTarget] = useState(1)
@@ -66,6 +69,17 @@ export default function SchulteGrid() {
   const rafRef = useRef<ReturnType<typeof requestAnimationFrame>>()
 
   const config = SIZE_CONFIG[size]
+
+  const cardBg = dark ? 'rgba(30,27,60,0.6)' : 'rgba(255,255,255,0.6)'
+  const cardBorder = dark ? 'rgba(139,92,246,0.15)' : 'rgba(255,255,255,0.4)'
+  const textMuted = dark ? '#9ca3af' : '#9CA3AF'
+  const textPrimary = dark ? '#e5e7eb' : '#374151'
+  const textSecondary = dark ? '#6b7280' : '#6B7280'
+  const inputBg = dark ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.6)'
+  const inputColor = dark ? '#e5e7eb' : '#374151'
+  const gridBg = dark ? 'rgba(30,27,60,0.3)' : 'rgba(237,233,254,0.2)'
+  const cellDefaultBg = dark ? 'rgba(55,65,81,0.6)' : '#F0EEFF'
+  const cellDefaultBorder = dark ? 'rgba(139,92,246,0.2)' : 'rgba(255,255,255,0.5)'
 
   const shuffle = useCallback((n: number): number[] => {
     const arr = Array.from({ length: n }, (_, i) => i + 1)
@@ -174,7 +188,7 @@ export default function SchulteGrid() {
     <div style={{ textAlign: 'center' }}>
       {/* Nickname input */}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-        <span style={{ fontSize: 14, color: '#9CA3AF' }}>玩家</span>
+        <span style={{ fontSize: 14, color: textMuted }}>玩家</span>
         <input
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
@@ -182,8 +196,8 @@ export default function SchulteGrid() {
           maxLength={12}
           style={{
             width: 140, padding: '6px 14px', borderRadius: 999, fontSize: 13,
-            border: '1px solid rgba(167,139,250,0.25)', background: 'rgba(255,255,255,0.6)',
-            color: '#374151', outline: 'none', textAlign: 'center',
+            border: '1px solid rgba(167,139,250,0.25)', background: inputBg,
+            color: inputColor, outline: 'none', textAlign: 'center',
           }}
         />
       </div>
@@ -199,7 +213,7 @@ export default function SchulteGrid() {
               border: 'none', cursor: 'pointer', transition: 'all 0.3s ease',
               ...(size === s
                 ? { background: '#A78BFA', color: 'white', boxShadow: '0 4px 10px rgba(167,139,250,0.3)' }
-                : { background: 'rgba(255,255,255,0.6)', color: '#6B7280', border: '1px solid rgba(167,139,250,0.2)' }),
+                : { background: cardBg, color: textSecondary, border: '1px solid rgba(167,139,250,0.2)' }),
             }}
           >
             {SIZE_CONFIG[s].label}
@@ -210,8 +224,8 @@ export default function SchulteGrid() {
           style={{
             padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 500,
             border: 'none', cursor: 'pointer',
-            background: showRank ? '#F59E0B' : 'rgba(255,255,255,0.6)',
-            color: showRank ? 'white' : '#6B7280',
+            background: showRank ? '#F59E0B' : cardBg,
+            color: showRank ? 'white' : textSecondary,
             transition: 'all 0.3s ease',
           }}
         >
@@ -223,22 +237,22 @@ export default function SchulteGrid() {
       {showRank && !finished && (
         <div style={{
           maxWidth: 400, margin: '0 auto 24px', padding: 20,
-          background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(12px)',
-          borderRadius: 20, border: '1px solid rgba(255,255,255,0.5)',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.06)', textAlign: 'left',
+          background: dark ? 'rgba(30,27,60,0.7)' : 'rgba(255,255,255,0.7)', backdropFilter: 'blur(12px)',
+          borderRadius: 20, border: `1px solid ${cardBorder}`,
+          boxShadow: dark ? '0 10px 25px rgba(0,0,0,0.2)' : '0 10px 25px rgba(0,0,0,0.06)', textAlign: 'left',
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-            <h3 style={{ fontFamily: '"ZCOOL XiaoWei", serif', fontSize: 18, color: '#374151' }}>
+            <h3 style={{ fontFamily: '"ZCOOL XiaoWei", serif', fontSize: 18, color: textPrimary }}>
               🏅 排行榜
             </h3>
             <button onClick={() => clearRecords()} style={{
-              fontSize: 12, color: '#9CA3AF', background: 'none', border: 'none', cursor: 'pointer',
+              fontSize: 12, color: textMuted, background: 'none', border: 'none', cursor: 'pointer',
             }}>
               清空全部
             </button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-            <span style={{ fontSize: 13, color: '#6B7280', whiteSpace: 'nowrap' }}>昵称</span>
+            <span style={{ fontSize: 13, color: textSecondary, whiteSpace: 'nowrap' }}>昵称</span>
             <input
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
@@ -246,15 +260,15 @@ export default function SchulteGrid() {
               maxLength={12}
               style={{
                 flex: 1, padding: '6px 12px', borderRadius: 10, fontSize: 13,
-                border: '1px solid rgba(167,139,250,0.25)', background: 'rgba(255,255,255,0.6)',
-                color: '#374151', outline: 'none',
+                border: '1px solid rgba(167,139,250,0.25)', background: inputBg,
+                color: inputColor, outline: 'none',
               }}
             />
           </div>
 
           {([3, 4, 5] as Size[]).map((s) => (
             <div key={s} style={{ marginBottom: 16 }}>
-              <div style={{ fontSize: 13, fontWeight: 600, color: '#6B7280', marginBottom: 6 }}>
+              <div style={{ fontSize: 13, fontWeight: 600, color: textSecondary, marginBottom: 6 }}>
                 {SIZE_CONFIG[s].label}
                 {bestTime[s] !== null && (
                   <span style={{ color: '#F59E0B', fontWeight: 400, marginLeft: 8 }}>
@@ -263,14 +277,14 @@ export default function SchulteGrid() {
                 )}
               </div>
               {records[s].length === 0 ? (
-                <div style={{ fontSize: 13, color: '#D1D5DB', padding: '8px 0' }}>暂无记录</div>
+                <div style={{ fontSize: 13, color: dark ? '#4b5563' : '#D1D5DB', padding: '8px 0' }}>暂无记录</div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                   {records[s].slice(0, 5).map((r, i) => (
                     <div key={i} style={{
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                       padding: '6px 12px', borderRadius: 10, fontSize: 13,
-                      background: i === 0 ? 'rgba(245,158,11,0.1)' : 'rgba(0,0,0,0.02)',
+                      background: i === 0 ? 'rgba(245,158,11,0.1)' : (dark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)'),
                     }}>
                       <span style={{ minWidth: 20 }}>
                         {i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `${i + 1}.`}
@@ -278,17 +292,17 @@ export default function SchulteGrid() {
                       <span style={{ fontWeight: 600, color: '#7C3AED', fontSize: 12, maxWidth: 60, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                         {r.name}
                       </span>
-                      <span style={{ fontWeight: 600, color: '#374151', fontFamily: 'monospace' }}>
+                      <span style={{ fontWeight: 600, color: textPrimary, fontFamily: 'monospace' }}>
                         {formatTime(r.time)}
                       </span>
-                      <span style={{ fontSize: 11, color: '#9CA3AF' }}>
+                      <span style={{ fontSize: 11, color: textMuted }}>
                         {r.wrong > 0 ? `误点${r.wrong}` : '无误点'}
                       </span>
-                      <span style={{ fontSize: 11, color: '#D1D5DB' }}>{r.date}</span>
+                      <span style={{ fontSize: 11, color: dark ? '#4b5563' : '#D1D5DB' }}>{r.date}</span>
                     </div>
                   ))}
                   {records[s].length > 5 && (
-                    <div style={{ fontSize: 11, color: '#D1D5DB', textAlign: 'center' }}>
+                    <div style={{ fontSize: 11, color: dark ? '#4b5563' : '#D1D5DB', textAlign: 'center' }}>
                       共 {records[s].length} 条记录
                     </div>
                   )}
@@ -302,20 +316,20 @@ export default function SchulteGrid() {
       {/* Stats row */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 16, marginBottom: 24 }}>
         <div style={{
-          background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)',
-          borderRadius: 16, padding: '10px 18px', border: '1px solid rgba(255,255,255,0.4)',
+          background: cardBg, backdropFilter: 'blur(8px)',
+          borderRadius: 16, padding: '10px 18px', border: `1px solid ${cardBorder}`,
         }}>
-          <div style={{ fontSize: 11, color: '#9CA3AF' }}>用时</div>
-          <div style={{ fontSize: 22, fontWeight: 500, color: '#374151', fontFamily: 'monospace' }}>
+          <div style={{ fontSize: 11, color: textMuted }}>用时</div>
+          <div style={{ fontSize: 22, fontWeight: 500, color: textPrimary, fontFamily: 'monospace' }}>
             {displayTime}
           </div>
         </div>
         {wrongClicks > 0 && (
           <div style={{
-            background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)',
-            borderRadius: 16, padding: '10px 18px', border: '1px solid rgba(255,255,255,0.4)',
+            background: cardBg, backdropFilter: 'blur(8px)',
+            borderRadius: 16, padding: '10px 18px', border: `1px solid ${cardBorder}`,
           }}>
-            <div style={{ fontSize: 11, color: '#9CA3AF' }}>误点</div>
+            <div style={{ fontSize: 11, color: textMuted }}>误点</div>
             <div style={{ fontSize: 22, fontWeight: 500, color: '#FDA4AF' }}>
               {wrongClicks}
             </div>
@@ -323,10 +337,10 @@ export default function SchulteGrid() {
         )}
         {bestTime[size] !== null && (
           <div style={{
-            background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)',
-            borderRadius: 16, padding: '10px 18px', border: '1px solid rgba(255,255,255,0.4)',
+            background: cardBg, backdropFilter: 'blur(8px)',
+            borderRadius: 16, padding: '10px 18px', border: `1px solid ${cardBorder}`,
           }}>
-            <div style={{ fontSize: 11, color: '#9CA3AF' }}>最佳</div>
+            <div style={{ fontSize: 11, color: textMuted }}>最佳</div>
             <div style={{ fontSize: 22, fontWeight: 500, color: '#F59E0B', fontFamily: 'monospace' }}>
               {formatTime(bestTime[size]!)}
             </div>
@@ -338,7 +352,7 @@ export default function SchulteGrid() {
       {!started && !finished && (
         <div style={{
           padding: '10px 20px', borderRadius: 16, marginBottom: 20,
-          background: 'rgba(237,233,254,0.4)', color: '#7C3AED',
+          background: dark ? 'rgba(139,92,246,0.15)' : 'rgba(237,233,254,0.4)', color: '#7C3AED',
           fontSize: 14, fontWeight: 500, display: 'inline-block',
         }}>
           按 1 → {config.total} 的顺序依次点击
@@ -352,7 +366,7 @@ export default function SchulteGrid() {
         gap: 6,
         padding: 16,
         borderRadius: 20,
-        background: 'rgba(237,233,254,0.2)',
+        background: gridBg,
         justifyContent: 'center',
         margin: '0 auto',
         width: 'fit-content',
@@ -367,13 +381,13 @@ export default function SchulteGrid() {
           let opacity: number = 1
 
           if (isWrong) {
-            bg = '#FEE2E2'
+            bg = dark ? 'rgba(127,29,29,0.5)' : '#FEE2E2'
             borderColor = '#FCA5A5'
             color = '#EF4444'
           } else {
-            bg = '#F0EEFF'
-            borderColor = 'rgba(255,255,255,0.5)'
-            color = '#374151'
+            bg = cellDefaultBg
+            borderColor = cellDefaultBorder
+            color = textPrimary
           }
 
           if (completed) {
@@ -400,7 +414,7 @@ export default function SchulteGrid() {
                 cursor: completed ? 'default' : 'pointer',
                 transition: 'all 0.2s ease',
                 opacity,
-                boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+                boxShadow: dark ? '0 1px 3px rgba(0,0,0,0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
               }}
             >
               {num}
@@ -416,7 +430,7 @@ export default function SchulteGrid() {
             onClick={() => startGame(size)}
             style={{
               padding: '8px 18px', borderRadius: 999, fontSize: 13,
-              background: 'rgba(255,255,255,0.6)', color: '#8B5CF6',
+              background: cardBg, color: '#8B5CF6',
               border: '1px solid rgba(167,139,250,0.3)',
               fontWeight: 500, cursor: 'pointer',
             }}
@@ -430,15 +444,15 @@ export default function SchulteGrid() {
       {finished && (
         <div style={{ marginTop: 24, animation: 'fadeUp 0.6s ease-out forwards' }}>
           <div style={{
-            display: 'inline-block', padding: 32, background: 'rgba(255,255,255,0.7)',
-            backdropFilter: 'blur(12px)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.5)',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.06)',
+            display: 'inline-block', padding: 32, background: dark ? 'rgba(30,27,60,0.7)' : 'rgba(255,255,255,0.7)',
+            backdropFilter: 'blur(12px)', borderRadius: 24, border: `1px solid ${cardBorder}`,
+            boxShadow: dark ? '0 10px 25px rgba(0,0,0,0.2)' : '0 10px 25px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>🏆</div>
-            <div style={{ fontFamily: '"ZCOOL XiaoWei", serif', fontSize: 22, color: '#374151', marginBottom: 8 }}>
+            <div style={{ fontFamily: '"ZCOOL XiaoWei", serif', fontSize: 22, color: textPrimary, marginBottom: 8 }}>
               完成！
             </div>
-            <div style={{ color: '#6B7280', fontSize: 15, marginBottom: 4 }}>
+            <div style={{ color: textSecondary, fontSize: 15, marginBottom: 4 }}>
               用时 <span style={{ fontWeight: 700, color: '#A78BFA', fontSize: 20, fontFamily: 'monospace' }}>{formatTime(elapsed)}</span>
             </div>
             {wrongClicks > 0 && (
@@ -460,7 +474,7 @@ export default function SchulteGrid() {
             {/* Mini rank in completion card */}
             {records[size].length > 1 && (
               <div style={{ marginTop: 12, marginBottom: 8, textAlign: 'left' }}>
-                <div style={{ fontSize: 12, color: '#9CA3AF', marginBottom: 4 }}>
+                <div style={{ fontSize: 12, color: textMuted, marginBottom: 4 }}>
                   历史 TOP 3
                 </div>
                 {records[size].slice(0, 3).map((r, i) => (
@@ -473,10 +487,10 @@ export default function SchulteGrid() {
                     <span style={{ color: '#7C3AED', fontWeight: 500, maxWidth: 50, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {r.name}
                     </span>
-                    <span style={{ fontFamily: 'monospace', fontWeight: 500, color: '#374151' }}>
+                    <span style={{ fontFamily: 'monospace', fontWeight: 500, color: textPrimary }}>
                       {formatTime(r.time)}
                     </span>
-                    <span style={{ color: '#9CA3AF' }}>{r.date}</span>
+                    <span style={{ color: textMuted }}>{r.date}</span>
                   </div>
                 ))}
               </div>

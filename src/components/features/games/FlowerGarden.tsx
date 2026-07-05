@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 
+const isDarkMode = () => document.documentElement.classList.contains('dark')
+
 interface Plot {
   id: number
   stage: 'empty' | 'seed' | 'sprout' | 'growing' | 'bloom'
@@ -21,6 +23,12 @@ export default function FlowerGarden() {
   )
   const [bloomCount, setBloomCount] = useState(0)
   const timerRef = useRef<ReturnType<typeof setInterval>>()
+  const dark = isDarkMode()
+
+  const cardBg = dark ? 'rgba(30,27,60,0.6)' : 'rgba(255,255,255,0.6)'
+  const cardBorder = dark ? 'rgba(139,92,246,0.15)' : 'rgba(255,255,255,0.4)'
+  const textMuted = dark ? '#9ca3af' : '#9CA3AF'
+  const textPrimary = dark ? '#e5e7eb' : '#374151'
 
   const startGrow = useCallback((plotId: number) => {
     setPlots((prev) => {
@@ -75,37 +83,37 @@ export default function FlowerGarden() {
       gap: 4, transition: 'all 0.3s ease', position: 'relative', overflow: 'hidden',
       padding: 4,
     }
-    if (plot.stage === 'empty') return { ...base, background: 'rgba(254,243,199,0.8)', borderColor: 'rgba(253,224,71,0.5)', cursor: 'pointer' }
-    if (plot.stage === 'bloom') return { ...base, background: 'rgba(209,250,229,0.5)', borderColor: 'rgba(110,231,183,0.5)', transform: 'scale(1.05)' }
-    return { ...base, background: 'rgba(254,243,199,0.8)', borderColor: 'rgba(253,224,71,0.5)', cursor: 'default' }
+    if (plot.stage === 'empty') return { ...base, background: dark ? 'rgba(120,113,108,0.3)' : 'rgba(254,243,199,0.8)', borderColor: dark ? 'rgba(120,113,108,0.4)' : 'rgba(253,224,71,0.5)', cursor: 'pointer' }
+    if (plot.stage === 'bloom') return { ...base, background: dark ? 'rgba(6,78,59,0.3)' : 'rgba(209,250,229,0.5)', borderColor: dark ? 'rgba(110,231,183,0.4)' : 'rgba(110,231,183,0.5)', transform: 'scale(1.05)' }
+    return { ...base, background: dark ? 'rgba(120,113,108,0.3)' : 'rgba(254,243,199,0.8)', borderColor: dark ? 'rgba(120,113,108,0.4)' : 'rgba(253,224,71,0.5)', cursor: 'default' }
   }
 
   return (
     <div style={{ textAlign: 'center' }}>
       <div style={{ display: 'flex', justifyContent: 'center', gap: 24, marginBottom: 24 }}>
-        <div style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)', borderRadius: 16, padding: '12px 20px', border: '1px solid rgba(255,255,255,0.4)' }}>
-          <div style={{ fontSize: 12, color: '#9CA3AF' }}>已开花</div>
-          <div style={{ fontSize: 18, fontWeight: 500, color: '#374151' }}>{bloomCount} / {TOTAL}</div>
+        <div style={{ background: cardBg, backdropFilter: 'blur(8px)', borderRadius: 16, padding: '12px 20px', border: `1px solid ${cardBorder}` }}>
+          <div style={{ fontSize: 12, color: textMuted }}>已开花</div>
+          <div style={{ fontSize: 18, fontWeight: 500, color: textPrimary }}>{bloomCount} / {TOTAL}</div>
         </div>
-        <div style={{ background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(8px)', borderRadius: 16, padding: '12px 20px', border: '1px solid rgba(255,255,255,0.4)' }}>
-          <div style={{ fontSize: 12, color: '#9CA3AF' }}>花种</div>
+        <div style={{ background: cardBg, backdropFilter: 'blur(8px)', borderRadius: 16, padding: '12px 20px', border: `1px solid ${cardBorder}` }}>
+          <div style={{ fontSize: 12, color: textMuted }}>花种</div>
           <div style={{ fontSize: 14 }}>{FLOWERS.join(' ')}</div>
         </div>
       </div>
 
-      <p style={{ color: '#9CA3AF', fontSize: 14, marginBottom: 24 }}>点击空地种下种子，静静等待花开 💐</p>
+      <p style={{ color: textMuted, fontSize: 14, marginBottom: 24 }}>点击空地种下种子，静静等待花开 💐</p>
 
       <div style={{
         display: 'grid', gridTemplateColumns: `repeat(${GRID_SIZE}, 80px)`,
         gap: 12, padding: 24, borderRadius: 24,
-        background: 'rgba(209,250,229,0.3)', justifyContent: 'center', margin: '0 auto', width: 'fit-content',
+        background: dark ? 'rgba(6,78,59,0.15)' : 'rgba(209,250,229,0.3)', justifyContent: 'center', margin: '0 auto', width: 'fit-content',
       }}>
         {plots.map((plot) => (
           <button key={plot.id} onClick={() => startGrow(plot.id)} disabled={plot.stage !== 'empty'} style={plotStyle(plot)}>
             <span style={{ fontSize: 28 }}>{plot.stage === 'bloom' ? plot.flower : STAGE_EMOJI[plot.stage]}</span>
-            <span style={{ fontSize: 10, color: '#9CA3AF' }}>{STAGE_LABEL[plot.stage]}</span>
+            <span style={{ fontSize: 10, color: textMuted }}>{STAGE_LABEL[plot.stage]}</span>
             {plot.stage !== 'empty' && plot.stage !== 'bloom' && (
-              <div style={{ position: 'absolute', bottom: 4, left: 8, right: 8, height: 4, background: '#E5E7EB', borderRadius: 2, overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', bottom: 4, left: 8, right: 8, height: 4, background: dark ? 'rgba(255,255,255,0.1)' : '#E5E7EB', borderRadius: 2, overflow: 'hidden' }}>
                 <div style={{ height: '100%', background: '#34D399', borderRadius: 2, width: `${getProgress(plot)}%`, transition: 'width 1s linear' }} />
               </div>
             )}
@@ -117,7 +125,7 @@ export default function FlowerGarden() {
         <div style={{ marginTop: 24 }}>
           <button onClick={reset} style={{
             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-            padding: '10px 20px', borderRadius: 999, background: 'rgba(255,255,255,0.6)',
+            padding: '10px 20px', borderRadius: 999, background: cardBg,
             color: '#8B5CF6', border: '1px solid rgba(167,139,250,0.3)',
             fontWeight: 500, cursor: 'pointer', fontSize: 14,
           }}>🔄 重新种</button>
@@ -127,12 +135,12 @@ export default function FlowerGarden() {
       {bloomCount === TOTAL && (
         <div style={{ marginTop: 24, animation: 'fadeUp 0.6s ease-out forwards' }}>
           <div style={{
-            display: 'inline-block', padding: 24, background: 'rgba(255,255,255,0.7)',
-            backdropFilter: 'blur(12px)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.5)',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.06)',
+            display: 'inline-block', padding: 24, background: cardBg,
+            backdropFilter: 'blur(12px)', borderRadius: 24, border: `1px solid ${cardBorder}`,
+            boxShadow: dark ? '0 10px 25px rgba(0,0,0,0.2)' : '0 10px 25px rgba(0,0,0,0.06)',
           }}>
             <div style={{ fontSize: 36, marginBottom: 8 }}>🌺</div>
-            <div style={{ fontFamily: '"ZCOOL XiaoWei", serif', fontSize: 20, color: '#374151' }}>满园花开，好美！</div>
+            <div style={{ fontFamily: '"ZCOOL XiaoWei", serif', fontSize: 20, color: textPrimary }}>满园花开，好美！</div>
           </div>
         </div>
       )}

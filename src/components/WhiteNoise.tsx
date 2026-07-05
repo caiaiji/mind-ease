@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 
+const isDarkMode = () => document.documentElement.classList.contains('dark')
 
 interface Sound {
   id: string
@@ -23,6 +24,7 @@ const sounds: Sound[] = [
 ]
 
 export default function WhiteNoise() {
+  const dark = isDarkMode()
   const [activeId, setActiveId] = useState<string | null>(null)
   const [volume, setVolume] = useState(70)
   const [timerMin, setTimerMin] = useState(0)
@@ -33,6 +35,12 @@ export default function WhiteNoise() {
   const noiseSourceRef = useRef<AudioBufferSourceNode | null>(null)
   const noiseGainRef = useRef<GainNode | null>(null)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const cardBg = dark ? 'rgba(30,27,60,0.6)' : 'rgba(255,255,255,0.8)'
+  const cardBorder = dark ? 'rgba(139,92,246,0.15)' : 'rgba(139,92,246,0.1)'
+  const textMuted = dark ? '#9ca3af' : '#6B7280'
+  const textPrimary = dark ? '#e5e7eb' : '#1F2937'
+  const accentColor = dark ? '#a78bfa' : '#8B5CF6'
 
   const stop = useCallback(() => {
     if (nodesRef.current) {
@@ -146,10 +154,10 @@ export default function WhiteNoise() {
     <div style={{ maxWidth: 600, margin: '0 auto', padding: '24px 0' }}>
       {/* Volume */}
       <div style={{
-        background: 'rgba(255,255,255,0.8)',
+        background: cardBg,
         backdropFilter: 'blur(10px)',
         borderRadius: 16,
-        border: '1px solid rgba(139,92,246,0.1)',
+        border: `1px solid ${cardBorder}`,
         padding: '16px 24px',
         marginBottom: 24,
         display: 'flex',
@@ -157,24 +165,24 @@ export default function WhiteNoise() {
         gap: 16
       }}>
         <span style={{ fontSize: 24 }}>🔊</span>
-        <span style={{ fontSize: 14, color: '#6B7280', minWidth: 60 }}>音量</span>
+        <span style={{ fontSize: 14, color: textMuted, minWidth: 60 }}>音量</span>
         <input
           type="range"
           min="0"
           max="100"
           value={volume}
           onChange={e => setVolume(Number(e.target.value))}
-          style={{ flex: 1, accentColor: '#8B5CF6', height: 6 }}
+          style={{ flex: 1, accentColor: accentColor, height: 6 }}
         />
-        <span style={{ fontSize: 14, color: '#8B5CF6', fontWeight: 600, minWidth: 40 }}>{volume}%</span>
+        <span style={{ fontSize: 14, color: accentColor, fontWeight: 600, minWidth: 40 }}>{volume}%</span>
       </div>
 
       {/* Timer */}
       <div style={{
-        background: 'rgba(255,255,255,0.8)',
+        background: cardBg,
         backdropFilter: 'blur(10px)',
         borderRadius: 16,
-        border: '1px solid rgba(139,92,246,0.1)',
+        border: `1px solid ${cardBorder}`,
         padding: '16px 24px',
         marginBottom: 24,
         display: 'flex',
@@ -182,9 +190,9 @@ export default function WhiteNoise() {
         gap: 16
       }}>
         <span style={{ fontSize: 24 }}>⏱</span>
-        <span style={{ fontSize: 14, color: '#6B7280', minWidth: 60 }}>定时</span>
+        <span style={{ fontSize: 14, color: textMuted, minWidth: 60 }}>定时</span>
         {remaining > 0 ? (
-          <span style={{ fontSize: 24, fontWeight: 700, color: '#8B5CF6', fontFamily: 'monospace', minWidth: 80 }}>
+          <span style={{ fontSize: 24, fontWeight: 700, color: accentColor, fontFamily: 'monospace', minWidth: 80 }}>
             {fmtTime(remaining)}
           </span>
         ) : (
@@ -197,9 +205,9 @@ export default function WhiteNoise() {
                   padding: '4px 12px',
                   borderRadius: 20,
                   fontSize: 13,
-                  border: timerMin === m ? '2px solid #8B5CF6' : '1px solid #E5E7EB',
-                  background: timerMin === m ? '#EDE9FE' : '#fff',
-                  color: timerMin === m ? '#8B5CF6' : '#6B7280',
+                  border: timerMin === m ? `2px solid ${accentColor}` : `1px solid ${dark ? '#374151' : '#E5E7EB'}`,
+                  background: timerMin === m ? (dark ? 'rgba(139,92,246,0.2)' : '#EDE9FE') : (dark ? 'rgba(255,255,255,0.05)' : '#fff'),
+                  color: timerMin === m ? accentColor : textMuted,
                   cursor: 'pointer'
                 }}
               >
@@ -217,7 +225,7 @@ export default function WhiteNoise() {
               borderRadius: 20,
               fontSize: 13,
               border: '1px solid #F87171',
-              background: '#FEF2F2',
+              background: dark ? 'rgba(239,68,68,0.15)' : '#FEF2F2',
               color: '#EF4444',
               cursor: 'pointer'
             }}
@@ -242,28 +250,28 @@ export default function WhiteNoise() {
               style={{
                 padding: 24,
                 borderRadius: 20,
-                border: isActive ? '2px solid #8B5CF6' : '2px solid transparent',
+                border: isActive ? `2px solid ${accentColor}` : '2px solid transparent',
                 background: isActive
-                  ? 'linear-gradient(135deg, #EDE9FE, #F3F4F6)'
-                  : 'rgba(255,255,255,0.8)',
+                  ? (dark ? 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(55,65,81,0.4))' : 'linear-gradient(135deg, #EDE9FE, #F3F4F6)')
+                  : cardBg,
                 backdropFilter: 'blur(10px)',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
                 textAlign: 'left',
-                boxShadow: isActive ? '0 4px 20px rgba(139,92,246,0.2)' : '0 2px 8px rgba(0,0,0,0.04)',
+                boxShadow: isActive ? '0 4px 20px rgba(139,92,246,0.2)' : (dark ? '0 2px 8px rgba(0,0,0,0.2)' : '0 2px 8px rgba(0,0,0,0.04)'),
                 transform: isActive ? 'scale(1.02)' : 'none'
               }}
             >
               <span style={{ fontSize: 36, display: 'block', marginBottom: 12 }}>{sound.emoji}</span>
-              <span style={{ fontSize: 16, fontWeight: 600, color: '#1F2937', display: 'block', marginBottom: 4 }}>
+              <span style={{ fontSize: 16, fontWeight: 600, color: textPrimary, display: 'block', marginBottom: 4 }}>
                 {sound.name}
                 {isActive && (
-                  <span style={{ marginLeft: 8, fontSize: 12, color: '#8B5CF6', fontWeight: 500 }}>
+                  <span style={{ marginLeft: 8, fontSize: 12, color: accentColor, fontWeight: 500 }}>
                     ▶ 播放中
                   </span>
                 )}
               </span>
-              <span style={{ fontSize: 13, color: '#9CA3AF', lineHeight: 1.5 }}>
+              <span style={{ fontSize: 13, color: textMuted, lineHeight: 1.5 }}>
                 {sound.desc}
               </span>
             </button>
@@ -276,10 +284,10 @@ export default function WhiteNoise() {
         marginTop: 24,
         padding: '16px 20px',
         borderRadius: 16,
-        background: 'rgba(167,139,250,0.08)',
-        border: '1px solid rgba(139,92,246,0.1)',
+        background: dark ? 'rgba(139,92,246,0.1)' : 'rgba(167,139,250,0.08)',
+        border: `1px solid ${cardBorder}`,
         fontSize: 13,
-        color: '#8B5CF6',
+        color: accentColor,
         lineHeight: 1.6,
         textAlign: 'center'
       }}>
