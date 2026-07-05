@@ -22,6 +22,13 @@ const moodConfig = [
 
 const moodTags = ['学习', '社交', '家庭', '恋爱', '睡眠', '工作', '健康', '其他']
 
+// 危机关键词 - 用于笔记检测和趋势预警
+const CRISIS_KEYWORDS = [
+  '不想活', '想死', '自杀', '结束生命', '活不下去', '没有意义',
+  '还不如死', '去死', '死了算了', '活着好累', '世界没有我',
+  '消失', '跳楼', '割腕', '跳河', '吃安眠药',
+]
+
 function loadEntries(): MoodEntry[] {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]') }
   catch { return [] }
@@ -39,12 +46,23 @@ export default function MoodDiary() {
   const [note, setNote] = useState('')
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [showHistory, setShowHistory] = useState(false)
+  const [showCrisisAlert, setShowCrisisAlert] = useState(false)
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => { saveEntries(entries) }, [entries])
 
+  // 检测笔记中的危机关键词
+  const detectNoteCrisis = useCallback((text: string): boolean => {
+    return CRISIS_KEYWORDS.some(kw => text.includes(kw))
+  }, [])
+
   const addEntry = useCallback(() => {
     if (selectedMood === null) return
+    // 危机关键词检测
+    if (note.trim() && detectNoteCrisis(note.trim())) {
+      setShowCrisisAlert(true)
+      return // 不提交，先显示关怀提示
+    }
     const entry: MoodEntry = {
       id: Date.now().toString(),
       mood: selectedMood,
@@ -56,7 +74,7 @@ export default function MoodDiary() {
     setSelectedMood(null)
     setNote('')
     setSelectedTags([])
-  }, [selectedMood, note, selectedTags])
+  }, [selectedMood, note, selectedTags, detectNoteCrisis])
 
   const toggleTag = (tag: string) => {
     setSelectedTags(prev =>
@@ -185,6 +203,14 @@ export default function MoodDiary() {
     ? (weekEntries.reduce((s, e) => s + e.mood, 0) / weekEntries.length).toFixed(1)
     : '--'
 
+  // 危机趋势检测：过去7天记录>=3次且全部<=2，或平均<=1.5
+  const crisisTrend = weekEntries.length >= 3 && (
+    weekEntries.every(e => e.mood <= 2) ||
+    (weekEntries.reduce((s, e) => s + e.mood, 0) / weekEntries.length) <= 1.5
+  )
+
+
+
   const s = {
     page: { background: '#FFFBF5', minHeight: '100vh', fontFamily: '"Noto Sans SC", sans-serif', color: dark('#374151', '#d1d5db'), padding: '100px 16px 60px' },
     container: { maxWidth: 640, margin: '0 auto' },
@@ -310,6 +336,47 @@ export default function MoodDiary() {
               </div>
             )}
 
+            {/* 危机趋势预警 */}
+            {crisisTrend && (
+              <div style={{
+                background: 'linear-gradient(135deg, rgba(254,226,226,0.9), rgba(254,215,170,0.9))',
+                borderRadius: 20, padding: 20, marginBottom: 20,
+                border: '2px solid rgba(239,68,68,0.2)',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                  <span style={{ fontSize: 28 }}>💛</span>
+                  <div>
+                    <p style={{ fontSize: 15, fontWeight: 600, color: '#9B1C1C', marginBottom: 8 }}>
+                      过去一周你的情绪持续偏低
+                    </p>
+                    <p style={{ fontSize: 13, color: '#991B1B', lineHeight: 1.6, marginBottom: 12 }}>
+                      我们注意到你最近的心情记录一直不太理想。持续的负面情绪需要被重视，
+                      这不是你的错，也不代表你必须独自面对。
+                    </p>
+                    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                      <a href="tel:400-161-9995" style={{
+                        padding: '8px 16px', borderRadius: 12, fontSize: 13, fontWeight: 500,
+                        background: '#EF4444', color: '#fff', textDecoration: 'none',
+                        display: 'inline-flex', alignItems: 'center', gap: 4,
+                      }}>
+                        📞 拨打心理热线 400-161-9995
+                      </a>
+                      <a href="tel:400-821-1215" style={{
+                        padding: '8px 16px', borderRadius: 12, fontSize: 13, fontWeight: 500,
+                        background: '#F97316', color: '#fff', textDecoration: 'none',
+                        display: 'inline-flex', alignItems: 'center', gap: 4,
+                      }}>
+                        📞 生命热线 400-821-1215
+                      </a>
+                    </div>
+                    <p style={{ fontSize: 11, color: '#B91C1C', marginTop: 10 }}>
+                      也许可以和信任的人聊一聊，或者去学校的心理咨询中心看看——寻求帮助是勇敢的表现。
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* 趋势图 */}
             {entries.length >= 2 && (
               <div style={s.canvasWrap}>
@@ -365,6 +432,82 @@ export default function MoodDiary() {
           </>
         )}
       </div>
+
+      {/* 危机关键词提醒弹窗 */}
+      {showCrisisAlert && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 9999, padding: 20,
+        }} onClick={() => setShowCrisisAlert(false)}>
+          <div style={{
+            background: '#fff', borderRadius: 24, padding: 28, maxWidth: 420, width: '100%',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.15)',
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{ textAlign: 'center', marginBottom: 16 }}>
+              <span style={{ fontSize: 48 }}>💛</span>
+            </div>
+            <h3 style={{ fontSize: 18, fontWeight: 600, color: '#1F2937', textAlign: 'center', marginBottom: 12 }}>
+              我们注意到你写了一些让人担心的话
+            </h3>
+            <p style={{ fontSize: 14, color: '#6B7280', lineHeight: 1.7, textAlign: 'center', marginBottom: 20 }}>
+              你并不孤单，很多人都经历过这样的时刻。<br />
+              专业的心理支持可以帮助你度过这个阶段——<br />
+              请给这些热线一个机会，也给自己一个机会。
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
+              <a href="tel:400-161-9995" style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '12px 16px', borderRadius: 14, fontSize: 15, fontWeight: 600,
+                background: 'linear-gradient(135deg, #EF4444, #DC2626)', color: '#fff',
+                textDecoration: 'none',
+              }}>
+                📞 全国心理援助热线 400-161-9995
+              </a>
+              <a href="tel:400-821-1215" style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '12px 16px', borderRadius: 14, fontSize: 15, fontWeight: 600,
+                background: 'linear-gradient(135deg, #F97316, #EA580C)', color: '#fff',
+                textDecoration: 'none',
+              }}>
+                📞 生命热线 400-821-1215
+              </a>
+              <a href="tel:010-82951332" style={{
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                padding: '12px 16px', borderRadius: 14, fontSize: 15, fontWeight: 600,
+                background: 'linear-gradient(135deg, #8B5CF6, #7C3AED)', color: '#fff',
+                textDecoration: 'none',
+              }}>
+                📞 北京心理危机热线 010-82951332
+              </a>
+            </div>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button onClick={() => {
+                setShowCrisisAlert(false)
+              }} style={{
+                flex: 1, padding: '10px 16px', borderRadius: 12, fontSize: 14, fontWeight: 500,
+                border: '1px solid #E5E7EB', background: '#fff', color: '#6B7280', cursor: 'pointer',
+              }}>
+                我想先记下来
+              </button>
+              <button onClick={() => {
+                setShowCrisisAlert(false)
+                setNote('')
+                setSelectedMood(null)
+              }} style={{
+                flex: 1, padding: '10px 16px', borderRadius: 12, fontSize: 14, fontWeight: 500,
+                border: 'none', background: '#F3F4F6', color: '#9CA3AF', cursor: 'pointer',
+              }}>
+                取消记录
+              </button>
+            </div>
+            <p style={{ fontSize: 11, color: '#D1D5DB', textAlign: 'center', marginTop: 12 }}>
+              如果你正在经历紧急情况，请立即拨打 120 或 110
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
