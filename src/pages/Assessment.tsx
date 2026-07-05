@@ -49,6 +49,14 @@ export default function Assessment() {
     [activeType]
   )
 
+  // Auto-save result when entering result phase
+  useEffect(() => {
+    if (phase === 'result' && assessment) {
+      saveResult()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase])
+
   const startQuiz = (typeId: string) => {
     setActiveType(typeId)
     setCurrentQ(0)
@@ -185,7 +193,7 @@ export default function Assessment() {
                 <p className="text-sm text-gray-400 mb-4">{a.description}</p>
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-300">{a.questions.length} 道题</span>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${colorMap[a.getResult(0).color].light} ${colorMap[a.getResult(0).color].text}`}>
+                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${colorMap[a.getResult(0).color]?.light ?? "bg-lavender-50"} ${colorMap[a.getResult(0).color]?.text ?? "text-lavender-500"}`}>
                     开始测评
                   </span>
                 </div>
@@ -272,7 +280,7 @@ export default function Assessment() {
             <div className="space-y-3">
               {history.map(r => {
                 const a = assessments.find(x => x.id === r.assessmentId)
-                const colors = a ? colorMap[a.getResult(0).color] : colorMap.lavender
+                const colors = a ? (colorMap[a.getResult(0).color] || colorMap.lavender) : colorMap.lavender
                 const pct = Math.round((r.score / r.maxScore) * 100)
                 return (
                   <div key={r.id} className="glass-card p-5 flex items-center gap-5">
@@ -329,20 +337,12 @@ export default function Assessment() {
     )
   }
 
-
-  // Auto-save result when entering result phase
-  useEffect(() => {
-    if (phase === 'result' && assessment) {
-      saveResult()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase])
   // ===== RESULT PHASE =====
   if (phase === 'result' && assessment) {
     const result = assessment.getResult(totalScore)
     const maxScore = assessment.questions.length * 3
     const percentage = Math.round((totalScore / maxScore) * 100)
-    const colors = colorMap[result.color]
+    const colors = colorMap[result.color] || colorMap.lavender
 
 
     const isHighRisk = percentage >= 70
