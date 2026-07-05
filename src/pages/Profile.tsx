@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useUser } from '../contexts/UserContext'
-
+import { dark } from '../contexts/ThemeContext'
 
 const AVATARS = ['🧑', '👩', '👨', '🧒', '👩‍🎓', '🧑‍🎓', '👨‍🎓', '🌸', '🍀', '⭐', '🌙', '🌈']
 
@@ -26,6 +26,17 @@ export default function Profile() {
   const [editNick, setEditNick] = useState(user?.nickname || '')
   const [editBio, setEditBio] = useState(user?.bio || '')
   const [editAvatar, setEditAvatar] = useState(user?.avatar || AVATARS[0])
+
+  const dk = dark
+  const textPrimary = dk('#1F2937', '#e5e7eb')
+  const textSecondary = dk('#6B7280', '#9ca3af')
+  const textMuted = dk('#9CA3AF', '#6b7280')
+  const textFaint = dk('#D1D5DB', '#4b5563')
+  const cardBg = dk('rgba(255,255,255,0.8)', 'rgba(30,27,60,0.7)')
+  const cardBorder = dk('rgba(200,180,230,0.15)', 'rgba(139,92,246,0.2)')
+  const inputBg = dk('rgba(255,255,255,0.6)', 'rgba(255,255,255,0.05)')
+  const tabActiveBg = dk('linear-gradient(135deg, #EDE9FE, #E0E7FF)', 'linear-gradient(135deg, #4c1d95, #312e81)')
+  const avatarBg = dk('linear-gradient(135deg, #EDE9FE, #E0E7FF)', 'linear-gradient(135deg, #4c1d95, #312e81)')
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
@@ -103,18 +114,18 @@ export default function Profile() {
       margin: '0 auto',
     } as React.CSSProperties,
     card: {
-      background: 'rgba(255,255,255,0.8)',
+      background: cardBg,
       backdropFilter: 'blur(20px)',
       borderRadius: 24,
       padding: '32px 24px',
-      border: '1px solid rgba(200,180,230,0.15)',
-      boxShadow: '0 8px 32px rgba(139,92,246,0.06)',
+      border: `1px solid ${cardBorder}`,
+      boxShadow: `0 8px 32px ${dk('rgba(139,92,246,0.06)', 'rgba(0,0,0,0.2)')}`,
     } as React.CSSProperties,
     tabs: {
       display: 'flex',
       gap: 8,
       marginBottom: 28,
-      borderBottom: '2px solid rgba(200,180,230,0.15)',
+      borderBottom: `2px solid ${cardBorder}`,
       paddingBottom: 12,
     } as React.CSSProperties,
     tab: (active: boolean) => ({
@@ -126,14 +137,14 @@ export default function Profile() {
       fontWeight: 500,
       cursor: 'pointer',
       transition: 'all 0.3s',
-      background: active ? 'linear-gradient(135deg, #EDE9FE, #E0E7FF)' : 'transparent',
-      color: active ? '#7C3AED' : '#9CA3AF',
+      background: active ? tabActiveBg : 'transparent',
+      color: active ? '#7C3AED' : textMuted,
       border: 'none',
     } as React.CSSProperties),
     title: {
       fontSize: 24,
       fontWeight: 600,
-      color: '#1F2937',
+      color: textPrimary,
       textAlign: 'center' as const,
       marginBottom: 24,
       fontFamily: '"ZCOOL XiaoWei", serif',
@@ -145,17 +156,17 @@ export default function Profile() {
       display: 'block',
       fontSize: 13,
       fontWeight: 500,
-      color: '#6B7280',
+      color: textSecondary,
       marginBottom: 6,
     } as React.CSSProperties,
     input: {
       width: '100%',
       padding: '12px 16px',
       borderRadius: 14,
-      border: '1.5px solid rgba(200,180,230,0.2)',
+      border: `1.5px solid ${dk('rgba(200,180,230,0.2)', 'rgba(139,92,246,0.25)')}`,
       fontSize: 14,
-      color: '#1F2937',
-      background: 'rgba(255,255,255,0.6)',
+      color: textPrimary,
+      background: inputBg,
       outline: 'none',
       boxSizing: 'border-box' as const,
       transition: 'border-color 0.3s',
@@ -177,7 +188,7 @@ export default function Profile() {
       width: '100%',
       padding: '12px 0',
       borderRadius: 16,
-      border: '1.5px solid rgba(200,180,230,0.3)',
+      border: `1.5px solid ${dk('rgba(200,180,230,0.3)', 'rgba(139,92,246,0.3)')}`,
       fontSize: 14,
       fontWeight: 500,
       color: '#7C3AED',
@@ -200,7 +211,7 @@ export default function Profile() {
       marginTop: 8,
     } as React.CSSProperties,
     error: {
-      background: 'rgba(239,68,68,0.08)',
+      background: dk('rgba(239,68,68,0.08)', 'rgba(239,68,68,0.12)'),
       color: '#EF4444',
       padding: '10px 16px',
       borderRadius: 12,
@@ -209,7 +220,7 @@ export default function Profile() {
       textAlign: 'center' as const,
     } as React.CSSProperties,
     success: {
-      background: 'rgba(16,185,129,0.08)',
+      background: dk('rgba(16,185,129,0.08)', 'rgba(16,185,129,0.12)'),
       color: '#10B981',
       padding: '10px 16px',
       borderRadius: 12,
@@ -221,7 +232,7 @@ export default function Profile() {
       width: 80,
       height: 80,
       borderRadius: '50%',
-      background: 'linear-gradient(135deg, #EDE9FE, #E0E7FF)',
+      background: avatarBg,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -241,7 +252,7 @@ export default function Profile() {
       width: 48,
       height: 48,
       borderRadius: '50%',
-      border: selected ? '3px solid #8B5CF6' : '2px solid rgba(200,180,230,0.2)',
+      border: selected ? '3px solid #8B5CF6' : `2px solid ${dk('rgba(200,180,230,0.2)', 'rgba(139,92,246,0.25)')}`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -254,8 +265,8 @@ export default function Profile() {
       display: 'flex',
       justifyContent: 'space-around',
       padding: '16px 0',
-      borderTop: '1px solid rgba(200,180,230,0.15)',
-      borderBottom: '1px solid rgba(200,180,230,0.15)',
+      borderTop: `1px solid ${cardBorder}`,
+      borderBottom: `1px solid ${cardBorder}`,
       marginBottom: 24,
       marginTop: 20,
     } as React.CSSProperties,
@@ -270,17 +281,17 @@ export default function Profile() {
     } as React.CSSProperties,
     statLabel: {
       fontSize: 12,
-      color: '#9CA3AF',
+      color: textMuted,
       marginTop: 2,
     } as React.CSSProperties,
     textarea: {
       width: '100%',
       padding: '12px 16px',
       borderRadius: 14,
-      border: '1.5px solid rgba(200,180,230,0.2)',
+      border: `1.5px solid ${dk('rgba(200,180,230,0.2)', 'rgba(139,92,246,0.25)')}`,
       fontSize: 14,
-      color: '#1F2937',
-      background: 'rgba(255,255,255,0.6)',
+      color: textPrimary,
+      background: inputBg,
       outline: 'none',
       boxSizing: 'border-box' as const,
       minHeight: 80,
@@ -345,7 +356,7 @@ export default function Profile() {
         {tab === 'register' && (
           <>
             <h2 style={s.title}>加入心晴驿站</h2>
-            <p style={{ textAlign: 'center', fontSize: 14, color: '#9CA3AF', marginBottom: 24 }}>
+            <p style={{ textAlign: 'center', fontSize: 14, color: textMuted, marginBottom: 24 }}>
               创建一个账号，开始你的心灵之旅
             </p>
             <form onSubmit={handleRegister}>
@@ -401,8 +412,8 @@ export default function Profile() {
 
             {/* Avatar & Info Display */}
             <div style={s.avatar}>{user.avatar}</div>
-            <p style={{ textAlign: 'center', fontSize: 18, fontWeight: 600, color: '#1F2937' }}>{user.nickname}</p>
-            <p style={{ textAlign: 'center', fontSize: 13, color: '#9CA3AF', marginTop: 4 }}>
+            <p style={{ textAlign: 'center', fontSize: 18, fontWeight: 600, color: textPrimary }}>{user.nickname}</p>
+            <p style={{ textAlign: 'center', fontSize: 13, color: textMuted, marginTop: 4 }}>
               {user.email}
             </p>
 
@@ -415,7 +426,7 @@ export default function Profile() {
                   borderRadius: 10,
                   fontSize: 12,
                   fontWeight: 600,
-                  background: 'rgba(245,158,11,0.1)',
+                  background: dk('rgba(245,158,11,0.1)', 'rgba(245,158,11,0.15)'),
                   color: '#F59E0B',
                   marginBottom: 8,
                 }}>👑 管理员</span>
@@ -548,7 +559,7 @@ export default function Profile() {
       <p style={{
         textAlign: 'center',
         fontSize: 12,
-        color: '#D1D5DB',
+        color: textFaint,
         marginTop: 20,
         lineHeight: 1.6,
       }}>
