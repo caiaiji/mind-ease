@@ -156,13 +156,13 @@ export default function AssessmentGuide() {
                 <li>• 家族中有精神疾病史，近期状态明显异常</li>
               </ul>
               <div className="mt-4 flex flex-wrap gap-2">
-                <span className="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-red-600 border border-red-200">
+                <span className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-full text-sm font-medium text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
                   📞 400-161-9995（24h 全国心理援助）
                 </span>
-                <span className="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-red-600 border border-red-200">
+                <span className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-full text-sm font-medium text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
                   📞 010-82951332（北京心理危机干预）
                 </span>
-                <span className="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-red-600 border border-red-200">
+                <span className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-full text-sm font-medium text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
                   📞 12355 青年热线
                 </span>
               </div>

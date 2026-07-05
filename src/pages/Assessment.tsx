@@ -367,13 +367,13 @@ export default function Assessment() {
                   <div className="space-y-2">
                     <p className="text-sm text-red-700 font-medium">请立即拨打以下热线获取专业帮助：</p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-red-600 border border-red-200">
+                      <span className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-full text-sm font-medium text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
                         📞 400-161-9995（24h）
                       </span>
-                      <span className="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-red-600 border border-red-200">
+                      <span className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-full text-sm font-medium text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
                         📞 010-82951332（24h）
                       </span>
-                      <span className="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-red-600 border border-red-200">
+                      <span className="px-3 py-1.5 bg-white dark:bg-gray-800 rounded-full text-sm font-medium text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800">
                         📞 12355 青年热线
                       </span>
                     </div>
