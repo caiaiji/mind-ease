@@ -329,6 +329,14 @@ export default function Assessment() {
     )
   }
 
+
+  // Auto-save result when entering result phase
+  useEffect(() => {
+    if (phase === 'result' && assessment) {
+      saveResult()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase])
   // ===== RESULT PHASE =====
   if (phase === 'result' && assessment) {
     const result = assessment.getResult(totalScore)
@@ -336,11 +344,6 @@ export default function Assessment() {
     const percentage = Math.round((totalScore / maxScore) * 100)
     const colors = colorMap[result.color]
 
-    // Auto-save result on first view
-    useEffect(() => {
-      saveResult()
-      // eslint-disable-next-line
-    }, [phase])
 
     const isHighRisk = percentage >= 70
 
