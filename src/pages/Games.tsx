@@ -2,7 +2,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, lazy, Suspense } from 'react'
 
 const BubblePop = lazy(() => import('../components/features/games/BubblePop'))
-const GameCompleteGuide = lazy(() => import('../components/features/games/GameCompleteGuide'))
+import GameCompleteGuide from '../components/features/games/GameCompleteGuide'
 const FlowerGarden = lazy(() => import('../components/features/games/FlowerGarden'))
 const MemoryMatch = lazy(() => import('../components/features/games/MemoryMatch'))
 const FloatingBubbles = lazy(() => import('../components/features/games/FloatingBubbles'))
@@ -107,14 +107,12 @@ export default function Games() {
 
       <div style={{ padding: '0 24px 80px' }}>
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
-        <Suspense fallback={null}>
           <GameCompleteGuide
             gameName={guideGameName}
             show={showGuide}
             duration={gameDuration}
             onDismiss={() => setShowGuide(false)}
           />
-        </Suspense>
         </div>
         <div style={{ maxWidth: 960, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
           {GAMES.map((game) => (
