@@ -1,31 +1,48 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
 import { ThemeProvider } from './contexts/ThemeContext'
 import Layout from './components/layout/Layout'
-import Home from './pages/Home'
-import Articles from './pages/Articles'
-import ArticleDetail from './pages/ArticleDetail'
-import Assessment from './pages/Assessment'
-import Relax from './pages/Relax'
-import About from './pages/About'
-import Games from './pages/Games'
-import MoodDiary from './pages/MoodDiary'
-import TreeHole from './pages/TreeHole'
-import Profile from './pages/Profile'
-import Admin from './pages/Admin'
-import PrivacyPolicy from './pages/PrivacyPolicy'
-import AssessmentGuide from './pages/AssessmentGuide'
-import CheckIn from './pages/CheckIn'
-import Dashboard from './pages/Dashboard'
-import ExamPrep from './pages/ExamPrep'
-import WeeklyInsight from './pages/WeeklyInsight'
 import ErrorBoundary from './components/ErrorBoundary'
+
+// Eager: 首屏必需
+import Home from './pages/Home'
+
+// Lazy: 按需加载
+const Articles = lazy(() => import('./pages/Articles'))
+const ArticleDetail = lazy(() => import('./pages/ArticleDetail'))
+const Assessment = lazy(() => import('./pages/Assessment'))
+const Relax = lazy(() => import('./pages/Relax'))
+const About = lazy(() => import('./pages/About'))
+const Games = lazy(() => import('./pages/Games'))
+const MoodDiary = lazy(() => import('./pages/MoodDiary'))
+const TreeHole = lazy(() => import('./pages/TreeHole'))
+const Profile = lazy(() => import('./pages/Profile'))
+const Admin = lazy(() => import('./pages/Admin'))
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
+const AssessmentGuide = lazy(() => import('./pages/AssessmentGuide'))
+const CheckIn = lazy(() => import('./pages/CheckIn'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const ExamPrep = lazy(() => import('./pages/ExamPrep'))
+const WeeklyInsight = lazy(() => import('./pages/WeeklyInsight'))
+
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-10 h-10 border-3 border-lavender-200 border-t-lavender-500 rounded-full animate-spin" />
+        <span className="text-sm text-gray-400 dark:text-gray-500">加载中...</span>
+      </div>
+    </div>
+  )
+}
 
 function App() {
   return (
     <ThemeProvider>
       <UserProvider>
       <ErrorBoundary>
+      <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -47,6 +64,7 @@ function App() {
           <Route path="/weekly-insight" element={<WeeklyInsight />} />
         </Route>
       </Routes>
+      </Suspense>
       </ErrorBoundary>
     </UserProvider>
     </ThemeProvider>
