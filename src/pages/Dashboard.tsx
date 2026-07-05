@@ -287,6 +287,55 @@ export default function Dashboard() {
         )}
       </div>
 
+      {/* Community Reference */}
+      <div style={s.card}>
+        <p style={s.sectionTitle}>🌍 心情参照</p>
+        <p style={{ fontSize: 12, color: dk('#D1D5DB', '#4B5563'), marginBottom: 12, lineHeight: 1.5 }}>
+          以下为模拟的匿名参照数据，帮助你了解自己的情绪在人群中的相对位置。
+          数据基于心理健康研究文献中的典型分布模拟，非真实用户聚合。
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {[
+            { label: '年轻人平均压力水平', value: '中等偏高', emoji: '📊', note: '约 65% 的年轻人在学期中会经历中度以上压力' },
+            { label: '本周情绪基线参考', value: '3.2 / 5', emoji: '🌡️', note: '大多数人每周的平均心情在 3.0-3.5 之间波动' },
+            { label: '考试季典型状态', value: '轻度焦虑', emoji: '📝', note: '考前 1 周适度焦虑是正常的，能帮助提升专注力' },
+          ].map((ref, i) => (
+            <div key={i} style={{
+              padding: '12px 14px', borderRadius: 14,
+              background: dk('rgba(167,139,250,0.04)', 'rgba(167,139,250,0.06)'),
+              border: `1px solid ${dk('rgba(167,139,250,0.1)', 'rgba(139,92,246,0.12)')}`,
+            }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                <span style={{ fontSize: 13, fontWeight: 500, color: dk('#374151', '#f3f4f6') }}>
+                  {ref.emoji} {ref.label}
+                </span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#7C3AED' }}>{ref.value}</span>
+              </div>
+              <p style={{ fontSize: 11, color: dk('#9CA3AF', '#6B7280'), lineHeight: 1.5 }}>{ref.note}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Personal comparison if user has data */}
+        {moodEntries.length >= 7 && (
+          <div style={{
+            marginTop: 16, padding: '14px 16px', borderRadius: 14,
+            background: dk('rgba(110,231,183,0.08)', 'rgba(110,231,183,0.06)'),
+            border: `1px solid ${dk('rgba(110,231,183,0.2)', 'rgba(110,231,183,0.15)')}`,
+          }}>
+            <p style={{ fontSize: 13, color: dk('#374151', '#f3f4f6'), lineHeight: 1.6 }}>
+              💚 你的近7天平均心情为 <strong>{avgMood}</strong>，
+              {parseFloat(avgMood) >= 3.5
+                ? '高于大多数人——你的情绪状态不错，继续保持！'
+                : parseFloat(avgMood) >= 2.5
+                  ? '和大多数人差不多——这是正常的情绪波动范围。'
+                  : '低于大多数人的平均水平。这不一定意味着什么，但如果持续低落，建议和信任的人聊聊。'
+              }
+            </p>
+          </div>
+        )}
+      </div>
+
       {/* Latest Assessment */}
       <div style={s.card}>
         <p style={s.sectionTitle}>📋 最近测评结果</p>
