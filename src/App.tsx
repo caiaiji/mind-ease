@@ -4,6 +4,7 @@ import { UserProvider } from './contexts/UserContext'
 import { ThemeProvider } from './contexts/ThemeContext'
 import Layout from './components/layout/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
+import ScrollToTop from './components/ScrollToTop'
 
 // Eager: 首屏必需
 import Home from './pages/Home'
@@ -25,6 +26,7 @@ const CheckIn = lazy(() => import('./pages/CheckIn'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const ExamPrep = lazy(() => import('./pages/ExamPrep'))
 const WeeklyInsight = lazy(() => import('./pages/WeeklyInsight'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function PageLoader() {
   return (
@@ -41,6 +43,7 @@ function App() {
   return (
     <ThemeProvider>
       <UserProvider>
+      <ScrollToTop />
       <ErrorBoundary>
       <Suspense fallback={<PageLoader />}>
       <Routes>
@@ -62,6 +65,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/exam-prep" element={<ExamPrep />} />
           <Route path="/weekly-insight" element={<WeeklyInsight />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
       </Suspense>
