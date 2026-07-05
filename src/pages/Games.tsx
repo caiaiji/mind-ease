@@ -1,10 +1,11 @@
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
-import { useState } from 'react'
-import BubblePop from '../components/features/games/BubblePop'
-import FlowerGarden from '../components/features/games/FlowerGarden'
-import MemoryMatch from '../components/features/games/MemoryMatch'
-import FloatingBubbles from '../components/features/games/FloatingBubbles'
-import SchulteGrid from '../components/features/games/SchulteGrid'
+import { useState, lazy, Suspense } from 'react'
+
+const BubblePop = lazy(() => import('../components/features/games/BubblePop'))
+const FlowerGarden = lazy(() => import('../components/features/games/FlowerGarden'))
+const MemoryMatch = lazy(() => import('../components/features/games/MemoryMatch'))
+const FloatingBubbles = lazy(() => import('../components/features/games/FloatingBubbles'))
+const SchulteGrid = lazy(() => import('../components/features/games/SchulteGrid'))
 
 type GameId = 'none' | 'bubble-pop' | 'flower-garden' | 'memory-match' | 'floating-bubbles' | 'schulte-grid'
 
@@ -17,6 +18,17 @@ const GAMES: { id: GameId; title: string; description: string; emoji: string; gr
 ]
 
 const isDarkMode = () => document.documentElement.classList.contains('dark')
+
+function GameLoader() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 0' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+        <div style={{ width: 40, height: 40, border: '3px solid #ddd0fe', borderTopColor: '#8B5CF6', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+        <span style={{ fontSize: 14, color: '#9CA3AF' }}>加载游戏中...</span>
+      </div>
+    </div>
+  )
+}
 
 export default function Games() {
     useDocumentTitle('放松游戏')
@@ -61,11 +73,13 @@ export default function Games() {
         </div>
 
         <div style={{ ...glassCard, padding: '24px 32px' }}>
-          {activeGame === 'bubble-pop' && <BubblePop />}
-          {activeGame === 'flower-garden' && <FlowerGarden />}
-          {activeGame === 'memory-match' && <MemoryMatch />}
-          {activeGame === 'floating-bubbles' && <FloatingBubbles />}
-          {activeGame === 'schulte-grid' && <SchulteGrid />}
+          <Suspense fallback={<GameLoader />}>
+            {activeGame === 'bubble-pop' && <BubblePop />}
+            {activeGame === 'flower-garden' && <FlowerGarden />}
+            {activeGame === 'memory-match' && <MemoryMatch />}
+            {activeGame === 'floating-bubbles' && <FloatingBubbles />}
+            {activeGame === 'schulte-grid' && <SchulteGrid />}
+          </Suspense>
         </div>
       </div>
     )

@@ -1,9 +1,21 @@
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { relaxTips } from '../data/relax'
-import WhiteNoise from '../components/WhiteNoise'
-import BreathingGuide from '../components/BreathingGuide'
-import MindfulnessTimer from '../components/MindfulnessTimer'
+
+const WhiteNoise = lazy(() => import('../components/WhiteNoise'))
+const BreathingGuide = lazy(() => import('../components/BreathingGuide'))
+const MindfulnessTimer = lazy(() => import('../components/MindfulnessTimer'))
+
+function ToolLoader() {
+  return (
+    <div className="flex items-center justify-center py-20">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-10 h-10 border-3 border-lavender-200 border-t-lavender-500 rounded-full animate-spin" />
+        <span className="text-sm text-gray-400 dark:text-gray-500">加载工具中...</span>
+      </div>
+    </div>
+  )
+}
 
 export default function Relax() {
     useDocumentTitle('放松工具')
@@ -13,11 +25,19 @@ export default function Relax() {
   const [showMindfulness, setShowMindfulness] = useState(false)
 
   if (showBreathing) {
-    return <BreathingGuide onBack={() => setShowBreathing(false)} />
+    return (
+      <Suspense fallback={<ToolLoader />}>
+        <BreathingGuide onBack={() => setShowBreathing(false)} />
+      </Suspense>
+    )
   }
 
   if (showMindfulness) {
-    return <MindfulnessTimer onBack={() => setShowMindfulness(false)} />
+    return (
+      <Suspense fallback={<ToolLoader />}>
+        <MindfulnessTimer onBack={() => setShowMindfulness(false)} />
+      </Suspense>
+    )
   }
 
   if (showWhiteNoise) {
@@ -33,7 +53,9 @@ export default function Relax() {
           <p className="text-gray-500 dark:text-gray-400 text-lg mb-8 max-w-2xl">
             用自然的声音包裹自己，隔绝外界喧嚣，帮助放松和入睡。
           </p>
-          <WhiteNoise />
+          <Suspense fallback={<ToolLoader />}>
+            <WhiteNoise />
+          </Suspense>
         </div>
       </div>
     )
