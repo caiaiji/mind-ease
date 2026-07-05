@@ -1,12 +1,12 @@
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useParams, Link } from 'react-router-dom'
+import ReactMarkdown from 'react-markdown'
 import { articles, categories } from '../data/articles'
 
 export default function ArticleDetail() {
   const { id } = useParams<{ id: string }>()
   const article = articles.find((a) => a.id === id)
   useDocumentTitle(article?.title)
-
 
   if (!article) {
     return (
@@ -25,43 +25,35 @@ export default function ArticleDetail() {
 
   const categoryLabel = categories.find((c) => c.id === article.category)?.label
 
-  // Parse markdown-like content into paragraphs
-  const renderContent = (content: string) => {
-    return content.split('\n\n').map((block, i) => {
-      if (block.startsWith('**') && block.endsWith('**')) {
-        return (
-          <h2 key={i} className="font-display text-xl md:text-2xl text-gray-800 dark:text-gray-100 mt-8 mb-4">
-            {block.replace(/\*\*/g, '')}
-          </h2>
-        )
-      }
-      if (block.startsWith('**')) {
-        const text = block.replace(/\*\*/g, '')
-        const [heading, ...rest] = text.split('\n')
-        return (
-          <div key={i} className="mb-6">
-            {heading && (
-              <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">{heading}</h3>
-            )}
-            {rest.map((line, j) => (
-              <p key={j} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-2">{line}</p>
-            ))}
-          </div>
-        )
-      }
-      if (block.startsWith('- ')) {
-        return (
-          <ul key={i} className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-6 ml-4">
-            {block.split('\n').map((line, j) => (
-              <li key={j}>{line.replace('- ', '')}</li>
-            ))}
-          </ul>
-        )
-      }
-      return (
-        <p key={i} className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">{block}</p>
-      )
-    })
+  // Markdown component overrides matching site design
+  const mdComponents: any = {
+    h1: ({ children }: any) => <h1 className="font-display text-2xl md:text-3xl text-gray-800 dark:text-gray-100 mt-10 mb-4">{children}</h1>,
+    h2: ({ children }: any) => <h2 className="font-display text-xl md:text-2xl text-gray-800 dark:text-gray-100 mt-8 mb-4">{children}</h2>,
+    h3: ({ children }: any) => <h3 className="font-display text-lg md:text-xl text-gray-800 dark:text-gray-100 mt-6 mb-3">{children}</h3>,
+    p: ({ children }: any) => <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-5">{children}</p>,
+    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-6 ml-2">{children}</ul>,
+    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-6 ml-2">{children}</ol>,
+    li: ({ children }: any) => <li className="leading-relaxed">{children}</li>,
+    blockquote: ({ children }: any) => (
+      <blockquote className="border-l-4 border-lavender-300 dark:border-lavender-600 pl-4 py-1 my-6 bg-lavender-50/50 dark:bg-lavender-950/20 rounded-r-lg italic text-gray-500 dark:text-gray-400">{children}</blockquote>
+    ),
+    strong: ({ children }: any) => <strong className="text-gray-800 dark:text-gray-200 font-semibold">{children}</strong>,
+    table: ({ children }: any) => (
+      <div className="overflow-x-auto mb-6">
+        <table className="w-full border-collapse text-sm">{children}</table>
+      </div>
+    ),
+    thead: ({ children }: any) => <thead className="bg-lavender-100 dark:bg-lavender-900/30">{children}</thead>,
+    th: ({ children }: any) => <th className="border border-lavender-200 dark:border-gray-700 px-4 py-2.5 text-left text-gray-700 dark:text-gray-300 font-medium">{children}</th>,
+    td: ({ children }: any) => <td className="border border-lavender-200 dark:border-gray-700 px-4 py-2.5 text-gray-600 dark:text-gray-400">{children}</td>,
+    hr: () => <hr className="border-lavender-200 dark:border-gray-700 my-8" />,
+    a: ({ href, children }: any) => <a href={href} className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+    code: ({ children }: any) => (
+      <code className="bg-lavender-100 dark:bg-lavender-900/40 px-1.5 py-0.5 rounded text-sm text-gray-700 dark:text-gray-300">{children}</code>
+    ),
+    pre: ({ children }: any) => (
+      <pre className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 overflow-x-auto mb-6 text-sm text-gray-700 dark:text-gray-300">{children}</pre>
+    ),
   }
 
   return (
@@ -93,7 +85,7 @@ export default function ArticleDetail() {
         <div className="max-w-3xl mx-auto">
           <div className="glass-card p-8 md:p-12">
             <div className="animate-fade-in">
-              {renderContent(article.content)}
+              <ReactMarkdown components={mdComponents}>{article.content}</ReactMarkdown>
             </div>
           </div>
 
