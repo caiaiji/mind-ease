@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser, getUsers } from '../contexts/UserContext'
@@ -13,6 +14,8 @@ interface StatCard {
 }
 
 export default function Admin() {
+    useDocumentTitle('管理后台')
+
   const { user, isAdmin, isLogin, setUserRole, deleteUser } = useUser()
   const navigate = useNavigate()
   const [tab, setTab] = useState<AdminTab>('overview')

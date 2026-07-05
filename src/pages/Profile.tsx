@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState } from 'react'
 import { useUser } from '../contexts/UserContext'
 import { dark } from '../contexts/ThemeContext'
@@ -7,6 +8,8 @@ const AVATARS = ['🧑', '👩', '👨', '🧒', '👩‍🎓', '🧑‍🎓', '
 type Tab = 'login' | 'register' | 'profile'
 
 export default function Profile() {
+    useDocumentTitle('个人中心')
+
   const { user, isLogin, isAdmin, register, login, logout, updateProfile } = useUser()
   const [tab, setTab] = useState<Tab>(isLogin ? 'profile' : 'login')
   const [error, setError] = useState('')

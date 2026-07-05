@@ -1,4 +1,7 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 export default function PrivacyPolicy() {
+    useDocumentTitle('隐私政策')
+
   return (
     <div className="px-6 md:px-12 lg:px-20 pt-12 pb-20">
       <div className="max-w-3xl mx-auto">

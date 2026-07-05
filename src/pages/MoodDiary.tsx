@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { dark } from '../contexts/ThemeContext'
 
@@ -31,6 +32,8 @@ function saveEntries(entries: MoodEntry[]) {
 }
 
 export default function MoodDiary() {
+    useDocumentTitle('情绪日记')
+
   const [entries, setEntries] = useState<MoodEntry[]>(loadEntries)
   const [selectedMood, setSelectedMood] = useState<number | null>(null)
   const [note, setNote] = useState('')

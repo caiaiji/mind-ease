@@ -1,6 +1,9 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { Link } from 'react-router-dom'
 
 export default function NotFound() {
+    useDocumentTitle('页面走丢了')
+
   return (
     <div className="min-h-[60vh] flex items-center justify-center px-6">
       <div className="text-center max-w-md">

@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useMemo } from 'react'
 import { useUser } from '../contexts/UserContext'
 import { dark } from '../contexts/ThemeContext'
@@ -35,6 +36,8 @@ const ASSESS_NAMES: Record<string, string> = {
 }
 
 export default function Dashboard() {
+    useDocumentTitle('情绪仪表盘')
+
   const { isLogin } = useUser()
   const journal = useMemo(() => loadMoodJournal(), [])
   const assessmentHistory = useMemo(() => loadAssessments(), [])

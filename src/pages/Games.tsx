@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState } from 'react'
 import BubblePop from '../components/features/games/BubblePop'
 import FlowerGarden from '../components/features/games/FlowerGarden'
@@ -18,6 +19,8 @@ const GAMES: { id: GameId; title: string; description: string; emoji: string; gr
 const isDarkMode = () => document.documentElement.classList.contains('dark')
 
 export default function Games() {
+    useDocumentTitle('放松游戏')
+
   const [activeGame, setActiveGame] = useState<GameId>('none')
   const dark = isDarkMode()
 

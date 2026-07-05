@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useMemo, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import { useUser } from '../contexts/UserContext'
@@ -32,6 +33,8 @@ function saveHistory(records: HistoryRecord[]) {
 }
 
 export default function Assessment() {
+    useDocumentTitle('情绪测评')
+
   const [searchParams] = useSearchParams()
   const preselected = searchParams.get('type')
   const { user, isLogin } = useUser()

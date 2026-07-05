@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -68,6 +69,8 @@ function getWeekRange(offset: number = 0) {
 }
 
 export default function WeeklyInsight() {
+    useDocumentTitle('情绪周报')
+
   const [weekOffset, setWeekOffset] = useState(0)
 
   const isDark = document.documentElement.classList.contains('dark')

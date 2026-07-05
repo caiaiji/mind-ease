@@ -1,8 +1,11 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { articles, categories } from '../data/articles'
 
 export default function Articles() {
+    useDocumentTitle('心理文章')
+
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
 

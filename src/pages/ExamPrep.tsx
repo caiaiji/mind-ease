@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { Link } from 'react-router-dom'
 import { dark } from '../contexts/ThemeContext'
 
@@ -62,6 +63,8 @@ const AFFIRMATIONS = [
 ]
 
 export default function ExamPrep() {
+    useDocumentTitle('考前减压')
+
   const dk = dark
   const s = {
     page: {

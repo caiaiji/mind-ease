@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useEffect, useMemo } from 'react'
 import { useUser } from '../contexts/UserContext'
 import { dark } from '../contexts/ThemeContext'
@@ -118,6 +119,8 @@ function getWeekHeatmap(dates: string[]): { weekCols: { date: string; checked: b
 const WEEKDAY_LABELS = ['一', '二', '三', '四', '五', '六', '日']
 
 export default function CheckIn() {
+    useDocumentTitle('每日打卡')
+
   const { isLogin } = useUser()
   const [records, setRecords] = useState<CheckInRecord>(loadRecords)
   const [justCheckedIn, setJustCheckedIn] = useState(false)

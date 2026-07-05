@@ -1,6 +1,9 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { Link } from 'react-router-dom'
 
 export default function AssessmentGuide() {
+    useDocumentTitle('量表科普')
+
   return (
     <div className="px-6 md:px-12 lg:px-20 pt-12 pb-20">
       <div className="max-w-3xl mx-auto">

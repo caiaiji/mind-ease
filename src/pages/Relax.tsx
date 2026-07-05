@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState } from 'react'
 import { relaxTips } from '../data/relax'
 import WhiteNoise from '../components/WhiteNoise'
@@ -5,6 +6,8 @@ import BreathingGuide from '../components/BreathingGuide'
 import MindfulnessTimer from '../components/MindfulnessTimer'
 
 export default function Relax() {
+    useDocumentTitle('放松工具')
+
   const [showBreathing, setShowBreathing] = useState(false)
   const [showWhiteNoise, setShowWhiteNoise] = useState(false)
   const [showMindfulness, setShowMindfulness] = useState(false)

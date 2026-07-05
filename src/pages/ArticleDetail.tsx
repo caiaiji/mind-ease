@@ -1,9 +1,12 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useParams, Link } from 'react-router-dom'
 import { articles, categories } from '../data/articles'
 
 export default function ArticleDetail() {
   const { id } = useParams<{ id: string }>()
   const article = articles.find((a) => a.id === id)
+  useDocumentTitle(article?.title)
+
 
   if (!article) {
     return (

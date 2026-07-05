@@ -1,3 +1,4 @@
+import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { dark } from '../contexts/ThemeContext'
 
@@ -71,6 +72,8 @@ function getRandomWarmReplies(): string[] {
 }
 
 export default function TreeHole() {
+    useDocumentTitle('树洞倾诉')
+
   const [messages, setMessages] = useState<Message[]>(loadMessages)
   const [content, setContent] = useState('')
   const [nickname, setNickname] = useState(loadNickname)
