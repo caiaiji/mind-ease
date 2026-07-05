@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import FirstTimeGuide from '../components/FirstTimeGuide'
 import { articles } from '../data/articles'
 import { assessments } from '../data/assessments'
 
@@ -67,6 +68,11 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* First Time Guide */}
+      <section className="px-6 md:px-12 lg:px-20 pt-4 pb-4">
+        <FirstTimeGuide />
       </section>
 
       {/* Interactive Tools - Featured Section */}
