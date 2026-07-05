@@ -11,10 +11,10 @@ export default function Footer() {
             <span className="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-red-600 dark:text-red-400 font-medium border border-red-200 dark:border-red-800">
               📞 24h 全国心理援助热线 400-161-9995
             </span>
-            <span className="px-3 py-1 bg-white rounded-full text-red-600 font-medium border border-red-200">
+            <span className="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-red-600 dark:text-red-400 font-medium border border-red-200 dark:border-red-800">
               📞 010-82951332
             </span>
-            <span className="px-3 py-1 bg-white rounded-full text-red-600 font-medium border border-red-200">
+            <span className="px-3 py-1 bg-white dark:bg-gray-800 rounded-full text-red-600 dark:text-red-400 font-medium border border-red-200 dark:border-red-800">
               📞 共青团 12355
             </span>
           </div>
@@ -54,9 +54,9 @@ export default function Footer() {
             <h3 className="font-medium text-gray-700 dark:text-gray-300 mb-3">心理援助热线</h3>
             <div className="flex flex-col gap-2 text-sm text-gray-400 dark:text-gray-500">
               <p>全国心理援助热线：<strong className="text-gray-600 dark:text-gray-300">400-161-9995</strong>（24h）</p>
-              <p>北京心理危机干预中心：<strong className="text-gray-600">010-82951332</strong>（24h）</p>
-              <p>生命热线：<strong className="text-gray-600">400-821-1215</strong></p>
-              <p>共青团心理咨询热线：<strong className="text-gray-600">12355</strong></p>
+              <p>北京心理危机干预中心：<strong className="text-gray-600 dark:text-gray-300">010-82951332</strong>（24h）</p>
+              <p>生命热线：<strong className="text-gray-600 dark:text-gray-300">400-821-1215</strong></p>
+              <p>共青团心理咨询热线：<strong className="text-gray-600 dark:text-gray-300">12355</strong></p>
             </div>
           </div>
         </div>
@@ -73,13 +73,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-lavender-100/50">
+        <div className="mt-6 pt-6 border-t border-lavender-100/50 dark:border-gray-700/50">
           <p className="text-center text-xs text-gray-300 dark:text-gray-600">
             <span className="flex items-center justify-center gap-2">
               心晴驿站 MindEase · 用温暖守护每一颗年轻的心
               <span className="text-gray-200 dark:text-gray-700">|</span>
               <Link to="/privacy" className="hover:text-lavender-500 transition-colors">隐私政策</Link>
-              <span className="text-gray-200">|</span>
+              <span className="text-gray-200 dark:text-gray-700">|</span>
               <a href="https://github.com/caiaiji/mind-ease" target="_blank" rel="noopener noreferrer" className="hover:text-lavender-500 dark:hover:text-lavender-400 transition-colors">GitHub</a>
             </span>
           </p>
