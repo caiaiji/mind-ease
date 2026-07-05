@@ -91,12 +91,14 @@ export default function MoodDiary() {
 
     ctx.clearRect(0, 0, w, h)
 
+    const dark = document.documentElement.classList.contains('dark')
+
     // 背景
-    ctx.fillStyle = '#FFFBF5'
+    ctx.fillStyle = dark ? 'rgba(30,27,60,0.8)' : '#FFFBF5'
     ctx.fillRect(0, 0, w, h)
 
     // 网格线
-    ctx.strokeStyle = '#F0EEFF'
+    ctx.strokeStyle = dark ? 'rgba(139,92,246,0.15)' : '#F0EEFF'
     ctx.lineWidth = 1
     for (let i = 1; i <= 5; i++) {
       const y = padding.top + chartH - (i / 5) * chartH
@@ -105,7 +107,7 @@ export default function MoodDiary() {
       ctx.lineTo(w - padding.right, y)
       ctx.stroke()
       // Y轴标签
-      ctx.fillStyle = '#9CA3AF'
+      ctx.fillStyle = dark ? '#6B7280' : '#9CA3AF'
       ctx.font = '11px sans-serif'
       ctx.textAlign = 'right'
       ctx.fillText(i.toString(), padding.left - 8, y + 4)
@@ -149,12 +151,12 @@ export default function MoodDiary() {
       ctx.fill()
       ctx.beginPath()
       ctx.arc(p.x, p.y, 2, 0, Math.PI * 2)
-      ctx.fillStyle = '#fff'
+      ctx.fillStyle = dark ? '#1a1a2e' : '#fff'
       ctx.fill()
     })
 
     // X轴日期标签
-    ctx.fillStyle = '#9CA3AF'
+    ctx.fillStyle = dark ? '#6B7280' : '#9CA3AF'
     ctx.font = '10px sans-serif'
     ctx.textAlign = 'center'
     const step = Math.max(1, Math.floor(recent.length / 6))

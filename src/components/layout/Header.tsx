@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useUser } from '../../contexts/UserContext'
 import { useTheme } from '../../contexts/ThemeContext'
@@ -18,11 +18,35 @@ const navLinks = [
   { path: '/about', label: '关于' },
 ]
 
+// Primary nav items shown directly on desktop
+const primaryNav = navLinks.slice(0, 5)
+// Extra nav items shown in "more" dropdown on desktop
+const extraNav = navLinks.slice(5)
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
   const { user, isLogin, isAdmin } = useUser()
   const { resolvedTheme, toggleTheme } = useTheme()
+
+  // Close "more" dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false)
+      }
+    }
+    if (moreOpen) document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [moreOpen])
+
+  // Close menus on route change
+  useEffect(() => {
+    setMenuOpen(false)
+    setMoreOpen(false)
+  }, [location.pathname])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-lg border-b border-lavender-100/50 dark:border-gray-700/50" style={resolvedTheme === 'dark' ? { backgroundColor: 'rgba(26,26,46,0.85)' } : undefined}>
@@ -40,7 +64,7 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {primaryNav.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -54,11 +78,49 @@ export default function Header() {
               </Link>
             ))}
 
+            {/* More dropdown */}
+            <div ref={moreRef} className="relative">
+              <button
+                onClick={() => setMoreOpen(!moreOpen)}
+                className={`px-3 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1 ${
+                  extraNav.some(l => l.path === location.pathname)
+                    ? 'bg-lavender-100 dark:bg-lavender-900/40 text-lavender-600 dark:text-lavender-400'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-lavender-500 hover:bg-lavender-50 dark:hover:bg-lavender-900/40'
+                }`}
+              >
+                更多
+                <svg className={`w-3.5 h-3.5 transition-transform ${moreOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {moreOpen && (
+                <div className="absolute top-full right-0 mt-2 py-2 w-48 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-lavender-100/50 dark:border-gray-700/50 animate-fade-in">
+                  {extraNav.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setMoreOpen(false)}
+                      className={`block px-4 py-2.5 text-sm font-medium transition-colors ${
+                        location.pathname === link.path
+                          ? 'bg-lavender-50 dark:bg-lavender-900/30 text-lavender-600 dark:text-lavender-400'
+                          : 'text-gray-600 dark:text-gray-300 hover:bg-lavender-50 dark:hover:bg-lavender-900/30 hover:text-lavender-500'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Divider */}
+            <div className="w-px h-5 bg-lavender-200/50 dark:bg-gray-600/50 mx-1" />
+
             {/* Admin Button */}
             {isAdmin && (
               <Link
                 to="/admin"
-                className="ml-1 px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-800/50 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition-all"
+                className="px-3 py-1.5 rounded-full text-sm font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-800/50 hover:bg-amber-100 dark:hover:bg-amber-900/60 transition-all"
               >
                 👑 管理后台
               </Link>
@@ -68,15 +130,15 @@ export default function Header() {
             {isLogin && user ? (
               <Link
                 to="/profile"
-                className="ml-1 flex items-center gap-2 px-3 py-1.5 rounded-full bg-lavender-50 dark:bg-lavender-900/40 border border-lavender-100 dark:border-lavender-800/50 hover:bg-lavender-100 dark:hover:bg-lavender-900/60 transition-all"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-lavender-50 dark:bg-lavender-900/40 border border-lavender-100 dark:border-lavender-800/50 hover:bg-lavender-100 dark:hover:bg-lavender-900/60 transition-all"
               >
                 <span className="text-lg">{user.avatar}</span>
-                <span className="text-sm font-medium text-lavender-600">{user.nickname}</span>
+                <span className="text-sm font-medium text-lavender-600 dark:text-lavender-400">{user.nickname}</span>
               </Link>
             ) : (
               <Link
                 to="/profile"
-                className="ml-2 px-4 py-1.5 rounded-full text-sm font-medium bg-lavender-500 text-white hover:bg-lavender-600 transition-all"
+                className="px-4 py-1.5 rounded-full text-sm font-medium bg-lavender-500 text-white hover:bg-lavender-600 transition-all"
               >
                 注册 / 登录
               </Link>
@@ -85,7 +147,7 @@ export default function Header() {
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="ml-2 p-2 rounded-full hover:bg-lavender-100 dark:hover:bg-lavender-500/20 transition-colors"
+              className="ml-1 p-2 rounded-full hover:bg-lavender-100 dark:hover:bg-lavender-500/20 transition-colors"
               aria-label={resolvedTheme === 'dark' ? '切换到浅色模式' : '切换到深色模式'}
               title={resolvedTheme === 'dark' ? '浅色模式' : '深色模式'}
             >
@@ -133,26 +195,24 @@ export default function Header() {
                 className={`block px-4 py-3 rounded-2xl text-sm font-medium transition-all ${
                   location.pathname === link.path
                     ? 'bg-lavender-100 dark:bg-lavender-900/40 text-lavender-600 dark:text-lavender-400'
-                    : 'text-gray-500 hover:bg-lavender-50'
+                    : 'text-gray-500 dark:text-gray-400 hover:bg-lavender-50 dark:hover:bg-lavender-950/50'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
 
-            {/* Mobile User Section */}
-            
-              {/* Mobile Theme Toggle */}
-              <button
-                onClick={() => { toggleTheme() }}
-                className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-lavender-50 dark:bg-lavender-900/40 hover:bg-lavender-100 dark:hover:bg-lavender-900/60 transition-all"
-              >
-                <span className="text-xl">{resolvedTheme === 'dark' ? '☀️' : '🌙'}</span>
-                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                  {resolvedTheme === 'dark' ? '切换到浅色模式' : '切换到深色模式'}
-                </span>
-              </button>
-              <div className="border-t border-lavender-100/50 dark:border-gray-700/50 mt-2 pt-3">
+            {/* Mobile Theme Toggle */}
+            <button
+              onClick={() => { toggleTheme() }}
+              className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-lavender-50 dark:bg-lavender-900/40 hover:bg-lavender-100 dark:hover:bg-lavender-900/60 transition-all"
+            >
+              <span className="text-xl">{resolvedTheme === 'dark' ? '☀️' : '🌙'}</span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                {resolvedTheme === 'dark' ? '切换到浅色模式' : '切换到深色模式'}
+              </span>
+            </button>
+            <div className="border-t border-lavender-100/50 dark:border-gray-700/50 mt-2 pt-3">
               {isAdmin && (
                 <Link
                   to="/admin"

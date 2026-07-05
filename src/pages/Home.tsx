@@ -98,7 +98,7 @@ export default function Home() {
           {moodOptions.map((mood) => (
             <Link
               key={mood.label}
-              to="/assessment"
+              to="/mood-diary"
               className={`glass-card-sm p-6 text-center border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${mood.color}`}
             >
               <span className="text-4xl block mb-3">{mood.emoji}</span>
