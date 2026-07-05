@@ -451,8 +451,10 @@ export default function Profile() {
                 <div style={s.statNum}>
                   {(() => {
                     try {
-                      const records = JSON.parse(localStorage.getItem('schulte-records') || '[]')
-                      return records.length
+                      const records = JSON.parse(localStorage.getItem('schulte-records') || '{}')
+                      if (Array.isArray(records)) return records.length
+                      if (records && typeof records === 'object') return Object.values(records).flat().length
+                      return 0
                     } catch { return 0 }
                   })()}
                 </div>

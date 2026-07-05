@@ -45,7 +45,14 @@ export default function Admin() {
       setTreeholeData(JSON.parse(localStorage.getItem('mindease-treehole') || '[]'))
     } catch { setTreeholeData([]) }
     try {
-      setSchulteData(JSON.parse(localStorage.getItem('schulte-records') || '[]'))
+      const raw = JSON.parse(localStorage.getItem('schulte-records') || '{}')
+      if (Array.isArray(raw)) {
+        setSchulteData(raw)
+      } else if (raw && typeof raw === 'object') {
+        setSchulteData(Object.values(raw).flat())
+      } else {
+        setSchulteData([])
+      }
     } catch { setSchulteData([]) }
   }
 
