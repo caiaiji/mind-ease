@@ -32,6 +32,10 @@ export default function Home() {
   const todayQuote = quotes[new Date().getDate() % quotes.length]
   const featured = articles.slice(0, 4)
 
+  // Time-based greeting
+  const hour = new Date().getHours()
+  const greeting = hour < 6 ? '夜深了，注意休息' : hour < 11 ? '早安，新的一天开始了' : hour < 14 ? '午安，别忘了放松一下' : hour < 18 ? '下午好，辛苦了' : hour < 22 ? '晚上好，今天过得怎么样' : '夜深了，注意休息'
+
   return (
     <div>
       {/* Hero Section */}
@@ -42,6 +46,9 @@ export default function Home() {
         <div className="absolute top-40 right-1/4 w-48 h-48 bg-peach-200/20 rounded-full blur-3xl" />
 
         <div className="relative max-w-4xl mx-auto text-center">
+          <p className="text-base md:text-lg text-lavender-500 dark:text-lavender-400 mb-4 animate-fade-up font-medium">
+            {greeting}
+          </p>
           <h1 className="font-display text-4xl md:text-6xl text-gray-800 dark:text-gray-100 mb-6 animate-fade-up">
             给心灵放个假
           </h1>
