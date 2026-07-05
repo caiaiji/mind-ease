@@ -43,6 +43,16 @@ const STRATEGIES = [
       { label: '遇到不会的题', desc: '深呼吸3次，写下所有相关的公式或思路，往往写着写着就想起来了' },
     ],
   },
+  {
+    emoji: '🌈',
+    title: '考后情绪管理',
+    tips: [
+      { label: '允许自己失落', desc: '考后感到失落或焦虑是完全正常的。不要强迫自己"振作"，给情绪一些空间' },
+      { label: '避免对答案', desc: '考完不要急着对答案。过度关注正确率只会增加无谓的焦虑，结果无法改变' },
+      { label: '转移注意力', desc: '去做一件你 enjoy 的事——看一部电影、吃顿好吃的、散个步，让大脑切换频道' },
+      { label: '重新定义"成功"', desc: '考试只是衡量某个时刻的某个方面，它不能定义你的能力、价值或未来。无论成绩如何，你都在成长' },
+    ],
+  },
 ]
 
 const QUICK_TIPS = [
@@ -60,6 +70,15 @@ const AFFIRMATIONS = [
   '我准备好了，我有能力应对这场考试',
   '成绩不能定义我，我的价值远超一张试卷',
   '一步一步来，一道一道做，我能做到',
+  '考完了，我为自己坚持到了最后而骄傲',
+  '无论结果如何，这段备考经历本身就让我变得更强',
+]
+
+const POST_EXAM_TIPS = [
+  { emoji: '📱', text: '考完暂时远离社交媒体上关于考试的讨论，保护自己的情绪空间' },
+  { emoji: '🏃', text: '去做一场运动，运动后大脑会分泌内啡肽，自然改善心情' },
+  { emoji: '🌸', text: '如果等成绩的期间很焦虑，试试把注意力放在自己能控制的事情上' },
+  { emoji: '💬', text: '成绩不理想时，和信任的人聊聊感受，不要一个人扛着' },
 ]
 
 export default function ExamPrep() {
@@ -162,6 +181,20 @@ export default function ExamPrep() {
       <div style={s.card}>
         <h2 style={s.sectionTitle}>⚡ 考前速记小贴士</h2>
         {QUICK_TIPS.map((tip, i) => (
+          <div key={i} style={s.quickTip}>
+            <span style={s.quickTipEmoji}>{tip.emoji}</span>
+            <span style={s.quickTipText}>{tip.text}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Post Exam Tips */}
+      <div style={s.card}>
+        <h2 style={s.sectionTitle}>🌈 考后情绪调节</h2>
+        <p style={{ fontSize: 13, color: dk('#9CA3AF', '#6B7280'), marginBottom: 12 }}>
+          考试结束后的情绪管理同样重要：
+        </p>
+        {POST_EXAM_TIPS.map((tip, i) => (
           <div key={i} style={s.quickTip}>
             <span style={s.quickTipEmoji}>{tip.emoji}</span>
             <span style={s.quickTipText}>{tip.text}</span>
