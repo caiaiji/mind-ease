@@ -551,6 +551,118 @@ export default function Profile() {
               </div>
               <button type="submit" style={s.btnPrimary}>保存修改</button>
             </form>
+            {/* Data Management */}
+            <div style={{
+              marginTop: 28, padding: 20,
+              borderRadius: 16, border: `1px solid ${cardBorder}`,
+              background: dk('rgba(167,139,250,0.03)', 'rgba(167,139,250,0.05)'),
+            }}>
+              <p style={{ fontSize: 15, fontWeight: 600, color: textPrimary, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span>💾</span> 数据管理
+              </p>
+              <p style={{ fontSize: 12, color: textMuted, marginBottom: 16, lineHeight: 1.6 }}>
+                你的数据存储在浏览器本地，换设备或清缓存可能导致数据丢失。<br/>
+                建议定期导出备份。
+              </p>
+
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button
+                  onClick={() => {
+                    // Collect all mindease data
+                    const dataKeys = [
+                      'mindease-mood-journal',
+                      'schulte-records',
+                      'mindease-treehole',
+                      'mindease-assessment-history',
+                      'mindease-checkin',
+                      'mindease-session',
+                    ]
+                    const exportData: Record<string, any> = {
+                      _meta: {
+                        type: 'mindease-backup',
+                        version: 1,
+                        exportedAt: new Date().toISOString(),
+                        userEmail: user?.email,
+                      },
+                    }
+                    for (const key of dataKeys) {
+                      try {
+                        const val = localStorage.getItem(key)
+                        if (val) exportData[key] = JSON.parse(val)
+                      } catch { /* skip invalid */ }
+                    }
+                    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' })
+                    const url = URL.createObjectURL(blob)
+                    const a = document.createElement('a')
+                    a.href = url
+                    a.download = `mind-ease-backup-${new Date().toISOString().slice(0,10)}.json`
+                    a.click()
+                    URL.revokeObjectURL(url)
+                    setSuccess('数据导出成功！')
+                    setTimeout(() => setSuccess(''), 3000)
+                  }}
+                  style={{
+                    flex: 1, padding: '10px 0', borderRadius: 12,
+                    border: `1.5px solid ${dk('rgba(139,92,246,0.3)', 'rgba(139,92,246,0.4)')}`,
+                    fontSize: 13, fontWeight: 500, color: '#7C3AED',
+                    background: dk('rgba(167,139,250,0.06)', 'rgba(167,139,250,0.1)'),
+                    cursor: 'pointer',
+                  }}
+                >
+                  📤 导出数据
+                </button>
+
+                <label style={{
+                  flex: 1, padding: '10px 0', borderRadius: 12,
+                  border: `1.5px solid ${dk('rgba(16,185,129,0.3)', 'rgba(16,185,129,0.4)')}`,
+                  fontSize: 13, fontWeight: 500, color: '#10B981',
+                  background: dk('rgba(16,185,129,0.06)', 'rgba(16,185,129,0.1)'),
+                  cursor: 'pointer', textAlign: 'center', display: 'block',
+                }}>
+                  📥 导入数据
+                  <input
+                    type="file"
+                    accept=".json"
+                    style={{ display: 'none' }}
+                    onChange={(e) => {
+                      const file = e.target.files?.[0]
+                      if (!file) return
+                      const reader = new FileReader()
+                      reader.onload = (ev) => {
+                        try {
+                          const data = JSON.parse(ev.target?.result as string)
+                          if (!data._meta || data._meta.type !== 'mindease-backup') {
+                            setError('文件格式不正确，请选择心晴驿站导出的备份文件')
+                            return
+                          }
+                          // Import each key
+                          let count = 0
+                          for (const [key, val] of Object.entries(data)) {
+                            if (key.startsWith('mindease-') || key === 'schulte-records') {
+                              localStorage.setItem(key, JSON.stringify(val))
+                              count++
+                            }
+                          }
+                          setSuccess(`成功导入 ${count} 项数据，请刷新页面查看`)
+                          setTimeout(() => { setSuccess(''); window.location.reload() }, 3000)
+                        } catch {
+                          setError('文件解析失败，请确认文件完整')
+                        }
+                      }
+                      reader.readAsText(file)
+                      // Reset input
+                      e.target.value = ''
+                    }}
+                  />
+                </label>
+              </div>
+
+              <p style={{ fontSize: 11, color: textFaint, marginTop: 12, lineHeight: 1.5 }}>
+                导出内容包含：情绪日记、游戏记录、树洞留言、测评历史、打卡数据。<br/>
+                导入时将覆盖同名数据，建议先导出当前数据作为备份。
+              </p>
+            </div>
+
             <button style={s.btnDanger} onClick={handleLogout}>
               退出登录
             </button>
@@ -567,7 +679,7 @@ export default function Profile() {
         lineHeight: 1.6,
       }}>
         你的所有数据都存储在本地浏览器中，清除浏览器数据会导致账号丢失。<br/>
-        建议记住你的邮箱和密码以便重新登录。
+        建议记住你的邮箱和密码以便重新登录，或使用上方数据导出功能定期备份。
       </p>
     </div>
   )
