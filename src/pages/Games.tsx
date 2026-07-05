@@ -2,6 +2,7 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useState, lazy, Suspense } from 'react'
 
 const BubblePop = lazy(() => import('../components/features/games/BubblePop'))
+const GameCompleteGuide = lazy(() => import('../components/features/games/GameCompleteGuide'))
 const FlowerGarden = lazy(() => import('../components/features/games/FlowerGarden'))
 const MemoryMatch = lazy(() => import('../components/features/games/MemoryMatch'))
 const FloatingBubbles = lazy(() => import('../components/features/games/FloatingBubbles'))
@@ -34,6 +35,10 @@ export default function Games() {
     useDocumentTitle('放松游戏')
 
   const [activeGame, setActiveGame] = useState<GameId>('none')
+  const [showGuide, setShowGuide] = useState(false)
+  const [guideGameName, setGuideGameName] = useState('')
+  const [gameStartTime, setGameStartTime] = useState(0)
+  const [gameDuration, setGameDuration] = useState(0)
   const dark = isDarkMode()
 
   const glassCard: React.CSSProperties = {
@@ -60,7 +65,11 @@ export default function Games() {
     return (
       <div style={{ padding: '32px 24px 80px', maxWidth: 800, margin: '0 auto' }}>
         <button
-          onClick={() => setActiveGame('none')}
+          onClick={() => {
+              setGameDuration(Math.floor((Date.now() - gameStartTime) / 1000))
+              setGuideGameName(game.title)
+              setActiveGame('none')
+            }}
           style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, color: dark ? '#9CA3AF' : '#9CA3AF', background: 'none', border: 'none', cursor: 'pointer', padding: '0 0 24px', marginBottom: 8 }}
         >
           ← 返回游戏列表
@@ -96,12 +105,26 @@ export default function Games() {
         </div>
       </div>
 
-      <div style={{ padding: '48px 24px 80px' }}>
+      <div style={{ padding: '0 24px 80px' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <Suspense fallback={null}>
+          <GameCompleteGuide
+            gameName={guideGameName}
+            show={showGuide}
+            duration={gameDuration}
+            onDismiss={() => setShowGuide(false)}
+          />
+        </Suspense>
+        </div>
         <div style={{ maxWidth: 960, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
           {GAMES.map((game) => (
             <button
               key={game.id}
-              onClick={() => setActiveGame(game.id)}
+              onClick={() => {
+                setActiveGame(game.id)
+                setGameStartTime(Date.now())
+                setShowGuide(false)
+              }}
               style={{ ...gameCard, background: dark ? game.gradientDark : game.gradient }}
               onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = dark ? '0 20px 40px rgba(0,0,0,0.4)' : '0 20px 40px rgba(0,0,0,0.1)' }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = dark ? '0 10px 25px rgba(0,0,0,0.3)' : '0 10px 25px rgba(0,0,0,0.06)' }}
