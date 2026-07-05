@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mindease-v3'
+const CACHE_NAME = 'mindease-v4'
 const STATIC_ASSETS = [
   '/mind-ease/',
   '/mind-ease/index.html',

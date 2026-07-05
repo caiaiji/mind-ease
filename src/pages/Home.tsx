@@ -135,7 +135,7 @@ export default function Home() {
                 className="glass-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-lavender-50 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-lavender-50 dark:bg-lavender-900/40 flex items-center justify-center text-2xl flex-shrink-0 group-hover:scale-110 transition-transform">
                     {article.coverEmoji}
                   </div>
                   <div className="min-w-0">
@@ -193,7 +193,7 @@ export default function Home() {
             <span className="text-2xl block mb-3">🆘</span>
             <h3 className="font-medium text-gray-800 dark:text-gray-100 mb-2">需要专业帮助？</h3>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-              
+              如果你正经历持续的心理困扰，请不要犹豫，寻求专业帮助
             </p>
             <div className="flex flex-wrap justify-center gap-3 text-sm">
               <span className="px-4 py-2 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 rounded-full font-medium">
@@ -203,11 +203,11 @@ export default function Home() {
                 北京心理危机研究与干预中心：010-82951332
               </span>
               <span className="px-4 py-2 bg-mint-50 dark:bg-mint-950/40 text-mint-600 dark:text-mint-400 rounded-full font-medium">
-                希望24热线：400-161-9995
+                共青团心理咨询热线：12355
               </span>
             </div>
             <p className="text-xs text-gray-300 dark:text-gray-600 mt-4">
-              
+              本站内容仅供科普参考，不能替代专业心理咨询或治疗
             </p>
           </div>
         </div>
