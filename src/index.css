@@ -21,8 +21,10 @@
   }
 
   .dark body {
-    background-color: #1a1a2e;
+    /* background set by ThemeContext (gradient or solid) */
     color: #d1d5db;
+    background-attachment: fixed;
+    background-size: cover;
   }
 
   ::selection {

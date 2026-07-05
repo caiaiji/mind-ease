@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useUser } from '../../contexts/UserContext'
 import { useTheme } from '../../contexts/ThemeContext'
+import NightThemePicker from '../NightThemePicker'
 
 const navLinks = [
   { path: '/', label: '首页' },
@@ -161,6 +162,11 @@ export default function Header() {
                 </svg>
               )}
             </button>
+
+            {/* Night Theme Picker (only in dark mode) */}
+            <div className="ml-1">
+              <NightThemePicker isDark={resolvedTheme === 'dark'} />
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -212,6 +218,17 @@ export default function Header() {
                 {resolvedTheme === 'dark' ? '切换到浅色模式' : '切换到深色模式'}
               </span>
             </button>
+
+            {/* Mobile Night Theme Picker */}
+            {resolvedTheme === 'dark' && (
+              <div className="px-4 py-3 rounded-2xl bg-lavender-50 dark:bg-lavender-900/40 flex items-center gap-3">
+                <span className="text-xl">🎨</span>
+                <span className="text-sm font-medium text-gray-300">夜景背景</span>
+                <div style={{ marginLeft: 'auto' }}>
+                  <NightThemePicker isDark={true} />
+                </div>
+              </div>
+            )}
             <div className="border-t border-lavender-100/50 dark:border-gray-700/50 mt-2 pt-3">
               {isAdmin && (
                 <Link

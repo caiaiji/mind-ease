@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
+const NIGHT_BG_KEY = 'mindease-night-color'
+
 type Theme = 'light' | 'dark' | 'system'
 
 interface ThemeContextType {
@@ -33,13 +35,29 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement
     if (resolved === 'dark') {
       root.classList.add('dark')
+      // Apply custom night background or default gradient
+      const customBg = localStorage.getItem(NIGHT_BG_KEY)
+      if (customBg) {
+        if (customBg.includes('gradient')) {
+          document.body.style.backgroundImage = customBg
+          document.body.style.backgroundColor = ''
+        } else {
+          document.body.style.backgroundImage = ''
+          document.body.style.backgroundColor = customBg
+        }
+      } else {
+        document.body.style.backgroundImage = 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)'
+        document.body.style.backgroundColor = ''
+      }
     } else {
       root.classList.remove('dark')
+      document.body.style.backgroundImage = ''
+      document.body.style.backgroundColor = ''
     }
     // Update meta theme-color for mobile browsers
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) {
-      meta.setAttribute('content', resolved === 'dark' ? '#1a1a2e' : '#8B5CF6')
+      meta.setAttribute('content', resolved === 'dark' ? '#1a1632' : '#8B5CF6')
     }
   }
 
