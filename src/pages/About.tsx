@@ -55,6 +55,34 @@ export default function About() {
           </div>
         </div>
 
+        {/* Content Review Notice */}
+        <div className="glass-card p-8 md:p-10 mb-8">
+          <h2 className="font-display text-xl text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
+            <span>📝</span> 内容审核与专业性说明
+          </h2>
+          <div className="space-y-3 text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+            <p>
+              本站所有文章内容均参考了已发表的心理学研究文献、权威教材及公开学术资料，并在每篇文章末尾列出了核心参考文献。
+            </p>
+            <p>
+              文章编写基于循证心理学原则，力求内容科学准确、通俗易懂。但我们深知心理健康领域的复杂性，
+              <strong>不保证内容的绝对准确性和完整性</strong>，也可能会随着新的研究成果而更新。
+            </p>
+            <div className="mt-3 p-4 bg-lavender-50/50 dark:bg-lavender-950/20 rounded-xl border border-lavender-200/40 dark:border-lavender-800/40">
+              <p className="font-medium text-gray-700 dark:text-gray-300 mb-2">关于内容审校</p>
+              <p className="text-gray-500 dark:text-gray-400">
+                当前内容由项目维护者基于公开文献编写，尚未经过专业心理咨询师的系统审校。
+                我们<strong>诚挚欢迎心理学专业学生、持证心理咨询师及从业者</strong>参与内容审校和改进——
+                如果你愿意贡献专业力量，请通过 GitHub 仓库提交 Issue 或 Pull Request，
+                或者通过树洞模块与我们取得联系。
+              </p>
+            </div>
+            <p className="text-gray-400 dark:text-gray-500 text-xs mt-2">
+              内容适用范围：日常心理健康科普与自我觉察，不适用于临床诊断、治疗方案制定等专业场景。
+            </p>
+          </div>
+        </div>
+
         {/* Disclaimer - Prominent */}
         <div className="glass-card p-8 md:p-10 mb-8 border-2 border-amber-200 dark:border-amber-800/50 bg-amber-50/50 dark:bg-amber-950/20">
           <h2 className="font-display text-xl text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
