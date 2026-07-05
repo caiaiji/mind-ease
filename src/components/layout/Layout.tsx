@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import CrisisButton from '../CrisisButton'
 
 export default function Layout() {
   const { pathname } = useLocation()
@@ -25,6 +26,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <CrisisButton />
     </div>
   )
 }

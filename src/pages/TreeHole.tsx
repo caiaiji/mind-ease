@@ -84,7 +84,12 @@ export default function TreeHole() {
   const [replyNick, setReplyNick] = useState(loadNickname)
   const [filterTag, setFilterTag] = useState<string | null>(null)
   const [quickReplies, setQuickReplies] = useState<string[]>([])
+  const [crisisAlert, setCrisisAlert] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
+
+  // 危机关键词检测
+  const CRISIS_KEYWORDS = ['不想活', '想死', '自杀', '死掉', '活着没意思', '了结', '跳楼', '割腕', '安眠药', '遗书', '再也见不到', '离开这个世界', '撑不下去', '不如死了', '没有意义了']
+  const checkCrisis = (text: string) => CRISIS_KEYWORDS.some(kw => text.includes(kw))
 
   useEffect(() => { saveMessages(messages) }, [messages])
 
@@ -98,6 +103,10 @@ export default function TreeHole() {
 
   const submitMessage = useCallback(() => {
     if (!content.trim()) return
+    if (checkCrisis(content)) {
+      setCrisisAlert(true)
+      return
+    }
     const nick = nickname.trim() || '匿名小树'
     const msg: Message = {
       id: Date.now().toString(),
@@ -274,6 +283,47 @@ export default function TreeHole() {
           >
             投入树洞 🕳
           </button>
+
+          {/* Crisis Alert */}
+          {crisisAlert && (
+            <div style={{
+              marginTop: 16, padding: 16, borderRadius: 14,
+              background: 'rgba(239,68,68,0.08)',
+              border: '1px solid rgba(239,68,68,0.2)',
+              animation: 'page-enter 0.3s ease-out',
+            }}>
+              <p style={{ fontSize: 14, fontWeight: 600, color: '#EF4444', marginBottom: 6 }}>
+                我注意到你写下了一些让人担心的话
+              </p>
+              <p style={{ fontSize: 13, color: d('#6B7280', '#9ca3af'), marginBottom: 10, lineHeight: 1.6 }}>
+                如果你正在经历强烈的痛苦，或者有伤害自己的想法，<br />
+                请先拨打 <strong style={{ color: '#EF4444' }}>全国心理援助热线 400-161-9995</strong>。<br />
+                这里有很多愿意帮助你的人。
+              </p>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <a
+                  href="tel:400-161-9995"
+                  style={{
+                    flex: 1, padding: '8px 0', borderRadius: 12, fontSize: 13, fontWeight: 600,
+                    textAlign: 'center' as const, textDecoration: 'none',
+                    background: '#EF4444', color: '#fff',
+                  }}
+                >
+                  拨打热线
+                </a>
+                <button
+                  onClick={() => setCrisisAlert(false)}
+                  style={{
+                    flex: 1, padding: '8px 0', borderRadius: 12, fontSize: 13, fontWeight: 600,
+                    border: '1px solid rgba(239,68,68,0.3)', cursor: 'pointer',
+                    background: 'transparent', color: d('#6B7280', '#9ca3af'),
+                  }}
+                >
+                  取消发送
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Messages */}
