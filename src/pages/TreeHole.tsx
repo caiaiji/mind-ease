@@ -185,6 +185,18 @@ export default function TreeHole() {
           <p style={{ fontSize: 14, color: '#9CA3AF', marginBottom: 8 }}>说出你心里的声音，这里只有倾听没有评判</p>
         </div>
 
+        {/* Companionship banner */}
+        <div style={{
+          background: d('rgba(110,231,183,0.08)', 'rgba(110,231,183,0.1)'),
+          borderRadius: 14, padding: '12px 18px', marginBottom: 20,
+          fontSize: 13, color: d('#6B7280', '#9ca3af'), lineHeight: 1.6,
+          textAlign: 'center',
+          border: '1px solid ' + d('rgba(110,231,183,0.15)', 'rgba(110,231,183,0.2)'),
+        }}>
+          🌿 此时此刻，有很多人和你一样，正在面对类似的困扰。<br/>
+          <span style={{ fontSize: 12, color: d('#9CA3AF', '#6b7280') }}>你不需要独自承受。说出来，就是一种勇敢。</span>
+        </div>
+
         {/* Notice */}
         <div style={{
           background: d('rgba(167,139,250,0.08)', 'rgba(167,139,250,0.12)'),

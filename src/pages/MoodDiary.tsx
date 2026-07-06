@@ -279,6 +279,16 @@ export default function MoodDiary() {
           <p style={s.subtitle}>记录每天的心情，发现情绪变化的规律</p>
         </div>
 
+        {/* Companionship hint */}
+        <div style={{
+          background: 'rgba(167,139,250,0.06)',
+          borderRadius: 14, padding: '10px 16px', marginBottom: 16,
+          fontSize: 12, color: '#9CA3AF', lineHeight: 1.6,
+          textAlign: 'center',
+        }}>
+          📊 坚持记录情绪，能帮你发现平时注意不到的模式。<span style={{ color: '#A78BFA' }}>你已经在关注自己了，这很了不起。</span>
+        </div>
+
         <div style={s.tabRow}>
           <button style={s.tab(!showHistory)} onClick={() => setShowHistory(false)}>写日记</button>
           <button style={s.tab(showHistory)} onClick={() => setShowHistory(true)}>
