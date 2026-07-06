@@ -1,6 +1,7 @@
 import { useDocumentTitle } from '../hooks/useDocumentTitle'
 import { useParams, Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { articles, categories } from '../data/articles'
 
 export default function ArticleDetail() {
@@ -85,7 +86,7 @@ export default function ArticleDetail() {
         <div className="max-w-3xl mx-auto">
           <div className="glass-card p-8 md:p-12">
             <div className="animate-fade-in">
-              <ReactMarkdown components={mdComponents}>{article.content}</ReactMarkdown>
+              <ReactMarkdown components={mdComponents} remarkPlugins={[remarkGfm]}>{article.content}</ReactMarkdown>
             </div>
           </div>
 
