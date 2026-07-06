@@ -8,6 +8,7 @@ export interface Article {
   content: string
   coverEmoji: string
   references?: string[]
+  actionItem?: string
 }
 
 export const categories = [
@@ -25,6 +26,7 @@ export const articles: Article[] = [
   // === 新增文章 ===
   {
     id: 'overcome-self-denial',
+    actionItem: '今天写下一件你做到的小事——哪怕只是"按时起床了"，贴在你能看到的地方。',
     title: '总是在否定自己？教你打破"我不行"的魔咒',
     summary: '"我做不到""我不够好"——这些想法是否时刻困扰你？了解自我否定的根源，找回对自己的信任。',
     category: 'growth',
@@ -80,6 +82,7 @@ export const articles: Article[] = [
   },
   {
     id: 'parent-child-boundary',
+    actionItem: '今天试着和父母分享一件你最近开心的小事——不需要很正式，吃饭时随口提一句就好。',
     title: '爱不等于控制：如何面对父母的过度期待',
     summary: '"我是为你好"——这句话背后，是爱还是控制？学会在亲情中设立健康的心理边界。',
     category: 'relationship',
@@ -138,6 +141,7 @@ export const articles: Article[] = [
   },
   {
     id: 'relationship-burnout',
+    actionItem: '如果你正在为一段关系感到疲惫，今天给自己30分钟独处时间——不回复消息，只是陪自己。',
     title: '恋爱中的内耗：如何停止在关系里自我消耗',
     summary: '恋爱本该是甜蜜的，但你却越谈越累？识别恋爱内耗的信号，学会在爱中保持自我。',
     category: 'relationship',
@@ -196,6 +200,7 @@ export const articles: Article[] = [
   },
   {
     id: 'emotion-regulation-skills',
+    actionItem: '现在做一次"命名情绪"练习：感受你现在的心情，给它起一个准确的名字（不只是"好"或"不好"）。',
     title: '情绪急救箱：5 个随时可用的情绪调节技巧',
     summary: '情绪来了挡不住？这里有5个经过科学验证的"情绪急救"方法，帮你快速从情绪风暴中找回平静。',
     category: 'growth',
@@ -254,6 +259,7 @@ export const articles: Article[] = [
   // === 原有文章 ===
   {
     id: 'manage-exam-anxiety',
+    actionItem: '花2分钟写下三件你已经为考试做了的准备——然后对自己说：我已经付出了努力，这就够了。',
     title: '考前焦虑怎么办？5 个实用缓解技巧',
     summary: '考试季来临，紧张焦虑是正常的情绪反应。掌握这些科学方法，让你的心态回归平静。',
     category: 'anxiety',
@@ -299,6 +305,7 @@ export const articles: Article[] = [
   },
   {
     id: 'understand-social-anxiety',
+    actionItem: '今天在一个让你有点紧张的场景里，试着做一个小小的行动——比如举手回答一个问题，或者主动打招呼。',
     title: '社交焦虑不是害羞：你需要的认知与应对指南',
     summary: '社交焦虑和普通的内向害羞有什么区别？了解社交焦虑的本质，找到适合自己的应对方式。',
     category: 'anxiety',
@@ -347,6 +354,7 @@ export const articles: Article[] = [
   },
   {
     id: 'set-healthy-boundaries',
+    actionItem: '今天对一件小事说"不"——你不需要解释原因，一句"不太方便"就够了。',
     title: '学会说"不"：建立健康的人际边界',
     summary: '讨好型人格让你精疲力竭？学习如何在关系中设立边界，保护自己的能量。',
     category: 'relationship',
@@ -394,6 +402,7 @@ export const articles: Article[] = [
   },
   {
     id: 'stop-perfectionism',
+    actionItem: '挑一件你现在正在做的事，给自己设一个"做到60分就好"的标准，然后开始。感受降低标准后的轻松。',
     title: '拒绝完美主义：做个"足够好"的人',
     summary: '完美主义让你不断自我否定？了解完美主义的陷阱，学会接纳"足够好"的自己。',
     category: 'growth',
@@ -441,6 +450,7 @@ export const articles: Article[] = [
   },
   {
     id: 'improve-sleep-quality',
+    actionItem: '今晚提前15分钟开始准备睡觉——调暗灯光，放下手机，做几次深呼吸。',
     title: '睡个好觉：改善睡眠质量的科学方法',
     summary: '失眠、熬夜、越躺越清醒？这些基于睡眠科学的实用建议，帮助你找回好眠。',
     category: 'sleep',
@@ -492,6 +502,7 @@ export const articles: Article[] = [
   },
   {
     id: 'cope-with-burnout',
+    actionItem: '今天给自己一段"什么都不做"的时间——哪怕只有10分钟，关掉手机，发呆就好。',
     title: '倦怠了怎么办？识别与应对学业倦怠',
     summary: '感觉对什么都提不起劲？可能是学业倦怠在向你发出信号。了解它的征兆和应对方法。',
     category: 'stress',
@@ -549,6 +560,7 @@ export const articles: Article[] = [
 
   {
     id: 'procrastination-guide',
+    actionItem: '你现在最想逃避的那件事，打开它，只做1分钟。1分钟后你可以随时停下来——但你可能会想继续。',
     title: '拖延不是懒：理解并战胜拖延症',
     summary: '"明天再做"——为什么明知道要开始却总是无法行动？了解拖延的心理机制，找到真正有效的应对方法。',
     category: 'growth',
@@ -607,6 +619,7 @@ export const articles: Article[] = [
   },
   {
     id: 'family-of-origin',
+    actionItem: '拿出一张纸，写下你对原生家庭最想说的一句话。不需要给别人看——这是写给你自己的。',
     title: '原生家庭的烙印：如何理解它并疗愈自己',
     summary: '"为什么我总是不自觉地重复父母的模式？"原生家庭如何塑造我们的关系模式，以及如何打破这个循环。',
     category: 'growth',
@@ -669,6 +682,7 @@ export const articles: Article[] = [
   },
   {
     id: 'breakup-recovery',
+    actionItem: '今天允许自己难过10分钟——设一个闹钟，什么都不做，就是允许自己哭或者沮丧。闹钟响了就去洗把脸。',
     title: '分手后如何走出伤痛：科学视角的情绪修复指南',
     summary: '失恋的痛苦不只是"矫情"——神经科学告诉你为什么分手真的会痛，以及如何科学地走出来。',
     category: 'relationship',
@@ -720,6 +734,7 @@ export const articles: Article[] = [
   },
   {
     id: 'low-self-esteem',
+    actionItem: '今天在手机备忘录里建一个"我很棒"清单——写下3件你做得不错的事，无论多小。',
     title: '低自尊怎么办？重建自信的科学方法',
     summary: '"我不够好"这个信念像影子一样跟着你？了解低自尊的根源，学习用认知行为疗法（CBT）的方法重建自信。',
     category: 'growth',
@@ -773,6 +788,7 @@ export const articles: Article[] = [
   },
   {
     id: 'insomnia-deep-guide',
+    actionItem: '今晚试试"478呼吸"：吸气4秒、屏住7秒、呼气8秒。做3轮，让身体知道是时候休息了。',
     title: '失眠自救完全指南：基于 CBT-I 的科学方法',
     summary: '已经试过数羊还是睡不着？这份基于认知行为失眠疗法（CBT-I）的深度指南，帮你系统解决失眠问题。',
     category: 'sleep',
@@ -838,6 +854,7 @@ export const articles: Article[] = [
   // === 新增文章（深度评测建议补充） ===
   {
     id: 'panic-attack-guide',
+    actionItem: '现在就练习一次5-4-3-2-1 grounding：说出5个你看到的、4个能摸到的、3个听到的、2个闻到的、1个能尝到的东西。',
     title: '惊恐发作是什么？症状识别与自我应对指南',
     summary: '突然心跳加速、呼吸困难、感觉要失控？了解惊恐发作的本质，学会在发作时保护自己。',
     category: 'anxiety',
@@ -914,6 +931,7 @@ export const articles: Article[] = [
   },
   {
     id: 'understand-emotions',
+    actionItem: '今天观察自己的一个情绪反应——什么触发了它？你的身体有什么感觉？花30秒记下来。',
     title: '情绪低落就是抑郁吗？一文讲清情绪波动与抑郁症的区别',
     summary: '每个人都会情绪不好，但持续的低落可能需要重视。学会区分正常情绪波动和需要干预的抑郁状态。',
     category: 'mood',
@@ -982,6 +1000,7 @@ export const articles: Article[] = [
   },
   {
     id: 'somatic-symptoms',
+    actionItem: '现在做一次从头到脚的身体扫描——哪里紧张了？深呼吸，让那个部位放松。只需要2分钟。',
     title: '头痛、胸闷查不出病？可能是情绪在"说话"',
     summary: '明明各项检查都正常，身体却各种不舒服？了解躯体化症状，学会听懂身体的情绪信号。',
     category: 'mood',
@@ -1058,6 +1077,7 @@ export const articles: Article[] = [
   // === 考前心理 ===
   {
     id: 'exam-anxiety-management',
+    actionItem: '现在放下复习资料，做3次深呼吸，然后对自己说：我已经做了我能做的，剩下的交给时间。',
     title: '考试焦虑怎么办？6个实用策略帮你冷静上场',
     summary: '考前紧张到睡不着？拿到试卷大脑一片空白？了解考试焦虑的应对方法，把紧张转化为动力。',
     category: 'anxiety',
@@ -1109,6 +1129,7 @@ export const articles: Article[] = [
   },
   {
     id: 'exam-result-coping',
+    actionItem: '无论结果如何，今天给自己一个"什么都不想"的30分钟——散步、听歌、发呆都可以。',
     title: '成绩出来了，怎么面对不理想的分数？',
     summary: '不理想的分数不等于"我不行"。学会用成长型思维看待考试结果，把每一次考试变成进步的机会。',
     category: 'growth',
@@ -1151,6 +1172,7 @@ export const articles: Article[] = [
   // === 冥想入门 ===
   {
     id: 'meditation-beginner',
+    actionItem: '现在放下手机，闭上眼睛，只关注自己的呼吸，数10次。走神了就重新开始——这很正常。',
     title: '冥想入门指南：从5分钟开始改变大脑',
     summary: '冥想不是"什么都不想"，而是练习觉察。科学研究证实，每天5分钟冥想就能减轻焦虑、改善注意力。',
     category: 'mood',
@@ -1200,6 +1222,7 @@ export const articles: Article[] = [
   // === 社交恐惧 ===
   {
     id: 'social-anxiety-youth',
+    actionItem: '今天对一个人微笑一下——不用刻意搭话，只是一个自然的微笑。感受那个瞬间的温度。',
     title: '不敢举手发言？认识社交焦虑，走出自我设限',
     summary: '上课不敢回答问题、聚会躲在角落、害怕被注视……社交焦虑在年轻人中非常常见，且可以改善。',
     category: 'anxiety',
@@ -1255,6 +1278,7 @@ export const articles: Article[] = [
   // === 身份认同 ===
   {
     id: 'identity-exploration',
+    actionItem: '今天写下一个问题："如果没有人评判我，我最想做什么？"不需要回答，只是允许自己想一想。',
     title: '"我不知道我是谁"：青少年自我认同的困惑与探索',
     summary: '谁在青春期没有问过"我到底是谁"这个问题？自我认同的困惑是成长的必经之路，也是一种力量。',
     category: 'growth',
@@ -1303,6 +1327,7 @@ export const articles: Article[] = [
   // ===拖延症 ===
   {
     id: 'procrastination-psychology',
+    actionItem: '把你现在最大的任务拆成3个超小的步骤——小到你不可能失败。然后只做第一步。',
     title: '又拖延了？了解拖延背后的心理，找到属于你的解法',
     summary: '拖延不是因为"懒"，而是情绪管理出了问题。了解拖延的心理学机制，用科学的方法打破拖延循环。',
     category: 'stress',
@@ -1353,6 +1378,7 @@ export const articles: Article[] = [
   // === 同辈压力 ===
   {
     id: 'peer-pressure',
+    actionItem: '今天做一个你真正想做但不太"合群"的小选择——穿想穿的衣服、去想去的地方。感受"忠于自己"的感觉。',
     title: '被同学"卷"到了？如何在同辈压力中保持自我',
     summary: '周围人都在拼命学，你不学就有负罪感？同辈压力是双刃剑，学会用它来激励自己而不是压垮自己。',
     category: 'relationship',
@@ -1400,6 +1426,7 @@ export const articles: Article[] = [
   // === 电子产品依赖 ===
   {
     id: 'phone-addiction',
+    actionItem: '今晚睡前30分钟把手机放在另一个房间，看看自己会有什么不同的感受。',
     title: '总是停不下来刷手机？理解数字依赖，找回注意力',
     summary: '不是你自制力差，而是这些App被设计成让人上瘾的。了解数字依赖的机制，学会聪明地使用科技。',
     category: 'mood',
@@ -1457,6 +1484,7 @@ export const articles: Article[] = [
 
   {
     id: 'nostalgia-guide',
+    actionItem: '今天拿出一张旧照片或一件旧物品，允许自己回忆5分钟。然后问自己：那段时光教会了我什么？',
     title: '当过去像潮水涌来：如何与怀旧共处',
     summary: '怀旧不全是感伤——它是一封来自过去的信，提醒你曾经被爱过、被温暖过。学会读懂它，而不是被它淹没。',
     content: `你有没有这样的时刻？听到一首老歌，闻到一阵熟悉的香味，或者路过一条小巷，突然间记忆像潮水一样涌来——那个夏天、那些人、那段再也回不去的时光，一下子全都涌到眼前。
@@ -1521,6 +1549,7 @@ export const articles: Article[] = [
   },
   {
     id: 'letting-go-past',
+    actionItem: '找一张纸，写下你想放下的一件事。然后把纸折起来，放好。你不需要现在就丢掉它——只是承认它在那里。',
     title: '被回忆困住的时候：如何与过去和解',
     summary: '反刍思维让你反复咀嚼过去的遗憾和痛苦。这不是你的性格缺陷，而是一种可以学习应对的思维模式。',
     content: `凌晨三点，你躺在床上，脑海里反复回放着一个场景——那次考试发挥失常、那次和朋友的争吵、那个没说出口的道歉……
@@ -1596,6 +1625,7 @@ export const articles: Article[] = [
   },
   {
     id: 'goodbye-ritual',
+    actionItem: '今天给一个你想告别的回忆写一封短信——不需要很长，几句真心话就好。写完后可以做任何你觉得合适的事。',
     title: '告别仪式感：好好说再见的力量',
     summary: '毕业、搬家、离开一段关系——人生充满了告别。有仪式感的告别，是对过去的尊重，也是给未来的礼物。',
     content: `你是不是也有这样的体验：有些告别来得悄无声息。毕业那天忙着拍照，忘了好好看看教室；搬家那天忙着打包箱子，忘了在空荡荡的房间里站一会儿；离开一段关系后很久，才突然意识到"我们好像没有正式说过再见"。
@@ -1681,6 +1711,7 @@ export const articles: Article[] = [
   },
   {
     id: 'cherish-present',
+    actionItem: '现在放下手机，环顾四周，说出三件你此刻能看到并且让你觉得还不错的东西。',
     title: '回忆很美，但此刻也值得认真对待',
     summary: '如果你总在回忆中寻找安慰，也许是因为当下缺少一些"值得被记住"的瞬间。让我们一起练习活在当下。',
     content: `"以前的日子真好啊。"
@@ -1750,6 +1781,7 @@ export const articles: Article[] = [
 
   {
     id: 'why-not-want-to-heal',
+    actionItem: '今天允许自己什么都不"应该"做——不"应该"开心，不"应该"积极，不"应该"好起来。就只是待着。',
     title: '"我不想好起来"——这并不是矫情',
     summary: '有些人宁愿待在痛苦里，也不想走出来。这不是懒，不是矫情，而是一种比坚强更复杂的自我保护。',
     category: 'mood',
@@ -1855,6 +1887,7 @@ export const articles: Article[] = [
   },
   {
     id: 'learned-helplessness',
+    actionItem: '现在做一件你能完全控制的小事——比如站起来伸个懒腰，或者喝一杯水。感受"我的行动有结果"。',
     title: '为什么你觉得"做什么都没用"？',
     summary: '明明知道应该改变，却提不起任何力气——这不是懒，而是习得性无助在作祟。',
     category: 'growth',
@@ -1955,6 +1988,7 @@ export const articles: Article[] = [
   },
   {
     id: 'pain-as-identity',
+    actionItem: '把"我是一个XX的人"改成"我正在经历XX"，对自己说一遍。注意感受有什么不同。',
     title: '当痛苦成了"我是谁"的唯一答案',
     summary: '有人不是因为放不下痛苦，而是因为放下了痛苦，就不知道自己是谁了。',
     category: 'mood',
@@ -2037,6 +2071,7 @@ export const articles: Article[] = [
   },
   {
     id: 'benefits-of-therapy',
+    actionItem: '如果条件允许，今天给自己10分钟浏览一下学校心理咨询中心的预约页面——只是看看，不需要预约。',
     title: '心理咨询到底有什么用？',
     summary: '"我没疯，为什么要去做心理咨询？"——很多人对咨询有误解。其实它更像给心灵做一次体检。',
     category: 'growth',
@@ -2173,6 +2208,7 @@ export const articles: Article[] = [
   },
   {
     id: 'first-therapy-session',
+    actionItem: '今天在手机备忘录里写下你最想跟咨询师聊的三个话题。不着急，只是先准备好。',
     title: '第一次去做心理咨询，到底会发生什么？',
     summary: '没去过的人都会紧张：他会问什么？我要说什么？会不会很尴尬？提前帮你"预习"一下。',
     category: 'growth',
@@ -2259,6 +2295,7 @@ export const articles: Article[] = [
   },
   {
     id: 'therapy-vs-medication',
+    actionItem: '如果你不确定自己需要什么，今天给自己5分钟的时间，诚实回答：我的状态是否已经严重影响了日常生活？',
     title: '心理咨询和吃药，到底选哪个？',
     summary: '"我到底是应该做咨询还是吃药？"这是一个很多人都在纠结的问题，但其实它们不矛盾。',
     category: 'mood',
@@ -2348,6 +2385,7 @@ export const articles: Article[] = [
   },
   {
     id: 'therapy-not-working',
+    actionItem: '如果你正在做咨询，下次去的时候试着说出一句你一直没说出口的话——哪怕只是一句"我其实觉得没什么变化"。',
     title: '做了几次咨询感觉没用，正常吗？',
     summary: '"我都做了三次了，怎么一点好转都没有？"——慢下来，心理咨询不是打车。',
     category: 'growth',
@@ -2436,6 +2474,7 @@ export const articles: Article[] = [
   },
   {
     id: 'friends-vs-therapist',
+    actionItem: '今天试着对一个信任的朋友完整地说出你最近的感受——不简化，不"还好吧"，真实地说。',
     title: '跟朋友倾诉和找心理咨询师，有什么区别？',
     summary: '"我朋友也能听我说啊，为什么要花钱找咨询师？"——它们确实都是"找人说话"，但差别比你想象的大。',
     category: 'relationship',
@@ -2542,6 +2581,7 @@ export const articles: Article[] = [
   },
   {
     id: 'online-therapy-guide',
+    actionItem: '花5分钟看一下这篇文章里提到的正规免费资源——400-161-9995或者学校的心理咨询中心。记住它们的存在。',
     title: '线上心理咨询靠谱吗？怎么选才不会被坑？',
     summary: 'APP上那些心理咨询平台到底靠不靠谱？线上咨询和面对面有什么区别？选错可能比不做更糟。',
     category: 'growth',
