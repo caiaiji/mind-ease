@@ -166,6 +166,65 @@ export default function WeeklyInsight() {
     return parts.join('。') + '。'
   }, [weekMoods, weekCheckins, weekAssess, avgMood, bestDay, worstDay])
 
+  // Personalized action recommendation based on mood patterns
+  const actionRecommendation = useMemo(() => {
+    if (weekMoods.length < 2) return null
+    const recommendations: { text: string; link?: string; linkText?: string }[] = []
+    
+    // High anxiety pattern: multiple days with mood <= 2
+    const anxiousDays = weekMoods.filter(e => e.mood <= 2).length
+    if (anxiousDays >= 3) {
+      recommendations.push({
+        text: `这周有 ${anxiousDays} 天情绪偏低，试试睡前做4-7-8呼吸放松法，帮助缓解焦虑。`,
+        link: '/relax',
+        linkText: '试试呼吸放松',
+      })
+    }
+    
+    // Consistently low mood
+    if (avgMood && avgMood <= 2 && weekMoods.length >= 3) {
+      recommendations.push({
+        text: '情绪持续偏低超过几天，建议找个信任的人聊一聊，或者考虑联系学校心理咨询。',
+        link: '/articles/benefits-of-therapy',
+        linkText: '了解心理咨询',
+      })
+    }
+    
+    // Good streak - encourage continuation
+    const highDays = weekMoods.filter(e => e.mood >= 4).length
+    if (highDays >= 4 && weekMoods.length >= 5) {
+      recommendations.push({
+        text: '这周大部分时间心情不错！把让你开心的事记录下来，下次低落时翻出来看看。',
+        link: '/mood-diary',
+        linkText: '写一篇日记',
+      })
+    }
+    
+    // No checkin streak
+    if (weekCheckins.length === 0 && weekMoods.length >= 3) {
+      recommendations.push({
+        text: '这周还没打过卡，试试每天来心晴驿站打个卡，养成关注心灵的习惯。',
+        link: '/checkin',
+        linkText: '去打卡',
+      })
+    }
+    
+    // Mood swings
+    if (avgMood && weekMoods.length >= 3) {
+      const moods = weekMoods.map(e => e.mood)
+      const maxSwing = Math.max(...moods) - Math.min(...moods)
+      if (maxSwing >= 3) {
+        recommendations.push({
+          text: '本周情绪波动较大，这很正常。试着在情绪剧烈变化时暂停一下，做几次深呼吸。',
+          link: '/articles/mood-swings',
+          linkText: '了解情绪波动',
+        })
+      }
+    }
+    
+    return recommendations.length > 0 ? recommendations[0] : null
+  }, [weekMoods, weekCheckins, avgMood])
+
   const pageBg = d('#FFFBF5', '#1a1a2e')
   const textColor = d('#374151', '#d1d5db')
   const subColor = d('#9CA3AF', '#6b7280')
@@ -220,6 +279,34 @@ export default function WeeklyInsight() {
               <span style={{ fontWeight: 600, fontSize: 14, color: '#7C3AED' }}>本周洞察</span>
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, color: d('#4b5563', '#d1d5db') }}>{insightText}</p>
+          </div>
+        ) : null}
+
+        {/* Personalized Action Recommendation */}
+        {actionRecommendation ? (
+          <div style={{
+            background: d('rgba(110,231,183,0.06)', 'rgba(110,231,183,0.1)'),
+            borderRadius: 16, padding: '14px 18px', marginBottom: 20,
+            border: `1px solid ${d('rgba(110,231,183,0.15)', 'rgba(110,231,183,0.25)')}`,
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12,
+          }}>
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                <span style={{ fontSize: '1.1rem' }}>💡</span>
+                <span style={{ fontWeight: 600, fontSize: 13, color: '#059669' }}>个性化建议</span>
+              </div>
+              <p style={{ fontSize: 13, lineHeight: 1.6, color: d('#4b5563', '#d1d5db'), margin: 0 }}>{actionRecommendation.text}</p>
+            </div>
+            {actionRecommendation.link && (
+              <Link to={actionRecommendation.link} style={{
+                padding: '8px 14px', borderRadius: 10, flexShrink: 0,
+                background: d('rgba(110,231,183,0.15)', 'rgba(110,231,183,0.2)'),
+                color: '#059669', fontSize: 12, fontWeight: 600,
+                textDecoration: 'none', whiteSpace: 'nowrap',
+              }}>
+                {actionRecommendation.linkText} →
+              </Link>
+            )}
           </div>
         ) : null}
 
