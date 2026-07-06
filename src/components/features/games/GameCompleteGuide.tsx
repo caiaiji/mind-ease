@@ -20,6 +20,22 @@ const moodOptions = [
   { emoji: '😟', label: '更焦虑了', value: 2 },
 ]
 
+const gameInsights: Record<string, string> = {
+  '戳泡泡': '每一次"啵"的声响，都是你在有节奏地释放压力。重复的触觉反馈能让大脑进入"微冥想"状态。',
+  '种花花园': '等待一朵花开的过程，是在练习耐心和对生命的期待。你的情绪也在慢慢复苏，就像这些花一样。',
+  '记忆翻牌': '每一次翻牌都在锻炼你的工作记忆和注意力。大脑像肌肉一样，越练习越灵活。',
+  '漂浮泡泡': '安静的点击和观察，是一种"正念练习"——你正在学会把注意力放在当下这一刻。',
+  '舒尔特方格': '快速定位数字的过程，就是在训练你的专注力和视觉搜索能力。这是大脑的"健身操"。',
+}
+
+const encouragementMessages = [
+  '刚才这几分钟，你给自己放了一个小小的假。',
+  '你值得拥有这段只属于自己的放松时间。',
+  '觉察自己的感受，是保护心灵的第一步。',
+  '来心晴驿站本身就是一种对自己好的选择。',
+  '你不需要一直坚强，允许自己偶尔"什么都不做"。',
+]
+
 export default function GameCompleteGuide({ gameName, show, duration, onDismiss }: GameCompleteGuideProps) {
   const [selectedMood, setSelectedMood] = useState<number | null>(null)
   const [dismissed, setDismissed] = useState(false)
@@ -34,7 +50,6 @@ export default function GameCompleteGuide({ gameName, show, duration, onDismiss 
   if (!show || dismissed) return null
 
   const handleDismiss = () => {
-    // Save mood feedback if selected
     if (selectedMood !== null) {
       try {
         const key = 'mindease-mood-journal'
@@ -57,6 +72,9 @@ export default function GameCompleteGuide({ gameName, show, duration, onDismiss 
     ? `${Math.floor(duration / 60)} 分 ${duration % 60} 秒`
     : null
 
+  const insight = gameInsights[gameName] || ''
+  const encouragement = encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)]
+
   return (
     <div style={{
       padding: '24px 0', animation: 'fadeUp 0.5s ease-out',
@@ -73,9 +91,22 @@ export default function GameCompleteGuide({ gameName, show, duration, onDismiss 
             你已经放松了{durationText ? ` ${durationText}` : '一会儿'}
           </h3>
           <p style={{ fontSize: 13, color: textSecondary, lineHeight: 1.6 }}>
-            现在感觉怎么样？记录一下当下感受，帮助自己觉察情绪变化
+            {encouragement}
           </p>
         </div>
+
+        {/* Game-specific psychological insight */}
+        {insight && (
+          <div style={{
+            background: dk('rgba(167,139,250,0.06)', 'rgba(167,139,250,0.1)'),
+            borderRadius: 14, padding: '12px 16px', marginBottom: 16,
+            borderLeft: `3px solid ${dk('rgba(167,139,250,0.4)', 'rgba(167,139,250,0.6)')}`,
+          }}>
+            <p style={{ fontSize: 12, color: dk('#6B7280', '#9ca3af'), lineHeight: 1.7, margin: 0 }}>
+              💡 <strong style={{ color: dk('#4B5563', '#d1d5db') }}>{gameName}</strong>的心理意义：{insight}
+            </p>
+          </div>
+        )}
 
         <div style={{
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 16,
