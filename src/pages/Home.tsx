@@ -10,11 +10,11 @@ const quotes = [
 ]
 
 const coreTools = [
-  { to: '/games', emoji: '🎮', title: '放松一下', desc: '戳泡泡、种花、记忆翻牌，让大脑休息片刻', bg: 'from-lavender-50 to-mint-50 dark:from-lavender-950/50 dark:to-mint-950/50', border: 'border-lavender-100 dark:border-lavender-800/50' },
-  { to: '/mood-diary', emoji: '📝', title: '记录心情', desc: '写下今天的感觉，追踪情绪变化', bg: 'from-peach-50 to-lavender-50 dark:from-peach-950/50 dark:to-lavender-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
-  { to: '/treehole', emoji: '🌳', title: '树洞倾诉', desc: '匿名说出心里话，这里没有人会评判你', bg: 'from-mint-50 to-lavender-50 dark:from-mint-950/50 dark:to-lavender-950/50', border: 'border-mint-100 dark:border-mint-800/50' },
+  { to: '/games', emoji: '🎮', title: '放松一下', desc: '戳泡泡释放压力，种花找回掌控感，让大脑休息片刻', bg: 'from-lavender-50 to-mint-50 dark:from-lavender-950/50 dark:to-mint-950/50', border: 'border-lavender-100 dark:border-lavender-800/50' },
+  { to: '/mood-diary', emoji: '📝', title: '记录心情', desc: '写下来本身就是一种整理，看见自己的情绪', bg: 'from-peach-50 to-lavender-50 dark:from-peach-950/50 dark:to-lavender-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
+  { to: '/treehole', emoji: '🌳', title: '树洞倾诉', desc: '说出心里话，这里只有倾听没有评判', bg: 'from-mint-50 to-lavender-50 dark:from-mint-950/50 dark:to-lavender-950/50', border: 'border-mint-100 dark:border-mint-800/50' },
   { to: '/articles', emoji: '📖', title: '心理文章', desc: '关于情绪、成长和关系的科普内容', bg: 'from-peach-50 to-mint-50 dark:from-peach-950/50 dark:to-mint-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
-  { to: '/sleep-tonight', emoji: '🌙', title: '今晚睡个好觉', desc: '睡前呼吸、放松清单，帮你安静入眠', bg: 'from-indigo-50 to-purple-50 dark:from-indigo-950/50 dark:to-purple-950/50', border: 'border-indigo-100 dark:border-indigo-800/50' },
+  { to: '/sleep-tonight', emoji: '🌙', title: '今晚睡个好觉', desc: '4步入睡仪式，陪你从忙碌过渡到安心', bg: 'from-indigo-50 to-purple-50 dark:from-indigo-950/50 dark:to-purple-950/50', border: 'border-indigo-100 dark:border-indigo-800/50' },
 ]
 
 const moreTools = [

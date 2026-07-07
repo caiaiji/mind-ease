@@ -85,7 +85,7 @@ export default function CrisisButton() {
               紧急求助热线
             </h3>
             <p style={{ fontSize: 12, color: subColor, marginBottom: 14, lineHeight: 1.5 }}>
-              如果你或身边的人正在经历心理危机，请立即拨打以下电话。
+              谢谢你愿意点开这里。寻求帮助本身就是勇气的表现。
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -121,7 +121,7 @@ export default function CrisisButton() {
             </div>
 
             <p style={{ fontSize: 11, color: subColor, marginTop: 12, textAlign: 'center', lineHeight: 1.5 }}>
-              你不是一个人。总有人愿意倾听。
+              你不需要独自面对这一切。按下拨号键的那一步，已经很了不起了。
             </p>
           </div>
         </>
