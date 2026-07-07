@@ -26,6 +26,7 @@ const CheckIn = lazy(() => import('./pages/CheckIn'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const ExamPrep = lazy(() => import('./pages/ExamPrep'))
 const WeeklyInsight = lazy(() => import('./pages/WeeklyInsight'))
+const SleepTonight = lazy(() => import('./pages/SleepTonight'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 function PageLoader() {
@@ -65,6 +66,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/exam-prep" element={<ExamPrep />} />
           <Route path="/weekly-insight" element={<WeeklyInsight />} />
+          <Route path="/sleep-tonight" element={<SleepTonight />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

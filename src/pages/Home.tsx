@@ -14,6 +14,7 @@ const coreTools = [
   { to: '/mood-diary', emoji: '📝', title: '记录心情', desc: '写下今天的感觉，追踪情绪变化', bg: 'from-peach-50 to-lavender-50 dark:from-peach-950/50 dark:to-lavender-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
   { to: '/treehole', emoji: '🌳', title: '树洞倾诉', desc: '匿名说出心里话，这里没有人会评判你', bg: 'from-mint-50 to-lavender-50 dark:from-mint-950/50 dark:to-lavender-950/50', border: 'border-mint-100 dark:border-mint-800/50' },
   { to: '/articles', emoji: '📖', title: '心理文章', desc: '关于情绪、成长和关系的科普内容', bg: 'from-peach-50 to-mint-50 dark:from-peach-950/50 dark:to-mint-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
+  { to: '/sleep-tonight', emoji: '🌙', title: '今晚睡个好觉', desc: '睡前呼吸、放松清单，帮你安静入眠', bg: 'from-indigo-50 to-purple-50 dark:from-indigo-950/50 dark:to-purple-950/50', border: 'border-indigo-100 dark:border-indigo-800/50' },
 ]
 
 const moreTools = [
@@ -62,7 +63,7 @@ export default function Home() {
       {/* Core Tools - Only 4 essential ones */}
       <section className="px-6 md:px-12 lg:px-20 py-12 bg-white/40 dark:bg-gray-900/40">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {coreTools.map((item) => (
               <Link
                 key={item.title}
