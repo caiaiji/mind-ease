@@ -15,6 +15,7 @@ const coreTools = [
   { to: '/treehole', emoji: '🌳', title: '树洞倾诉', desc: '说出心里话，这里只有倾听没有评判', bg: 'from-mint-50 to-lavender-50 dark:from-mint-950/50 dark:to-lavender-950/50', border: 'border-mint-100 dark:border-mint-800/50' },
   { to: '/articles', emoji: '📖', title: '心理文章', desc: '关于情绪、成长和关系的科普内容', bg: 'from-peach-50 to-mint-50 dark:from-peach-950/50 dark:to-mint-950/50', border: 'border-peach-100 dark:border-peach-800/50' },
   { to: '/sleep-tonight', emoji: '🌙', title: '今晚睡个好觉', desc: '4步入睡仪式，陪你从忙碌过渡到安心', bg: 'from-indigo-50 to-purple-50 dark:from-indigo-950/50 dark:to-purple-950/50', border: 'border-indigo-100 dark:border-indigo-800/50' },
+  { to: '/quiet', emoji: '🌿', title: '安静待一会儿', desc: '风景、白噪音、一句话，什么都不做也挺好', bg: 'from-emerald-50 to-teal-50 dark:from-emerald-950/50 dark:to-teal-950/50', border: 'border-emerald-100 dark:border-emerald-800/50' },
 ]
 
 const moreTools = [
